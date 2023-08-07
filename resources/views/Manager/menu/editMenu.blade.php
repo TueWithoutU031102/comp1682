@@ -42,6 +42,15 @@
             </select>
         </div>
         <div class="input-box">
+            <label for="statusMenu" class="form-label">Status</label>
+
+            <select name="status_id" value="{{ $menu->status_id }}" class="form-select" id="statusMenu">
+                @foreach ($listStatus as $status)
+                    <option value="{{ $status->id }}">{{ $status->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="input-box">
             <label for="price" class="form-label">Price</label>
             <input type="text" class="form-control" value="{{ $menu->price }}" id="price" name="price">
         </div>

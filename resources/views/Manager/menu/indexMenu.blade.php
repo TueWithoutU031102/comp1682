@@ -26,6 +26,7 @@
                 <th scope="col">Image</th>
                 <th scope="col">Name</th>
                 <th scope="col">Type</th>
+                <th scope="col">Status</th>
                 <th scope="col">Price</th>
                 <th scope="col">Description</th>
                 <th scope="col">&nbsp;</th>
@@ -43,6 +44,7 @@
                     </td>
                     <td>{{ $menu->name }}</td>
                     <td>{{ $menu->type->name }}</td>
+                    <td>{{ $menu->statusMenu->name }}</td>
                     <td>{{ $menu->price }}</td>
                     <td>{{ $menu->description }}</td>
                     <td>

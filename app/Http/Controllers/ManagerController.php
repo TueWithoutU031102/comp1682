@@ -10,6 +10,7 @@ use App\Http\Requests\formType;
 use App\Models\Book;
 use App\Models\Menu;
 use App\Models\Type;
+use App\Models\StatusMenu;
 
 class ManagerController extends Controller
 {
@@ -28,7 +29,8 @@ class ManagerController extends Controller
     public function createFormMenu()
     {
         $listTypes = Type::all();
-        return view("/Manager/menu/menuForm", ['listTypes' => $listTypes]);
+        $listStatus = StatusMenu::all();
+        return view("/Manager/menu/menuForm", ['listTypes' => $listTypes, 'listStatus' => $listStatus]);
     }
     public function createMenu(formMenu $request)
     {
@@ -48,7 +50,8 @@ class ManagerController extends Controller
     {
         $menu = Menu::find($id);
         $listTypes = Type::all();
-        return view("Manager/menu/editMenu", ["menu" => $menu, "listTypes" => $listTypes]);
+        $listStatus = StatusMenu::all();
+        return view("Manager/menu/editMenu", ["menu" => $menu, "listTypes" => $listTypes, "listStatus" => $listStatus]);
     }
     public function editMenu(editMenu $request)
     {

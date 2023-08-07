@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\bookStore;
 use App\Models\Book;
-use Illuminate\Support\Facades\DB;
 use App\Models\Menu;
 use App\Models\Type;
+use App\Models\StatusMenu;
 use App\Http\Requests\updateCart;
 use App\Http\Requests\deleteCart;
 
@@ -40,7 +40,8 @@ class CustomerController extends Controller
     {
         $dish = Menu::find($id);
         $typeName = Type::find(Menu::find($id)->type_id);
-        return view("/Customer/order/detailDish", ['dish' => $dish, 'typeName' => $typeName]);
+        $statusName = StatusMenu::find(Menu::find($id)->status_id);
+        return view("/Customer/order/detailDish", ['dish' => $dish, 'typeName' => $typeName, 'statusName' => $statusName]);
     }
 
     public function addToCart($id)

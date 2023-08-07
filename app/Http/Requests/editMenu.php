@@ -26,7 +26,6 @@ class editMenu extends FormRequest
             'name' => ['required'],
             'type_id' => ['required'],
             'price' => ['required'],
-            'image' => ['required'],
             'description' => ['required'],
         ];
     }

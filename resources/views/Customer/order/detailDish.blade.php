@@ -19,10 +19,16 @@
             <p><span>Dish ID: </span>{{ $dish->id }}</p>
             <p><span>Name: </span>{{ $dish->name }}</p>
             <p><span>Type: </span>{{ $dish->type->name }}</p>
+            <p><span>Status: </span> {{ $dish->statusMenu->name }}</p>
             <p><span>Price: </span>{{ $dish->price }}</p>
             <p><span>Description: </span>{{ $dish->description }}</p>
-            <a href="#" data-url="{{ route('addToCart', ['id' => $dish->id]) }}" title="Order"
-                class="btn btn-info addToCart">Order</a>
+            @if ($dish->statusMenu->name === 'Unavailable')
+                <button type="button" class="btn btn-primary" style="display: none;">Order</button>
+            @else
+                <a href="#" data-url="{{ route('addToCart', ['id' => $dish->id]) }}" title="Order"
+                    class="btn btn-info addToCart">Order</a>
+            @endif
+
             <a href="/customer/order/orderForm">
                 <button class="btn btn-primary">Back</button>
             </a>

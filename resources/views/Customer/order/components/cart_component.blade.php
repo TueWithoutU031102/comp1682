@@ -11,6 +11,7 @@
                 <th scope="col">Price (VND)</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Sub Total</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                     <td><input type="number" value="{{ $cartItem['quantity'] }}" min="1" class="quantity"
                             data-id="{{ $id }}"></td>
                     <td>{{ number_format($cartItem['price'] * $cartItem['quantity']) }}</td>
+                    <td></td>
                     <td>
                         <button class="btn btn-primary cart_update" data-id="{{ $id }}">Update</button>
                         <button class="btn btn-danger cart_delete" data-id="{{ $id }}">Delete</button>

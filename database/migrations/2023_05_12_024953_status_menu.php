@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
@@ -12,15 +12,14 @@ return new class extends Migration {
     public function up(): void
     {
         //
-        Schema::create('statusDish', function (Blueprint $table) {
+        Schema::create('statusMenu', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
         });
-        DB::table('statusDish')->insert([
-            ['name' => 'Not ready'],
-            ['name' => 'Preparing'],
-            ['name' => 'Completed'],
+        DB::table('statusMenu')->insert([
+            ['name' => 'Unavailable'],
+            ['name' => 'Available'],
         ]);
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration {
     public function down(): void
     {
         //
-        Schema::dropIfExists('statusDish');
+        Schema::dropIfExists('statusMenu');
     }
 };

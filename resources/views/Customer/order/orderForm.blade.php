@@ -37,12 +37,18 @@
                         <td>
                             <h3>{{ $menu->name }}</h3>
                             <p>{{ $menu->price }}</p>
+                            <p>{{ $menu->statusMenu->name }}</p>
                             <p>{{ $menu->description }}</p>
                         </td>
                         <td>
-                            <a href="#" onclick="event.stopPropagation();"
-                                data-url="{{ route('addToCart', ['id' => $menu->id]) }}" title="View Profile"
-                                class="btn btn-info addToCart">Order</a>
+                            @if ($menu->statusMenu->name === 'Unavailable')
+                                <button type="button" class="btn btn-primary" style="display: none;">Order</button>
+                            @else
+                                <a href="#" onclick="event.stopPropagation();"
+                                    data-url="{{ route('addToCart', ['id' => $menu->id]) }}" title="View Profile"
+                                    class="btn btn-info addToCart">Order</a>
+                            @endif
+
                         </td>
                     </tr>
                 @endforeach
@@ -83,4 +89,5 @@
         });
     </script>
 </body>
+
 </html>
