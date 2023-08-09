@@ -129,4 +129,8 @@ class CustomerController extends Controller
             ], 404);
         }
     }
+    public function submitCart()
+    {
+        
+    }
 }
