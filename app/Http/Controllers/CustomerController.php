@@ -7,8 +7,10 @@ use App\Models\Book;
 use App\Models\Menu;
 use App\Models\Type;
 use App\Models\StatusMenu;
+use App\Models\Cart;
 use App\Http\Requests\updateCart;
 use App\Http\Requests\deleteCart;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -129,8 +131,10 @@ class CustomerController extends Controller
             ], 404);
         }
     }
-    public function submitCart()
+    public function submitCart(Request $request)
     {
-        
+        $cart = new Cart($request->all());
+        $cart->save();
+        return redirect()->route('books.index')->with('success', 'Booking created successfully!');
     }
 }
