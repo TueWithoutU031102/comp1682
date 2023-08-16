@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <form action="createType" method="POST">
+    <form action="{{ route('manager.type.store') }}" method="POST">
         @csrf
         <br>
         @if ($errors->any())
@@ -34,7 +34,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         <div class="button-action">
-            <a href="/manager/type/indexType" class="btn btn-primary">Back</a>
+            <a href="{{ route('manager.type.index') }}" class="btn btn-primary">Back</a>
         </div>
     </form>
 </body>

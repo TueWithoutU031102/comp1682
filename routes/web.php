@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Manager\TypeController;
 use App\Http\Controllers\Manager\TableController;
 use App\Http\Controllers\Manager\MenuController;
 use Illuminate\Support\Facades\Route;
@@ -72,23 +73,17 @@ Route::group(['prefix' => 'manager'], function () {
         Route::get('index', [TableController::class, 'index'])->name('manager.table.index');
         Route::get('create', [TableController::class, 'create'])->name('manager.table.create');
         Route::post('store', [TableController::class, 'store'])->name('manager.table.store');
-        Route::get('/{table}', [TableController::class, 'show'])->name('manager.table.show');
         Route::get('/{table}/edit', [TableController::class, 'edit'])->name('manager.table.edit');
         Route::post('/{table}/update', [TableController::class, 'update'])->name('manager.table.update');
         Route::post('/{table}/destroy', [TableController::class, 'destroy'])->name('manager.table.destroy');
     });
-    Route::group(['prefix' => 'type'], function () {
-        Route::get('indexType', [ManagerController::class, 'type'])->name('indexType');
-
-        Route::get('formType', [ManagerController::class, 'createFormType']);
-
-        Route::post('createType', [ManagerController::class, 'createType']);
-
-        Route::get('editType/{id}', [ManagerController::class, 'editFormType']);
-
-        Route::post('editType/{id}', [ManagerController::class, 'editType']);
-
-        Route::post('deleteType/{type}', [ManagerController::class, 'deleteType']);
+    Route::prefix('types')->group(function () {
+        Route::get('index', [TypeController::class, 'index'])->name('manager.type.index');
+        Route::get('create', [TypeController::class, 'create'])->name('manager.type.create');
+        Route::post('store', [TypeController::class, 'store'])->name('manager.type.store');
+        Route::get('/{type}/edit', [TypeController::class, 'edit'])->name('manager.type.edit');
+        Route::post('/{type}/update', [TypeController::class, 'update'])->name('manager.type.update');
+        Route::post('/{type}/destroy', [TypeController::class, 'destroy'])->name('manager.type.destroy');
     });
     Route::prefix('books')->group(function () {
         Route::get('index', [ManagerController::class, 'index'])->name('manager.book.index');

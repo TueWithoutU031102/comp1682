@@ -29,12 +29,11 @@
                 <th scope="col">Status</th>
                 <th scope="col">Price</th>
                 <th scope="col">Description</th>
-                <th scope="col">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($menus as $menu)
-                <tr>
+                <tr onclick="redirectTo('{{ url('manager/menus', ['menu' => $menu->id]) }}')">
                     <td>
                         <ul class="img">
                             <li>
@@ -48,15 +47,15 @@
                     <td>{{ $menu->statusMenu->name }}</td>
                     <td>{{ $menu->price }}</td>
                     <td>{{ $menu->description }}</td>
-                    <td>
-                        <a href="{{ route('manager.menu.show', ['menu' => $menu->id]) }}" title="View Profile"
-                            class="btn btn-info btn-sm"><i aria-hidden="true"><i class="fa-solid fa-eye"></i>
-                        </a>
-                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>

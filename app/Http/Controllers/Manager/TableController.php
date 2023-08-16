@@ -28,11 +28,6 @@ class TableController extends Controller
         $table->fill($data)->save();
         return to_route('manager.table.index');
     }
-    public function show(Table $table)
-    {
-        //detail of table
-        return view("manager.table.show", ['table' => $table]);
-    }
     public function edit(Table $table)
     {
         return view("manager.table.edit", ['table' => $table]);

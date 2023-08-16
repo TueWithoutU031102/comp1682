@@ -16,7 +16,7 @@
         <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
     @endif
     <div class="create-btn">
-        <a type="button" href="/manager/type/formType" class="btn btn-primary"
+        <a type="button" href="{{ route('manager.type.create') }}" class="btn btn-primary"
             style="font-weight: bold; font-size: 20px;">+</a>
     </div>
     <br><br>
@@ -32,10 +32,11 @@
                 <tr>
                     <td>{{ $type->name }}</td>
                     <td>
-                        <a href="/manager/type/editType/{{ $type->id }}" title="Edit Type"
+                        <a href="{{ route('manager.type.edit', ['type' => $type]) }}" title="Edit"
                             class="btn btn-primary btn-sm"><i aria-hidden="true"><i class="fa-solid fa-pen"></i>
                         </a>
-                        <form action="/manager/type/deleteType/{{ $type->id }}" method="POST" class="d-inline"
+                        <form action="{{ route('manager.type.destroy', ['type' => $type]) }}" method="POST"
+                            class="d-inline"
                             onsubmit="return confirm('Are you sure to delete {{ $type->name }} !!!???')">
                             @csrf
                             <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i
