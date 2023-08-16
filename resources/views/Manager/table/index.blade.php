@@ -11,30 +11,28 @@
 </head>
 
 <body>
-    <h1>Book</h1>
+    <h1>Menu</h1>
+    @if (Session::has('success'))
+        <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+    @endif
+    <div class="create-btn">
+        <a type="button" href="{{ route('manager.table.create') }}" class="btn btn-primary"
+            style="font-weight: bold; font-size: 20px;">+</a>
+    </div>
     <br><br>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Phonenumber</th>
-                <th scope="col">Number of people</th>
-                <th scope="col">Arrival time</th>
-                <th scope="col">Note</th>
-                <th scope="col">Status</th>
+                <th scope="col">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($booking as $book)
+            @foreach ($tables as $table)
                 <tr>
-                    <td>{{ $book->bookName }}</td>
-                    <td>{{ $book->phonenumber }}</td>
-                    <td>{{ $book->numberofPeople }}</td>
-                    <td>{{ $book->arrivalTime }}</td>
-                    <td>{{ $book->note }}</td>
-                    <td>{{ $book->status }}</td>
+                    <td>{{ $table->name }}</td>
                     <td>
-                        <a href="{{ $book->id }}" title="View Profile"
+                        <a href="{{ route('manager.table.show', ['table' => $table->id]) }}" title="View Profile"
                             class="btn btn-info btn-sm"><i aria-hidden="true"><i class="fa-solid fa-eye"></i>
                         </a>
                     </td>
@@ -42,6 +40,9 @@
             @endforeach
         </tbody>
     </table>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

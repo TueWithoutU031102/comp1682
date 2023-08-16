@@ -24,7 +24,7 @@
             <a href="" class="btn btn-primary">Review</a>
         </div>
         <div class="button-action">
-            <a href="" class="btn btn-primary">Booking</a>
+            <a href="{{ route('manager.book.index') }}" class="btn btn-primary">Booking</a>
         </div>
         <div class="button-action">
             <a href="/manager/indexMenu" class="btn btn-primary">Menu</a>

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <form action="createMenu" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('manager.menu.store', ['menu' => $menu]) }}}" method="POST" enctype="multipart/form-data">
         @csrf
         <br>
         @if ($errors->any())
@@ -25,16 +25,18 @@
                 </ul>
             </div>
         @endif
-        <h1>Add new dish</h1>
+        <h1>Edit the dish</h1>
+        <input type="hidden" name="id" value="{{ $menu->id }}" name="id" class="form-control"
+            id="id">
         <div class="input-box">
             <label for="name" class="form-label">Name:</label>
-            <input type="text" class="form-control" value="{{ old('name') }}" id="name" name="name">
+            <input type="text" class="form-control" value="{{ $menu->name }}" id="name" name="name">
         </div>
         <div class="input-box">
             <label for="type" class="form-label">Type</label>
 
-            <select name="type_id" value="{{ old('type_id') }}" class="form-select" id="type">
-                @foreach ($listTypes as $type)
+            <select name="type_id" value="{{ $menu->type_id }}" class="form-select" id="type">
+                @foreach ($types as $type)
                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                 @endforeach
             </select>
@@ -42,30 +44,32 @@
         <div class="input-box">
             <label for="statusMenu" class="form-label">Status</label>
 
-            <select name="status_id" value="{{ old('status_id') }}" class="form-select" id="statusMenu">
-                @foreach ($listStatus as $status)
+            <select name="status_id" value="{{ $menu->status_id }}" class="form-select" id="statusMenu">
+                @foreach ($statuses as $status)
                     <option value="{{ $status->id }}">{{ $status->name }}</option>
                 @endforeach
             </select>
         </div>
         <div class="input-box">
             <label for="price" class="form-label">Price</label>
-            <input type="text" class="form-control" value="{{ old('price') }}" id="price" name="price">
+            <input type="text" class="form-control" value="{{ $menu->price }}" id="price" name="price">
         </div>
         <div class="input-box">
             <label for="image" class="font-weight-bold">Image</label>
             <input type="file" name="image" class="form-control" id="image">
+            <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
+                src="{{ asset($menu->image) }}">
         </div>
         <div class="input-box">
             <label for="description" class="form-label">Description:</label>
-            <input type="text" class="form-control" value="{{ old('description') }}" id="description"
+            <input type="text" class="form-control" value="{{ $menu->description }}" id="description"
                 name="description">
         </div>
         <div class="button-action">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         <div class="button-action">
-            <a href="/manager/menu/indexMenu" class="btn btn-primary">Back</a>
+            <a href="{{ route('manager.menu.index') }}" class="btn btn-primary">Back</a>
         </div>
     </form>
 </body>

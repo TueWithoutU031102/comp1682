@@ -3,6 +3,8 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Manager\TableController;
+use App\Http\Controllers\Manager\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +44,8 @@ Route::group(['prefix' => 'customer'], function () {
         Route::post('updateCart', [CustomerController::class, 'updateCart'])->name('updateCart');
 
         Route::post('deleteCart', [CustomerController::class, 'deleteCart'])->name('deleteCart');
+
+        Route::post('submitCart', [CustomerController::class, 'submitCart'])->name('submitCart');
     });
 
     // Route::get("showAcc/{id}", [Controller::class, 'showAcc']);
@@ -54,21 +58,24 @@ Route::group(['prefix' => 'customer'], function () {
 });
 
 Route::group(['prefix' => 'manager'], function () {
-    Route::get('index', [ManagerController::class, 'index'])->name('index');
-    Route::group(['prefix' => 'menu'], function () {
-        Route::get('indexMenu', [ManagerController::class, 'menu'])->name('indexMenu');
-
-        Route::get('formMenu', [ManagerController::class, 'createFormMenu']);
-
-        Route::post('createMenu', [ManagerController::class, 'createMenu']);
-
-        Route::get('detailMenu/{id}', [ManagerController::class, 'detailMenu']);
-
-        Route::get('editMenu/{id}', [ManagerController::class, 'editFormMenu']);
-
-        Route::post('editMenu/{id}', [ManagerController::class, 'editMenu']);
-
-        Route::post('deleteMenu/{menu}', [ManagerController::class, 'deleteMenu']);
+    Route::get('index', [ManagerController::class, 'index'])->name('manager.index');
+    Route::prefix('menus')->group(function () {
+        Route::get('index', [MenuController::class, 'index'])->name('manager.menu.index');
+        Route::get('create', [MenuController::class, 'create'])->name('manager.menu.create');
+        Route::post('store', [MenuController::class, 'store'])->name('manager.menu.store');
+        Route::get('/{menu}', [MenuController::class, 'show'])->name('manager.menu.show');
+        Route::get('/{menu}/edit', [MenuController::class, 'edit'])->name('manager.menu.edit');
+        Route::post('/{menu}/update', [MenuController::class, 'update'])->name('manager.menu.update');
+        Route::post('/{menu}/destroy', [MenuController::class, 'destroy'])->name('manager.menu.destroy');
+    });
+    Route::prefix('tables')->group(function () {
+        Route::get('index', [TableController::class, 'index'])->name('manager.table.index');
+        Route::get('create', [TableController::class, 'create'])->name('manager.table.create');
+        Route::post('store', [TableController::class, 'store'])->name('manager.table.store');
+        Route::get('/{table}', [TableController::class, 'show'])->name('manager.table.show');
+        Route::get('/{table}/edit', [TableController::class, 'edit'])->name('manager.table.edit');
+        Route::post('/{table}/update', [TableController::class, 'update'])->name('manager.table.update');
+        Route::post('/{table}/destroy', [TableController::class, 'destroy'])->name('manager.table.destroy');
     });
     Route::group(['prefix' => 'type'], function () {
         Route::get('indexType', [ManagerController::class, 'type'])->name('indexType');
@@ -83,8 +90,8 @@ Route::group(['prefix' => 'manager'], function () {
 
         Route::post('deleteType/{type}', [ManagerController::class, 'deleteType']);
     });
-    Route::group(['prefix' => 'booking'], function () {
-        Route::get('indexBooking', [ManagerController::class, 'booking'])->name('indexBooking');
+    Route::prefix('books')->group(function () {
+        Route::get('index', [ManagerController::class, 'index'])->name('manager.book.index');
     });
 });
 

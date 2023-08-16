@@ -135,6 +135,6 @@ class CustomerController extends Controller
     {
         $cart = new Cart($request->all());
         $cart->save();
-        return redirect()->route('books.index')->with('success', 'Booking created successfully!');
+        return redirect()->route('customers.index');
     }
 }
