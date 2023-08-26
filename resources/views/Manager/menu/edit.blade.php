@@ -44,9 +44,9 @@
         <div class="input-box">
             <label for="statusMenu" class="form-label">Status</label>
 
-            <select name="status_id" value="{{ $menu->status_id }}" class="form-select" id="statusMenu">
+            <select name="status" value="{{ $menu->status }}" class="form-select" id="status">
                 @foreach ($statuses as $status)
-                    <option value="{{ $status->id }}">{{ $status->name }}</option>
+                    <option value="{{ $status->value }}">{{ $status->name }}</option>
                 @endforeach
             </select>
         </div>

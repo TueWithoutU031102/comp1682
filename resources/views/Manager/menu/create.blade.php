@@ -42,7 +42,7 @@
         <div class="input-box">
             <label for="statusMenu" class="form-label">Status</label>
 
-            <select name="status_id" value="{{ old('status_id') }}" class="form-select" id="statusMenu">
+            <select name="status" value="{{ old('status') }}" class="form-select" id="statusMenu">
                 @foreach ($listStatus as $status)
                     <option value="{{ $status->value }}">{{ $status->name }}</option>
                 @endforeach
