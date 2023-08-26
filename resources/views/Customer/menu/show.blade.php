@@ -13,26 +13,25 @@
 <body>
     <h1 class="display-4" style="text-align: center; font-weight: bold">DISH INFORMATION</h1><br>
     <div class="user-card">
-        <img src="{{ asset($dish->image) }}">
+        <img src="{{ asset($menu->image) }}">
         <div class="submission-information">
-            <h2>{{ $dish->name }}</h2>
-            <p><span>Dish ID: </span>{{ $dish->id }}</p>
-            <p><span>Name: </span>{{ $dish->name }}</p>
-            <p><span>Type: </span>{{ $dish->type->name }}</p>
-            <p><span>Status: </span> {{ $dish->statusMenu->name }}</p>
-            <p><span>Price: </span>{{ $dish->price }}</p>
-            <p><span>Description: </span>{{ $dish->description }}</p>
-            @if ($dish->statusMenu->name === 'Unavailable')
+            <h2>{{ $menu->name }}</h2>
+            <p><span>Dish ID: </span>{{ $menu->id }}</p>
+            <p><span>Name: </span>{{ $menu->name }}</p>
+            <p><span>Type: </span>{{ $menu->type->name }}</p>
+            <p><span>Status: </span> {{ $menu->statusMenu->name }}</p>
+            <p><span>Price: </span>{{ $menu->price }}</p>
+            <p><span>Description: </span>{{ $menu->description }}</p>
+            {{-- @if ($menu->statusMenu->name === 'Unavailable')
                 <button type="button" class="btn btn-primary" style="display: none;">Order</button>
             @else
-                <a href="#" data-url="{{ route('addToCart', ['id' => $dish->id]) }}" title="Order"
+                <a href="#" data-url="{{ route('addToCart', ['menu' => $menu]) }}" title="Order"
                     class="btn btn-info addToCart">Order</a>
-            @endif
+            @endif --}}
 
-            <a href="/customer/order/orderForm">
+            <a href="{{ route('customer.menu.index') }}">
                 <button class="btn btn-primary">Back</button>
             </a>
-
         </div>
     </div>
     <script>

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <form action="/customer/booking/store" method="POST">
+    <form action="{{ route('customer.store') }}" method="POST">
         @csrf
         <br>
         @if ($errors->any())
@@ -59,7 +59,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         <div class="button-action">
-            <a href="/customer/index" class="btn btn-primary">Back</a>
+            <a href="{{ route('customer.index') }}" class="btn btn-primary">Back</a>
         </div>
     </form>
 </body>

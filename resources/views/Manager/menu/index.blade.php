@@ -33,7 +33,7 @@
         </thead>
         <tbody>
             @foreach ($menus as $menu)
-                <tr onclick="redirectTo('{{ url('manager/menus', ['menu' => $menu->id]) }}')">
+                <tr onclick="redirectTo('{{ route('manager.menu.show', ['menu' => $menu]) }}')">
                     <td>
                         <ul class="img">
                             <li>

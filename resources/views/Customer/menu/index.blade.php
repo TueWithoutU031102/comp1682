@@ -13,7 +13,7 @@
 <body>
     <h1>Menu</h1>
     <br><br>
-    <a href="{{ route('showCart') }}" class="btn btn-primary">
+    <a href="" class="btn btn-primary">
         Show cart
     </a>
     <table class="table table-hover">
@@ -26,7 +26,7 @@
                     <td colspan="3">{{ $type->name }}</td>
                 </tr>
                 @foreach ($type->menus as $menu)
-                    <tr onclick="redirectTo('{{ url('/customer/order/detailDish') }}/{{ $menu->id }}')">
+                    <tr onclick="redirectTo('{{ route('customer.menu.show', ['menu' => $menu]) }}')">
                         <td style="width:20%">
                             <ul class="img">
                                 <li>
@@ -56,7 +56,7 @@
         </tbody>
     </table>
 
-    <a href="/customer/index">
+    <a href="{{ route('customer.index') }}">
         <button class="btn btn-primary">Back</button>
     </a>
 

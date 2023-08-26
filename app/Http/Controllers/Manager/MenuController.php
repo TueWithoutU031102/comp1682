@@ -40,8 +40,7 @@ class MenuController extends Controller
 
     public function show(Menu $menu, Type $type)
     {
-        //$type = Type::find($menu->type_id);
-        return view("manager.menu.show", ['menu' => $menu, 'type' => $type]);
+        return view("manager.menu.show", ['menu' => $menu]);
     }
     public function edit(Menu $menu)
     {

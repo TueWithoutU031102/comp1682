@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class bookStore extends FormRequest
+class UpdateSessionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,11 +23,6 @@ class bookStore extends FormRequest
     {
         return [
             //
-            'bookName' => ['required'],
-            'phonenumber' => ['required'],
-            'numberofPeople' => ['required'],
-            'arrivalTime' => ['required'],
-            'note' => ['nullable'],
         ];
     }
 }
