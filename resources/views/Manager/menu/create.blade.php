@@ -44,7 +44,7 @@
 
             <select name="status_id" value="{{ old('status_id') }}" class="form-select" id="statusMenu">
                 @foreach ($listStatus as $status)
-                    <option value="{{ $status->id }}">{{ $status->name }}</option>
+                    <option value="{{ $status->value }}">{{ $status->name }}</option>
                 @endforeach
             </select>
         </div>

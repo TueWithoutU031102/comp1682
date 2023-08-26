@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Enums\StatusMenu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Models\Menu;
 use App\Models\Type;
-use App\Models\StatusMenu;
+use Illuminate\Validation\Rules\Enum;
 
 class MenuController extends Controller
 {
@@ -20,7 +21,7 @@ class MenuController extends Controller
     public function create()
     {
         $listTypes = Type::all();
-        $listStatus = StatusMenu::all();
+        $listStatus = StatusMenu::cases();
         return view("manager.menu.create", ['listTypes' => $listTypes, 'listStatus' => $listStatus]);
     }
     public function store(Request $request, Menu $menu)
@@ -32,7 +33,9 @@ class MenuController extends Controller
             'price' => 'required',
             'description' => 'required',
             'image' => 'required',
+            'status' => ['required', new Enum(EnumsStatusMenu::class)]
         ]);
+
         $imagePath = $this->saveImage($request->file('image'));
         Menu::create(array_merge($data, ['image' => $imagePath]));
         return to_route("manager.menu.index")->with('success', 'Dish created successfully!');

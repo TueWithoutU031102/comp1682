@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'menu_id', 'quantity'];
+    protected $fillable = ['quantity'];
 
 
     public function menu()

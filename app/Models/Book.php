@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'bookName', 'phonenumber', 'numberofPeople', 'arrivalTime', 'note', 'status'];
+    protected $fillable = ['bookName', 'phonenumber', 'numberofPeople', 'arrivalTime', 'note', 'status'];
 }

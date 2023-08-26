@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class StatusDish extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['name'];
 
     // public function menus()
     // {

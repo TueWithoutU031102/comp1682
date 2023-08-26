@@ -11,8 +11,7 @@ class TableController extends Controller
     //
     public function index()
     {
-        $tables = Table::all();
-        return view("manager.table.index", ['tables' => $tables]);
+        return view("manager.table.index", ['tables' => Table::all()]);
     }
     public function create()
     {
