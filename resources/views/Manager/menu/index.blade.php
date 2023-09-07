@@ -44,7 +44,7 @@
                     </td>
                     <td>{{ $menu->name }}</td>
                     <td>{{ $menu->type->name }}</td>
-                    <td>{{ $menu->statusMenu->name }}</td>
+                    <td>{{ $menu->status }}</td>
                     <td>{{ $menu->price }}</td>
                     <td>{{ $menu->description }}</td>
                 </tr>

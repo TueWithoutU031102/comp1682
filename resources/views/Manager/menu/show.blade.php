@@ -19,7 +19,7 @@
             <p><span>Dish ID: </span>{{ $menu->id }}</p>
             <p><span>Name: </span>{{ $menu->name }}</p>
             <p><span>Type: </span>{{ $menu->type->name }}</p>
-            <p><span>Status: </span> {{ $menu->statusMenu->name }}</p>
+            <p><span>Status: </span> {{ $menu->status }}</p>
             <p><span>Price: </span>{{ $menu->price }}</p>
             <p><span>Description: </span>{{ $menu->description }}</p>
             <a href="{{ route('manager.menu.index') }}">

@@ -19,15 +19,15 @@
             <p><span>Dish ID: </span>{{ $menu->id }}</p>
             <p><span>Name: </span>{{ $menu->name }}</p>
             <p><span>Type: </span>{{ $menu->type->name }}</p>
-            <p><span>Status: </span> {{ $menu->statusMenu->name }}</p>
+            <p><span>Status: </span> {{ $menu->status }}</p>
             <p><span>Price: </span>{{ $menu->price }}</p>
             <p><span>Description: </span>{{ $menu->description }}</p>
-            {{-- @if ($menu->statusMenu->name === 'Unavailable')
+            @if ($menu->status === 'Unavailable')
                 <button type="button" class="btn btn-primary" style="display: none;">Order</button>
             @else
-                <a href="#" data-url="{{ route('addToCart', ['menu' => $menu]) }}" title="Order"
-                    class="btn btn-info addToCart">Order</a>
-            @endif --}}
+                {{-- <a href="#" data-url="{{ route('addToCart', ['menu' => $menu]) }}" title="Order"
+                    class="btn btn-info addToCart">Order</a> --}}
+            @endif
 
             <a href="{{ route('customer.menu.index') }}">
                 <button class="btn btn-primary">Back</button>

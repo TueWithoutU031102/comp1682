@@ -24,16 +24,16 @@ class MenuController extends Controller
         $listStatus = StatusMenu::cases();
         return view("manager.menu.create", ['listTypes' => $listTypes, 'listStatus' => $listStatus]);
     }
-    public function store(Request $request, Menu $menu)
+    public function store(Request $request)
     {
+
         $data = $request->validate([
             'name' => 'required',
             'type_id' => 'required',
-            'status_id' => 'required',
             'price' => 'required',
             'description' => 'required',
             'image' => 'required',
-            'status' => ['required', new Enum(EnumsStatusMenu::class)]
+            'status' => ['required', new Enum(StatusMenu::class)],
         ]);
 
         $imagePath = $this->saveImage($request->file('image'));

@@ -37,11 +37,11 @@
                         <td>
                             <h3>{{ $menu->name }}</h3>
                             <p>{{ $menu->price }}</p>
-                            <p>{{ $menu->statusMenu->name }}</p>
+                            <p>{{ $menu->status }}</p>
                             <p>{{ $menu->description }}</p>
                         </td>
                         <td>
-                            @if ($menu->statusMenu->name === 'Unavailable')
+                            @if ($menu->status === 'Unavailable')
                                 <button type="button" class="btn btn-primary" style="display: none;">Order</button>
                             @else
                                 <a href="#" onclick="event.stopPropagation();"
