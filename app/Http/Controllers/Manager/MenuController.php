@@ -48,7 +48,7 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         $types = Type::all();
-        $statuses = StatusMenu::all();
+        $statuses = StatusMenu::cases();
         return view("manager.menu.edit", ["menu" => $menu, "types" => $types, "statuses" => $statuses]);
     }
     public function update(Menu $menu, Request $request)
