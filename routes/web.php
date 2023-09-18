@@ -3,6 +3,7 @@
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Customer\CheckinController;
 use App\Http\Controllers\Manager\TypeController;
 use App\Http\Controllers\Manager\TableController;
 use App\Http\Controllers\Customer\MenuController as CustomerMenuController;
@@ -44,6 +45,14 @@ Route::prefix('customers')->group(function () {
         Route::post('updateCart', [CustomerOrderController::class, 'updateCart'])->name('updateCart');
         Route::post('deleteCart', [CustomerOrderController::class, 'deleteCart'])->name('deleteCart');
         Route::post('submitCart', [CustomerOrderController::class, 'submitCart'])->name('submitCart');
+    });
+    Route::prefix('checkins')->group(function () {
+        Route::get('index/{table}', [CheckinController::class, 'index'])->name('customer.checkin.index');
+        Route::get('notice', [CheckinController::class, 'notice'])->name('customer.checkin.notice');
+        Route::get('tables/{table}', [CheckinController::class, 'storeSession'])->name('customer.checkin.table');
+        Route::post('store/{table}', [CheckinController::class, 'store'])->name('customer.checkin.store');
+        //xử lý check in:
+        //Đối với table k có session, cho phép người dùng tao session và chuyển hướng người dùng sang trang order
     });
 });
 

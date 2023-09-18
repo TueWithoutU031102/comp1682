@@ -24,6 +24,7 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Name</th>
+                <th scope="col">Link</th>
                 <th scope="col">&nbsp;</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
             @foreach ($tables as $table)
                 <tr>
                     <td>{{ $table->name }}</td>
+                    <td>{{ asset($table->link) }}</td>
                     <td>
                         <a href="{{ route('manager.table.edit', ['table' => $table]) }}" title="Edit"
                             class="btn btn-primary btn-sm"><i aria-hidden="true"><i class="fa-solid fa-pen"></i>
