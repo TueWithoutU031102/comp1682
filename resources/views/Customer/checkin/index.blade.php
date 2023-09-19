@@ -12,6 +12,9 @@
 </head>
 
 <body>
+    {{-- @php
+        dd($table);
+    @endphp --}}
     <form action="{{ route('customer.checkin.store', ['table' => $table]) }}" method="POST"
         enctype="multipart/form-data">
         @csrf
@@ -24,6 +27,9 @@
         <div class="input-box">
             <label for="phone" class="form-label">Phone number:</label>
             <input type="text" class="form-control" id="phone" name="phone">
+        </div>
+        <div class="input-box" hidden>
+            <input type="text" class="form-control" value="{{ $table->id }}" id="table_id" name="table_id">
         </div>
         <div class="button-action">
             <button type="submit" class="btn btn-primary">Submit</button>

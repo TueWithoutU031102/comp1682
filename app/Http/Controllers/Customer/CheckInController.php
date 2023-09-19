@@ -10,9 +10,8 @@ use App\Models\Session;
 class CheckinController extends Controller
 {
     //
-    public function index()
+    public function index(Table $table)
     {
-        $table = Table::all();
         return view('Customer.checkin.index', ['table' => $table]);
     }
 
@@ -29,18 +28,18 @@ class CheckinController extends Controller
         }
     }
 
-    public function store(Request $request, Session $session, Table $table)
+    public function store(Table $table, Request $request)
     {
         $existingSession = Session::where('table_id', $table->id)->first();
-        if (!$existingSession) {
+        if ($existingSession) {
             $data = $request->validate([
                 'name' => 'required',
                 'phone' => 'required',
+                'table_id' => 'required',
             ]);
-            $session->fill($data)->save();
+            $existingSession->fill($data)->save();
             return to_route('customer.index');
-        } else {
-            return view('Customer.checkin.notice');
         }
+        else return back();
     }
 }
