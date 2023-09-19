@@ -49,7 +49,7 @@ Route::prefix('customers')->group(function () {
     Route::prefix('checkins')->group(function () {
         Route::get('index/{table}', [CheckinController::class, 'index'])->name('customer.checkin.index');
         Route::get('notice', [CheckinController::class, 'notice'])->name('customer.checkin.notice');
-        Route::get('tables/{table}', [CheckinController::class, 'storeSession'])->name('customer.checkin.table');
+        Route::get('tables/{table}', [CheckinController::class, 'create'])->name('customer.checkin.table');
         Route::post('store/{table}', [CheckinController::class, 'store'])->name('customer.checkin.store');
         //xử lý check in:
         //Đối với table k có session, cho phép người dùng tao session và chuyển hướng người dùng sang trang order

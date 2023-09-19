@@ -15,7 +15,7 @@ class CheckinController extends Controller
         return view('Customer.checkin.index', ['table' => $table]);
     }
 
-    public function storeSession(Table $table, Request $request)
+    public function create(Table $table, Request $request)
     {
         $existingSession = Session::where('table_id', $table->id)->first();
         if (!$existingSession) {
