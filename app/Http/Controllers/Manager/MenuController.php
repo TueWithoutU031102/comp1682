@@ -41,7 +41,7 @@ class MenuController extends Controller
         return to_route("manager.menu.index")->with('success', 'Dish created successfully!');
     }
 
-    public function show(Menu $menu, Type $type)
+    public function show(Menu $menu)
     {
         return view("manager.menu.show", ['menu' => $menu]);
     }

@@ -31,14 +31,20 @@ Route::get('/', function () {
 Route::prefix('admins')->group(function () {
     Route::prefix('manages')->group(function () {
         Route::get('index', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('create', [AdminController::class, 'create'])->name('admin.create');
+        Route::post('store', [AdminController::class, 'store'])->name('admin.store');
+        Route::get('/{user}', [AdminController::class, 'show'])->name('admin.show');
+        Route::get('/{user}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::post('/{user}/update', [AdminController::class, 'update'])->name('admin.update');
+        Route::post('/{user}/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
     });
 });
 Route::prefix('customers')->group(function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
     Route::prefix('books')->group(function () {
-        Route::get('create', [CustomerBookController::class, 'create'])->name('customer.create');
-        Route::post('store', [CustomerBookController::class, 'store'])->name('customer.store');
+        Route::get('create', [CustomerBookController::class, 'create'])->name('customer.book.create');
+        Route::post('store', [CustomerBookController::class, 'store'])->name('customer.book.store');
     });
     Route::prefix('menus')->group(function () {
         Route::get('index', [CustomerMenuController::class, 'index'])->name('customer.menu.index');

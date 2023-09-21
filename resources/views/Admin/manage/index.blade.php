@@ -16,7 +16,7 @@
         <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
     @endif
     <div class="create-btn">
-        <a type="button" href="{{ route('manager.table.create') }}" class="btn btn-primary"
+        <a type="button" href="{{ route('admin.create') }}" class="btn btn-primary"
             style="font-weight: bold; font-size: 20px;">+</a>
     </div>
     <br><br>
@@ -30,25 +30,18 @@
         </thead>
         <tbody>
             @foreach ($users as $user)
-                <tr>
+                <tr onclick="redirectTo('{{ route('admin.show', ['user' => $user]) }}')">
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->role }}</td>
-                    <td>
-                        {{-- <a href="{{ route('manager.table.edit', ['table' => $table]) }}" title="Edit"
-                            class="btn btn-primary btn-sm"><i aria-hidden="true"><i class="fa-solid fa-pen"></i>
-                        </a>
-                        <form action="{{ route('manager.table.destroy', ['table' => $table]) }}" method="POST"
-                            class="d-inline"
-                            onsubmit="return confirm('Are you sure to delete {{ $table->name }} !!!???')">
-                            @csrf
-                            <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i
-                                        class="fa-solid fa-trash"></i></button>
-                        </form> --}}
-                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
