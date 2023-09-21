@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -34,12 +35,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast.S
      *
      * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role' => Role::class
     ];
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
@@ -27,7 +28,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-
+Route::prefix('admins')->group(function () {
+    Route::prefix('manages')->group(function () {
+        Route::get('index', [AdminController::class, 'index'])->name('admin.index');
+    });
+});
 Route::prefix('customers')->group(function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
