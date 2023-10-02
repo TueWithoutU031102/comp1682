@@ -26,7 +26,6 @@ class MenuController extends Controller
     }
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'name' => 'required',
             'type_id' => 'required',

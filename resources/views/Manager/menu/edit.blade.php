@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <form action="{{ route('manager.menu.store', ['menu' => $menu]) }}}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('manager.menu.update', ['menu' => $menu]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <br>
         @if ($errors->any())

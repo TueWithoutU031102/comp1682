@@ -22,38 +22,16 @@
             <p><span>Status: </span> {{ $menu->status }}</p>
             <p><span>Price: </span>{{ $menu->price }}</p>
             <p><span>Description: </span>{{ $menu->description }}</p>
-            @if ($menu->status === 'Unavailable')
-                <button type="button" class="btn btn-primary" style="display: none;">Order</button>
-            @else
-                {{-- <a href="#" data-url="{{ route('addToCart', ['menu' => $menu]) }}" title="Order"
-                    class="btn btn-info addToCart">Order</a> --}}
+            @if ($menu->status == 'Available')
+                <a href="{{ route('customer.order.add', ['menu' => $menu]) }}" >
+                    <button class="btn btn-primary" title="Order" class="btn btn-info add">Order</button>
+                </a>
             @endif
-
             <a href="{{ route('customer.menu.index') }}">
                 <button class="btn btn-primary">Back</button>
             </a>
         </div>
     </div>
-    <script>
-        function addToCart(event) {
-            event.preventDefault();
-            let urlCart = $(this).data('url');
-            $.ajax({
-                type: "GET",
-                url: urlCart,
-                dataType: json,
-                success: function(data) {
-
-                },
-                error: function() {
-
-                },
-            });
-        }
-        $(function() {
-            $('.addToCart').on('click', addToCart);
-        });
-    </script>
 </body>
 
 </html>

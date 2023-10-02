@@ -51,11 +51,11 @@ Route::prefix('customers')->group(function () {
         Route::get('/{menu}', [CustomerMenuController::class, 'show'])->name('customer.menu.show');
     });
     Route::prefix('orders')->group(function () {
-        Route::get('addToCart/{id}', [CustomerOrderController::class, 'addToCart'])->name('addToCart');
-        Route::get('showCart', [CustomerOrderController::class, 'showCart'])->name('showCart');
-        Route::post('updateCart', [CustomerOrderController::class, 'updateCart'])->name('updateCart');
-        Route::post('deleteCart', [CustomerOrderController::class, 'deleteCart'])->name('deleteCart');
-        Route::post('submitCart', [CustomerOrderController::class, 'submitCart'])->name('submitCart');
+        Route::get('add/{menu}', [CustomerOrderController::class, 'add'])->name('customer.order.add');
+        Route::get('show', [CustomerOrderController::class, 'show'])->name('customer.order.show');
+        Route::post('update', [CustomerOrderController::class, 'update'])->name('customer.order.update');
+        Route::post('delete', [CustomerOrderController::class, 'delete'])->name('customer.order.delete');
+        Route::post('store', [CustomerOrderController::class, 'store'])->name('customer.order.store');
     });
     Route::prefix('checkins')->group(function () {
         Route::get('index/{table}', [CheckinController::class, 'index'])->name('customer.checkin.index');

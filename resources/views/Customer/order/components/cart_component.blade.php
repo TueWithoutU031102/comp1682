@@ -47,7 +47,7 @@
     <div class="col-md-12">
         <h2>Total: {{ number_format($total) }} VND</h2>
     </div>
-    <a href="/customer/order/orderForm">
+    <a href="">
         <button class="btn btn-primary">Back to Homepage</button>
     </a>
     <a href="">

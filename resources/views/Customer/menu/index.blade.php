@@ -13,7 +13,10 @@
 <body>
     <h1>Menu</h1>
     <br><br>
-    <a href="" class="btn btn-primary">
+    @if (Session::has('success'))
+        <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+    @endif
+    <a href="{{ route('customer.order.show') }}" class="btn btn-primary">
         Show cart
     </a>
     <table class="table table-hover">
@@ -41,14 +44,9 @@
                             <p>{{ $menu->description }}</p>
                         </td>
                         <td>
-                            @if ($menu->status === 'Unavailable')
-                                <button type="button" class="btn btn-primary" style="display: none;">Order</button>
-                            @else
-                                <a href="#" onclick="event.stopPropagation();"
-                                    data-url="{{ route('addToCart', ['id' => $menu->id]) }}" title="View Profile"
-                                    class="btn btn-info addToCart">Order</a>
-                            @endif
-
+                            <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
+                                <button class="btn btn-primary">Order</button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -67,26 +65,6 @@
         function redirectTo(url) {
             window.location.href = url;
         }
-
-        function addToCart(event) {
-            event.preventDefault();
-            let urlCart = $(this).data('url');
-            $.ajax({
-                type: "GET",
-                url: urlCart,
-                dataType: 'json',
-                success: function(data) {
-                    if (data.code === 200)
-                        alert("Add dish to cart successfully");
-                },
-                error: function() {
-
-                },
-            });
-        }
-        $(function() {
-            $('.addToCart').on("click", addToCart);
-        });
     </script>
 </body>
 

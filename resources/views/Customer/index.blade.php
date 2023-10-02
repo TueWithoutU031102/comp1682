@@ -18,7 +18,7 @@
     @endif
     customer page
     <div class="button-action">
-        <a href="{{ route('customer.create') }}" class="btn btn-primary">Booking</a>
+        <a href="" class="btn btn-primary">Booking</a>
     </div>
     <div class="button-action">
         <a href="" class="btn btn-primary">Payment</a>
