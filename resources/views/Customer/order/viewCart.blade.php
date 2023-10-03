@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Show cart</title>
 </head>
 
@@ -15,9 +17,44 @@
     <div class="cart_wrapper">
         @include('Customer.order.components.cart_component')
     </div>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).on('click', '.cart_remove', function() {
+            let id = $(this).data('id');
+            remove(id);
+        });
+
+        function remove(id) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('customer.order.remove') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    if (data.code === 200) {
+                        $('.cart_wrapper').html(data.cart_component);
+                        showFeedbackMessage('Dish removed from cart.', 'success');
+                    }
+                },
+                error: function() {
+                    showFeedbackMessage('Failed to remove item from cart. Please try again later.', 'error');
+                }
+            });
+        }
+
+        function showFeedbackMessage(message, type) {
+            let feedbackDiv = $('.cart_feedback');
+            feedbackDiv.text(message);
+            feedbackDiv.removeClass('alert-success alert-danger').addClass('alert-' + type);
+            feedbackDiv.show();
+            setTimeout(function() {
+                feedbackDiv.hide();
+            }, 3000);
+        }
+    </script>
 </body>
 
 </html>

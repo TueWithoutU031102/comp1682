@@ -54,7 +54,7 @@ Route::prefix('customers')->group(function () {
         Route::get('add/{menu}', [CustomerOrderController::class, 'add'])->name('customer.order.add');
         Route::get('show', [CustomerOrderController::class, 'show'])->name('customer.order.show');
         Route::post('update', [CustomerOrderController::class, 'update'])->name('customer.order.update');
-        Route::post('delete', [CustomerOrderController::class, 'delete'])->name('customer.order.delete');
+        Route::post('remove', [CustomerOrderController::class, 'remove'])->name('customer.order.remove');
         Route::post('store', [CustomerOrderController::class, 'store'])->name('customer.order.store');
     });
     Route::prefix('checkins')->group(function () {

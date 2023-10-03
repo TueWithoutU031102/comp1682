@@ -65,9 +65,8 @@ class OrderController extends Controller
         }
     }
 
-    public function delete(deleteCart $request)
+    public function remove(Request $request)
     {
-
         $id = $request->input('id');
 
         $cart = session()->get('cart', []);
