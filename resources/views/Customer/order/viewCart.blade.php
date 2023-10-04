@@ -17,11 +17,41 @@
     <div class="cart_wrapper">
         @include('Customer.order.components.cart_component')
     </div>
-    <script>
+    <script type="text/javascript">
         $(document).on('click', '.cart_remove', function() {
             let id = $(this).data('id');
             remove(id);
         });
+
+        $(document).on('input', '.cart_update', function() {
+            let id = $(this).data('id');
+            let quantity = $(this).parents('tr').find('input.quantity').val();
+            update(id, quantity);
+        });
+
+
+        function update(id, quantity) {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('customer.order.update') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id: id,
+                    quantity: quantity
+                },
+                success: function(data) {
+                    if (data.code === 200) {
+                        $('.cart_wrapper').html(data.cart_component);
+                        showFeedbackMessage('Cart updated successfully!', 'success');
+                    }
+                },
+                error: function() {
+                    showFeedbackMessage('Failed to update cart. Please try again later.', 'error');
+                }
+            });
+        }
 
         function remove(id) {
             $.ajax({
@@ -40,7 +70,7 @@
                     }
                 },
                 error: function() {
-                    showFeedbackMessage('Failed to remove item from cart. Please try again later.', 'error');
+                    showFeedbackMessage('Failed to remove dish from cart. Please try again later.', 'error');
                 }
             });
         }

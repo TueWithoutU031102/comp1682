@@ -45,7 +45,6 @@ class OrderController extends Controller
 
         $id = $request->input('id');
         $quantity = $request->input('quantity');
-
         $cart = session()->get('cart', []);
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] = $quantity;
@@ -65,7 +64,7 @@ class OrderController extends Controller
         }
     }
 
-    public function remove(Request $request)
+    public function remove(deleteCart $request)
     {
         $id = $request->input('id');
 
