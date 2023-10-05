@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 Route::prefix('admins')->group(function () {
     Route::prefix('manages')->group(function () {
         Route::get('index', [AdminController::class, 'index'])->name('admin.index');

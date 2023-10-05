@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\Book;
 
 class BookController extends Controller
@@ -18,12 +19,18 @@ class BookController extends Controller
     {
         $data = $request->validate([
             'bookName' => 'required',
-            'phonenumber' => 'required',
-            'numberofPeople' => 'required',
-            'arrivalTime' => 'required',
+            'phonenumber' => 'required|digits:10|starts_with:0',
+            'numberofPeople' => 'required|numeric|min:1',
+            'arrivalTime' => ['required', 'after:' . now()->subHours(1)->toDateString()],
             'note' => 'nullable',
+        ], [
+            'phonenumber.digits' => 'Phone number must be numeric and 10 characters long',
+            'numberofPeople.numeric' => 'Please enter a number of people',
+            'phonenumber.starts_with' => 'Phone number must start with 0',
+            'arrivalTime.after' => 'Please reserve a table 1 hour in advance',
         ]);
+
         $book->fill($data)->save();
-        return to_route('customer.index')->with('success', 'Booking created successfully!');
+        return to_route('index')->with('success', 'Booking created successfully!');
     }
 }
