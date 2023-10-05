@@ -22,8 +22,8 @@
             <p><span>Status: </span> {{ $menu->status }}</p>
             <p><span>Price: </span>{{ $menu->price }}</p>
             <p><span>Description: </span>{{ $menu->description }}</p>
-            @if ($menu->status == 'Available')
-                <a href="{{ route('customer.order.add', ['menu' => $menu]) }}" >
+            @if ($menu->status->value === 'Available')
+                <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
                     <button class="btn btn-primary" title="Order" class="btn btn-info add">Order</button>
                 </a>
             @endif

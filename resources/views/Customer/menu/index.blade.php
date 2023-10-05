@@ -85,13 +85,7 @@
                             <p>{{ $menu->status }}</p>
                             <p>{{ $menu->description }}</p>
                         </td>
-                        @if ($menu->status->value === 'Unavailable')
-                            <td>
-                                <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
-                                    <button class="btn btn-primary" style="display: none;">Order</button>
-                                </a>
-                            </td>
-                        @else
+                        @if ($menu->status->value === 'Available')
                             <td>
                                 <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
                                     <button class="btn btn-primary">Order</button>
