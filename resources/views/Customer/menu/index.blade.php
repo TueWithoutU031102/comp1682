@@ -24,7 +24,6 @@
                         Cart
                         <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
                     </button>
-
                     <div class="dropdown-menu">
                         <div class="row total-header-section">
                             @php $total = 0 @endphp
@@ -100,8 +99,6 @@
     <a href="{{ route('customer.index') }}">
         <button class="btn btn-primary">Back</button>
     </a>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function redirectTo(url) {
             window.location.href = url;
