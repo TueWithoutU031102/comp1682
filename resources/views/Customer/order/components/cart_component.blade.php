@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Shopping Cart</h1>
+    <h1>Order Cart</h1>
     <br><br>
     <div class="cart_feedback alert" style="display: none;"></div>
     <table class="table table-hover">
@@ -19,32 +19,40 @@
             @php
                 $total = 0;
             @endphp
-            @forelse ($carts as $id => $cartItem)
-                @php
-                    $total += $cartItem['price'] * $cartItem['quantity'];
-                @endphp
-                <tr>
-                    <th scope="row">{{ $id }}</th>
-                    <td><img style="width: 200px; height: 100px;" src="{{ asset($cartItem['image']) }}" alt="">
-                    </td>
-                    <td>{{ $cartItem['name'] }}</td>
-                    <td>{{ number_format($cartItem['price']) }}</td>
-                    <td><input type="number" value="{{ $cartItem['quantity'] }}" min="1" class="quantity"
-                            data-id="{{ $id }}"></td>
-                    <td>{{ number_format($cartItem['price'] * $cartItem['quantity']) }}</td>
-                    <td>
-                        <button class="btn btn-primary cart_update" data-id="{{ $id }}">Update</button>
-                        <button class="btn btn-danger btn-sm cart_remove" data-id="{{ $id }}">
-                            <i class="fa fa-trash-o"></i>
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            @empty
+            @if ($carts === null)
                 <tr>
                     <td colspan="7">Your cart is empty.</td>
                 </tr>
-            @endforelse
+            @else
+                @forelse ($carts as $id => $cartItem)
+                    @php
+                        $total += $cartItem['price'] * $cartItem['quantity'];
+                    @endphp
+                    <tr>
+                        <th scope="row">{{ $id }}</th>
+                        <td><img style="width: 200px; height: 100px;" src="{{ asset($cartItem['image']) }}"
+                                alt="">
+                        </td>
+                        <td>{{ $cartItem['name'] }}</td>
+                        <td>{{ number_format($cartItem['price']) }}</td>
+                        <td class="cart_update" data-id="{{ $id }}">
+                            <input type="number" value="{{ $cartItem['quantity'] }}" min="1" min="1"
+                                class="quantity">
+                        </td>
+                        <td>{{ number_format($cartItem['price'] * $cartItem['quantity']) }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm cart_remove" data-id="{{ $id }}">
+                                <i class="fa fa-trash-o"></i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7">Your cart is empty.</td>
+                    </tr>
+                @endforelse
+            @endif
         </tbody>
     </table>
 

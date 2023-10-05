@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <form action="{{ route('customer.store') }}" method="POST">
+    <form action="{{ route('customer.book.store') }}" method="POST">
         @csrf
         <br>
         @if ($errors->any())
@@ -34,15 +34,10 @@
         </div>
         <div class="input-box">
             <label for="numberofPeople" class="form-label">Number of people:</label>
-            <select class="form-select" value="{{ old('numberofPeople') }}" id="numberofPeople" name="numberofPeople">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="5">3-5</option>
-                <option value="10">6-10</option>
-                <option value="15">11-15</option>
-                <option>More</option>
-            </select>
+            <input type="text" id="numberofPeople" class="form-control" value="{{ old('numberofPeople') }}"
+                name="numberofPeople">
         </div>
+
         <div class="input-box">
             <label for="arrivalTime" class="form-label">Arrival time:</label>
             <input type="datetime-local" class="form-control" value="{{ old('arrivalTime') }}" id="arrivalTime"
@@ -56,7 +51,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         <div class="button-action">
-            <a href="{{ route('customer.index') }}" class="btn btn-primary">Back</a>
+            <a href="/" class="btn btn-primary">Back</a>
         </div>
     </form>
 </body>
