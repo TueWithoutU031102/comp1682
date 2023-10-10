@@ -1,0 +1,32 @@
+html {
+    overflow-y: scroll;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+.coffee {
+    height: 60%;
+    width: 60%;
+    display: grid;
+    grid-template-columns: (1fr, 2fr);
+    box-sizing: border-box;
+    text-align: left;
+    font-family: NoSpace;
+}
+.coffee-cake {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.coffee .description {
+    text-align: left;
+}
+.img {
+    height: 50%;
+    width: 50%;
+}
+.img img {
+}
