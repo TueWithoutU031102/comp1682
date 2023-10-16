@@ -6,12 +6,12 @@
   <div class="py-10">
     <div class="container">
       {{-- small banner --}}
-    
+
       <h2 class="text-center my-5 text-3xl font-bold">Cafe và Trà</h2>
-    
+
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-7">
         <img class="aspect-[16/10] object-cover w-full col-span-2 shadow rounded" src="https://picsum.photos/800" alt="">
-    
+
         @foreach (range(1, 6) as $index)
         <div>
           <div class="transition rounded hover:shadow-md hover:scale-105 duration-300">

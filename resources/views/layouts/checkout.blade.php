@@ -78,59 +78,7 @@
     </div>
   </div>
 
-  <div class="drawer drawer-end lg:drawer-open">
-    <input id="navbar" type="checkbox" class="drawer-toggle" /> 
-    <div class="drawer-content flex flex-col bg-stone-50">
-      <!-- Page content here -->
-      @yield('content')
-    </div>
-    <div class="drawer-side z-20">
-      <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label> 
-      <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200 min-h-full">
-        <div class="flex flex-col space-y-3">
-
-          @foreach (range(1,6) as $item)
-          <div class="rounded flex space-x-2 bg-white p-2">
-            <img class="aspect-square w-12 h-12 rounded" src="https://picsum.photos/200" alt="">
-            <div>
-              <p>The product one from anon, and one other</p>
-
-              <div class="flex justify-between mt-3">
-                <div class="join border border-stone-200">
-                  <button class="btn btn-xs join-item">-</button> 
-                  <input type="number" class="input input-xs join-item w-8 text-center" value="2">
-                  <button class="btn btn-xs join-item">+</button>
-                </div>
-
-                <span class="text-red-500">69.420 đ</span>
-              </div>
-            </div>
-          </div>
-          @endforeach
-        </div>
-
-        <div>
-          <hr class="border-t h-1 border-black border-dashed w-full my-2">
-          <div class="flex justify-between">
-            <span>Total price:</span>
-            <span>69.420 đ</span>
-          </div>
-
-          <button class="btn btn-info w-full mt-2">Checkout</button>
-
-          <div class="lg:mt-3 w-full text-center">
-            <label class="swap swap-flip opacity-40">
-  
-              <!-- this hidden checkbox controls the state -->
-              <input type="checkbox" class="hidden" />
-              <div class="swap-off"><span class="text-4xl">😀</span></div>
-              <div class="swap-on"><span class="text-4xl">🤡</span></div>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  @yield('content')
 
   <div class="bg-white rounded-t-xl">
     <footer class="container p-5 flex justify-between">
