@@ -68,12 +68,10 @@
       <ul class="hidden md:block">
         <li><a href="#">Menu</a></li>
         <li><a href="#">Booking</a></li>
-        <li><a href="#">About</a></li>
       </ul>
 
       <ul class="hidden md:block">
-        <li><a href="#">Register</a></li>
-        <li><a href="#" role="button">Login</a></li>
+        <li><a href="/login" role="button">Login</a></li>
       </ul>
 
       <ul class="md:hidden">

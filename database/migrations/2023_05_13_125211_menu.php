@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Type::class)->constrained()->cascadeOnDelete();
             $table->string('status')->default(StatusMenu::Available->value);
             $table->integer('price');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->longText('image')->nullable();
             $table->timestamps();
         });

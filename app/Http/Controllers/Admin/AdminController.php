@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 use App\Enums\Role;
 use Illuminate\Http\Request;
