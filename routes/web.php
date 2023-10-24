@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('view/{name}', fn($name) => view($name));
+
 Route::get('/', function () {
     return view('index');
 })->name('index');
