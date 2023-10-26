@@ -13,4 +13,10 @@ class BookController extends Controller
         $books = Book::all();
         return view("manager.book.index", ['books' => $books]);
     }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+        return to_route('manager.book.index')->with('success', 'Deleted successfully!');
+    }
 }

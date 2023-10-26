@@ -77,6 +77,8 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         });
         Route::prefix('books')->group(function () {
             Route::get('index', [ManagerBookController::class, 'index'])->name('manager.book.index');
+            Route::get('/{book}', [ManagerBookController::class, 'show'])->name('manager.book.show');
+            Route::post('/{book}/destroy', [ManagerBookController::class, 'destroy'])->name('manager.book.destroy');
         });
         Route::prefix('reviews')->group(function () {
             Route::get('index', [ManagerReviewController::class, 'index'])->name('manager.review.index');

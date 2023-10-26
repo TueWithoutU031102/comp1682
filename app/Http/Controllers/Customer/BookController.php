@@ -17,11 +17,12 @@ class BookController extends Controller
 
     public function store(Request $request, Book $book)
     {
+        dd(now()->addHour()->toDateTimeString());
         $data = $request->validate([
             'bookName' => 'required',
             'phonenumber' => 'required|digits:10|starts_with:0',
             'numberofPeople' => 'required|numeric|min:1',
-            'arrivalTime' => ['required', 'after:' . now()->subHours(1)->toDateString()],
+            'arrivalTime' => ['required', 'after:'.now()->addHour()->toDateTimeString()],
             'note' => 'nullable',
         ], [
             'phonenumber.digits' => 'Phone number must be numeric and 10 characters long',

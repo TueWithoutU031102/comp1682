@@ -16,11 +16,12 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Phonenumber</th>
+                <th scope="col">Phone</th>
                 <th scope="col">Number of people</th>
                 <th scope="col">Arrival time</th>
                 <th scope="col">Note</th>
                 <th scope="col">Status</th>
+                <th scope="col">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -33,9 +34,11 @@
                     <td>{{ $book->note }}</td>
                     <td>{{ $book->status }}</td>
                     <td>
-                        <a href="{{ $book->id }}" title="View Profile"
-                            class="btn btn-info btn-sm"><i aria-hidden="true"><i class="fa-solid fa-eye"></i>
-                        </a>
+                        <form action="{{ route('manager.book.destroy', ['book' => $book]) }}" method="POST" class="d-inline"
+                            onsubmit="return confirm('Are you sure to delete this booking !!!???')">
+                            @csrf
+                            <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i class="fa-solid fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
