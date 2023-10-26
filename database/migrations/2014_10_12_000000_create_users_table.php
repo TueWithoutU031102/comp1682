@@ -4,9 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\Role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -23,6 +24,23 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            [
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'role' => 'Admin',
+                'phone' => '0393608622',
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'name' => 'manager',
+                'email' => 'manager@gmail.com',
+                'role' => 'Manager',
+                'phone' => '0123456789',
+                'password' => Hash::make('123456'),
+            ],
+        ]);
     }
 
     /**

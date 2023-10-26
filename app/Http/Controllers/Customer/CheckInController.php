@@ -34,7 +34,7 @@ class CheckinController extends Controller
         if ($existingSession) {
             $data = $request->validate([
                 'name' => 'required',
-                'phone' => 'required',
+                'phone' => 'required|required|digits:10|starts_with:0',
                 'table_id' => 'required',
             ]);
             $existingSession->fill($data)->save();
