@@ -7,8 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Session;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Session::class)->constrained()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
             $table->string('foodQuality')->default(foodQuality::Normal->value);
             $table->string('serviceQuality')->default(serviceQuality::Normal->value);
             $table->string('detail')->nullable();

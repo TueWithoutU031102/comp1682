@@ -14,8 +14,9 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(); //name user
-            $table->string('phone')->nullable(); // phone number
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
             $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

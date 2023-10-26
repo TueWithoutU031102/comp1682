@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'phone', 'email', 'detail'];
     protected $casts = [
         'foodQuality' => foodQuality::class,
         'serviceQuality'=>serviceQuality::class,

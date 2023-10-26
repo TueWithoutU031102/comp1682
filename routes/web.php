@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
-use App\Http\Controllers\Customer\ReviewController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Customer\CheckinController;
@@ -14,6 +13,7 @@ use App\Http\Controllers\Customer\BookController as CustomerBookController;
 use App\Http\Controllers\Manager\BookController as ManagerBookController;
 use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\ReviewController as CustomerReviewController;
+use App\Http\Controllers\Manager\ReviewController as ManagerReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,12 +78,17 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         Route::prefix('books')->group(function () {
             Route::get('index', [ManagerBookController::class, 'index'])->name('manager.book.index');
         });
+        Route::prefix('reviews')->group(function () {
+            Route::get('index', [ManagerReviewController::class, 'index'])->name('manager.review.index');
+            Route::get('/{review}', [ManagerReviewController::class, 'show'])->name('manager.review.show');
+            Route::post('/{review}/destroy', [ManagerReviewController::class, 'destroy'])->name('manager.review.destroy');
+        });
     });
 
     Route::group(['prefix' => 'staffs', 'middleware' => ['auth', 'staffs']], function () {
     });
 });
-Route::group(['prefix' => 'customers', 'middleware' => ['auth', 'customers']], function () {
+Route::group(['prefix' => 'customers'], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
     Route::prefix('books')->group(function () {
@@ -103,6 +108,7 @@ Route::group(['prefix' => 'customers', 'middleware' => ['auth', 'customers']], f
     });
     Route::prefix('reviews')->group(function () {
         Route::get('create', [CustomerReviewController::class, 'create'])->name('customer.review.create');
+        Route::post('store', [CustomerReviewController::class, 'store'])->name('customer.review.store');
     });
     Route::prefix('checkins')->group(function () {
         Route::get('index/{table}', [CheckinController::class, 'index'])->name('customer.checkin.index');

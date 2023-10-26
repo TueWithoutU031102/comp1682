@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Customer;
 
 use App\Enums\foodQuality;
 use App\Enums\serviceQuality;
+use Illuminate\Validation\Rules\Enum;
 use App\Models\Review;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreReviewRequest;
-use App\Http\Requests\UpdateReviewRequest;
+use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
@@ -25,8 +25,18 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreReviewRequest $request)
+    public function store(Request $request, Review $review)
     {
         //
+        $data = $request->validate([
+            'name' => 'required',
+            'phone' => 'required|required|digits:10|starts_with:0',
+            'email' => 'required|email',
+            'foodQuality' => ['required', new Enum(foodQuality::class)],
+            'serviceQuality' => ['required', new Enum(serviceQuality::class)],
+            'detail' => 'required',
+        ]);
+        $review->fill($data)->save();
+        return to_route("customer.index")->with('success', 'Review created successfully!');
     }
 }
