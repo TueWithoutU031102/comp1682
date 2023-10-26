@@ -17,7 +17,6 @@ class BookController extends Controller
 
     public function store(Request $request, Book $book)
     {
-        dd(now()->addHour()->toDateTimeString());
         $data = $request->validate([
             'bookName' => 'required',
             'phonenumber' => 'required|digits:10|starts_with:0',
@@ -30,7 +29,6 @@ class BookController extends Controller
             'phonenumber.starts_with' => 'Phone number must start with 0',
             'arrivalTime.after' => 'Please reserve a table 1 hour in advance',
         ]);
-
         $book->fill($data)->save();
         return to_route('index')->with('success', 'Booking created successfully!');
     }

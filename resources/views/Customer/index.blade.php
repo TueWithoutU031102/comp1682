@@ -15,13 +15,13 @@
     @endif
     customer page
     <div class="button-action">
-        <a href="" class="btn btn-primary">Booking</a>
+        <a href="{{ route('customer.book.create') }}" class="btn btn-primary">Booking</a>
     </div>
     <div class="button-action">
         <a href="" class="btn btn-primary">Payment</a>
     </div>
     <div class="button-action">
-        <a href="" class="btn btn-primary">Review</a>
+        <a href="{{ route('customer.review.create') }}" class="btn btn-primary">Review</a>
     </div>
     <div class="button-action">
         <a href="" class="btn btn-primary">Call staffs</a>
