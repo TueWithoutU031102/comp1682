@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Manager\ManagerController;
@@ -85,6 +86,18 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('/{review}', [ManagerReviewController::class, 'show'])->name('manager.review.show');
             Route::post('/{review}/destroy', [ManagerReviewController::class, 'destroy'])->name('manager.review.destroy');
         });
+        Route::prefix('notifications')->group(function () {
+            Route::get('index', function () {
+                return view('Manager.notification.index');
+            });
+        });
+    });
+    Route::group(['prefix' => 'managers'], function () {
+        Route::prefix('notifications')->group(function () {
+            Route::get('index', function () {
+                return view('Manager.notification.index');
+            });
+        });
     });
 
     Route::group(['prefix' => 'staffs', 'middleware' => ['auth', 'staffs']], function () {
@@ -119,6 +132,11 @@ Route::group(['prefix' => 'customers'], function () {
         Route::post('store/{table}', [CheckinController::class, 'store'])->name('customer.checkin.store');
         //xử lý check in:
         //Đối với table k có session, cho phép người dùng tao session và chuyển hướng người dùng sang trang order
+    });
+    Route::post('/notify-manager', function () {
+        $message = "Khách hàng cần trợ giúp";
+        event(new NotificationEvent($message));
+        return response()->json(['message' => 'Yêu cầu đã được gửi thành công'], 200);
     });
 });
 Route::get('/dashboard', function () {
