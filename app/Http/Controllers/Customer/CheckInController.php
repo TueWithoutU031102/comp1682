@@ -38,6 +38,7 @@ class CheckinController extends Controller
                 'table_id' => 'required',
             ]);
             $existingSession->fill($data)->save();
+            session()->put('customer.session',$existingSession->id);
             return to_route('customer.index');
         }
         else return back();

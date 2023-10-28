@@ -1,6 +1,8 @@
 <?php
 
 use App\Events\NotificationEvent;
+use App\Http\Middleware\is\Customer;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Manager\ManagerController;
@@ -87,23 +89,16 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::post('/{review}/destroy', [ManagerReviewController::class, 'destroy'])->name('manager.review.destroy');
         });
         Route::prefix('notifications')->group(function () {
-            Route::get('index', function () {
-                return view('Manager.notification.index');
-            });
-        });
-    });
-    Route::group(['prefix' => 'managers'], function () {
-        Route::prefix('notifications')->group(function () {
-            Route::get('index', function () {
-                return view('Manager.notification.index');
-            });
+            Route::get('index', [NotificationController::class, 'index'])->name('manager.notifications.index');
+            Route::post('/{notification}/destroy', [NotificationController::class, 'destroy'])->name('manager.notification.destroy');
+            Route::get('/event', [NotificationController::class, 'event'])->name('manager.notification.event');
         });
     });
 
     Route::group(['prefix' => 'staffs', 'middleware' => ['auth', 'staffs']], function () {
     });
 });
-Route::group(['prefix' => 'customers'], function () {
+Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
     Route::prefix('books')->group(function () {
@@ -125,6 +120,11 @@ Route::group(['prefix' => 'customers'], function () {
         Route::get('create', [CustomerReviewController::class, 'create'])->name('customer.review.create');
         Route::post('store', [CustomerReviewController::class, 'store'])->name('customer.review.store');
     });
+    Route::prefix('notifications')->group(function () {
+        Route::post('store', [NotificationController::class, 'store'])->name('customer.notification.store');
+    });
+});
+Route::group(['prefix' => 'customers'], function () {
     Route::prefix('checkins')->group(function () {
         Route::get('index/{table}', [CheckinController::class, 'index'])->name('customer.checkin.index');
         Route::get('notice', [CheckinController::class, 'notice'])->name('customer.checkin.notice');
@@ -132,11 +132,6 @@ Route::group(['prefix' => 'customers'], function () {
         Route::post('store/{table}', [CheckinController::class, 'store'])->name('customer.checkin.store');
         //xử lý check in:
         //Đối với table k có session, cho phép người dùng tao session và chuyển hướng người dùng sang trang order
-    });
-    Route::post('/notify-manager', function () {
-        $message = "Khách hàng cần trợ giúp";
-        event(new NotificationEvent($message));
-        return response()->json(['message' => 'Yêu cầu đã được gửi thành công'], 200);
     });
 });
 Route::get('/dashboard', function () {
