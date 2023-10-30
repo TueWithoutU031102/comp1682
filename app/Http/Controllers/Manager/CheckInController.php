@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Models\Session;
-use App\Models\Table;
 
 class CheckInController extends Controller
 {
