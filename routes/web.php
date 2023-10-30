@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Customer\CheckinController;
 use App\Http\Controllers\Manager\TypeController;
 use App\Http\Controllers\Manager\TableController;
+use App\Http\Controllers\Manager\CheckInController as ManagerCheckInController;
 use App\Http\Controllers\Customer\MenuController as CustomerMenuController;
 use App\Http\Controllers\Manager\MenuController as ManagerMenuController;
 use App\Http\Controllers\Customer\BookController as CustomerBookController;
@@ -92,6 +93,11 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('index', [NotificationController::class, 'index'])->name('manager.notifications.index');
             Route::post('/{notification}/destroy', [NotificationController::class, 'destroy'])->name('manager.notification.destroy');
             Route::get('/event', [NotificationController::class, 'event'])->name('manager.notification.event');
+        });
+        Route::prefix('checkins')->group(function () {
+            Route::get('index', [ManagerCheckInController::class, 'index'])->name('manager.checkin.index');
+            Route::get('/{session}', [ManagerCheckInController::class, 'show'])->name('manager.checkin.show');
+            Route::post('/{session}/destroy', [ManagerCheckInController::class, 'destroy'])->name('manager.checkin.destroy');
         });
     });
 

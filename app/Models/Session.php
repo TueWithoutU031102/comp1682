@@ -9,4 +9,8 @@ class Session extends Model
 {
     use HasFactory;
     protected $fillable = ['table_id', 'name', 'phone'];
+    public function Table()
+    {
+        return $this->belongsTo(Table::class, 'table_id');
+    }
 }
