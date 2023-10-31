@@ -20,6 +20,7 @@ class CheckInController extends Controller
     }
     public function destroy(Session $session)
     {
+        session()->pull('customer.session', [Session::where('table_id', $session->id)->first()]);
         $session->delete();
         return to_route('manager.checkin.index')->with('success', 'Session deleted successfully!');
     }
