@@ -2,13 +2,31 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Models\VNPay;
 use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
     //
-    public function index()
+    public function index(VNPay $VNpay)
     {
+        if (isset($_GET['vnp_Amount'])) {
+            $data_vnpay = [
+                'vnp_Amount' => $_GET['vnp_Amount'],
+                'vnp_BankCode' => $_GET['vnp_BankCode'],
+                'vnp_BankTranNo' => $_GET['vnp_BankTranNo'],
+                'vnp_CardType' => $_GET['vnp_CardType'],
+                'vnp_OrderInfo' => $_GET['vnp_OrderInfo'],
+                'vnp_PayDate' => $_GET['vnp_PayDate'],
+                'vnp_ResponseCode' => $_GET['vnp_ResponseCode'],
+                'vnp_TmnCode' => $_GET['vnp_TmnCode'],
+                'vnp_TransactionNo' => $_GET['vnp_TransactionNo'],
+                'vnp_TransactionStatus' => $_GET['vnp_TransactionStatus'],
+                'vnp_TxnRef' => $_GET['vnp_TxnRef'],
+                'vnp_SecureHash' => $_GET['vnp_SecureHash'],
+            ];
+            $VNpay->fill($data_vnpay)->save();
+        }
         return view("customer.index");
     }
 

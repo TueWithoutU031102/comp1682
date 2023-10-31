@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('vnp_BankCode');
             $table->string('vnp_BankTranNo');
             $table->string('vnp_CardType');
-            $table->string('np_OrderInfo');
+            $table->string('vnp_OrderInfo');
             $table->string('vnp_PayDate');
             $table->string('vnp_ResponseCode');
             $table->string('vnp_TmnCode');

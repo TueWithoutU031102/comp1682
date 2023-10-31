@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->integer('price');
             $table->longText('description')->nullable();
             $table->longText('image')->nullable();
-            $table->integer('saled');
+            $table->integer('saled')->default('0');
             $table->timestamps();
         });
     }
