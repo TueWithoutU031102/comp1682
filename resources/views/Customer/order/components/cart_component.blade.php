@@ -62,11 +62,17 @@
     <a href="{{ route('customer.menu.index') }}">
         <button class="btn btn-primary">Continue to order</button>
     </a>
-    <div>
+    {{-- <div>
         <form action={{ route('vnpay_payment') }} method="POST">
             @csrf
             <input type="hidden" name="total" value="{{ $total }}">
             <button type="submit" name="redirect" class="btn btn-primary checkout-btn">Checkout by VNPay</button>
+        </form>
+    </div> --}}
+    <div class="button-action">
+        <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <button type="submit" class="btn btn-primary">Order</button>
         </form>
     </div>
 
