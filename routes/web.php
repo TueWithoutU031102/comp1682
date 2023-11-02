@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Customer\CheckinController;
 use App\Http\Controllers\Manager\TypeController;
 use App\Http\Controllers\Manager\TableController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Manager\OrderController as ManagerOrderController;
 use App\Http\Controllers\Manager\CheckInController as ManagerCheckInController;
 use App\Http\Controllers\Customer\MenuController as CustomerMenuController;
@@ -35,9 +36,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('view/{name}', fn($name) => view($name));
 
-Route::get('/', function () {
-    return view('public.index');
-})->name('index');
+Route::get('index', [IndexController::class, 'index'])->name('index');
 Route::get('/forbiddenPage', function () {
     return view('403');
 })->name("forbidden");
@@ -111,7 +110,8 @@ Route::group(['middleware' => ['auth', 'users']], function () {
     Route::group(['prefix' => 'staffs', 'middleware' => ['auth', 'staffs']], function () {
     });
 });
-Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
+// Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
+Route::group(['prefix' => 'customers'], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
 
