@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @include('layouts.link')
-    <title>Cart</title>
+    <title>Order</title>
 </head>
 
 <body>
-    <h1>Cart</h1>
+    <h1>Order</h1>
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
     @endif
@@ -39,7 +39,7 @@
                     </td>
                     <td>{{ $cart->created_at }}</td>
                     <td>
-                        <form action="{{ route('manager.cart.destroy', ['cart' => $cart]) }}" method="POST"
+                        <form action="{{ route('manager.order.destroy', ['cart' => $cart]) }}" method="POST"
                             class="d-inline"
                             onsubmit="return confirm('Are you sure to delete {{ $cart->menu->name }} {{ $cart->session->table->name }} !!!???')">
                             @csrf
@@ -50,7 +50,7 @@
                 </tr>
                 <tr class="form-row" id="form-row-{{ $cart->id }}" style="display: none;">
                     <td colspan="6">
-                        <form method="POST" action="{{ route('manager.cart.update', ['cart' => $cart]) }}">
+                        <form method="POST" action="{{ route('manager.order.update', ['cart' => $cart]) }}">
                             @method('PUT')
                             @csrf
 
