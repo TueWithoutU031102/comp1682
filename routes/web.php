@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Customer\CheckinController;
 use App\Http\Controllers\Manager\TypeController;
 use App\Http\Controllers\Manager\TableController;
+use App\Http\Controllers\Manager\CartController;
 use App\Http\Controllers\Manager\CheckInController as ManagerCheckInController;
 use App\Http\Controllers\Customer\MenuController as CustomerMenuController;
 use App\Http\Controllers\Manager\MenuController as ManagerMenuController;
@@ -99,6 +100,11 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('index', [ManagerCheckInController::class, 'index'])->name('manager.checkin.index');
             Route::get('/{session}', [ManagerCheckInController::class, 'show'])->name('manager.checkin.show');
             Route::post('/{session}/destroy', [ManagerCheckInController::class, 'destroy'])->name('manager.checkin.destroy');
+        });
+        Route::prefix('carts')->group(function () {
+            Route::get('index', [CartController::class, 'index'])->name('manager.cart.index');
+            Route::put('/{cart}/update', [CartController::class, 'update'])->name('manager.cart.update');
+            Route::post('/{cart}/destroy', [CartController::class, 'destroy'])->name('manager.cart.destroy');
         });
     });
 
