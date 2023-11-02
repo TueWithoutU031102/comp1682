@@ -38,15 +38,15 @@
                         <span class="status-text">{{ $cart->status }}</span>
                     </td>
                     <td>{{ $cart->created_at }}</td>
-                    {{-- <td>
+                    <td>
                         <form action="{{ route('manager.cart.destroy', ['cart' => $cart]) }}" method="POST"
                             class="d-inline"
-                            onsubmit="return confirm('Are you sure to delete {{ $cart->id }} !!!???')">
+                            onsubmit="return confirm('Are you sure to delete {{ $cart->menu->name }} {{ $cart->session->table->name }} !!!???')">
                             @csrf
                             <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i
                                         class="fa-solid fa-trash"></i></button>
                         </form>
-                    </td> --}}
+                    </td>
                 </tr>
                 <tr class="form-row" id="form-row-{{ $cart->id }}" style="display: none;">
                     <td colspan="6">
