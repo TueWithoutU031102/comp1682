@@ -20,13 +20,25 @@
             <a href="" class="btn btn-primary">Payment</a>
         </div>
         <div class="button-action">
-            <a href="" class="btn btn-primary">Review</a>
+            <a href="{{ route('manager.review.index') }}" class="btn btn-primary">Review</a>
         </div>
         <div class="button-action">
             <a href="{{ route('manager.book.index') }}" class="btn btn-primary">Booking</a>
         </div>
         <div class="button-action">
-            <a href="/manager/indexMenu" class="btn btn-primary">Menu</a>
+            <a href="{{ route('manager.table.index') }}" class="btn btn-primary">Table</a>
+        </div>
+        <div class="button-action">
+            <a href="{{ route('manager.checkin.index') }}" class="btn btn-primary">Session</a>
+        </div>
+        <div class="button-action">
+            <a href="{{ route('manager.order.index') }}" class="btn btn-primary">Order</a>
+        </div>
+        <div class="button-action">
+            <a href="{{ route('manager.type.index') }}" class="btn btn-primary">Type</a>
+        </div>
+        <div class="button-action">
+            <a href="{{ route('manager.menu.index') }}" class="btn btn-primary">Menu</a>
         </div>
     </div>
 </body>

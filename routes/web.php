@@ -114,10 +114,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
 Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
-    Route::prefix('books')->group(function () {
-        Route::get('create', [CustomerBookController::class, 'create'])->name('customer.book.create');
-        Route::post('store', [CustomerBookController::class, 'store'])->name('customer.book.store');
-    });
+
     Route::prefix('menus')->group(function () {
         Route::get('index', [CustomerMenuController::class, 'index'])->name('customer.menu.index');
         Route::get('/{menu}', [CustomerMenuController::class, 'show'])->name('customer.menu.show');
@@ -138,6 +135,10 @@ Route::group(['prefix' => 'customers', 'middleware' => Customer::class], functio
     });
 });
 Route::group(['prefix' => 'customers'], function () {
+    Route::prefix('books')->group(function () {
+        Route::get('create', [CustomerBookController::class, 'create'])->name('customer.book.create');
+        Route::post('store', [CustomerBookController::class, 'store'])->name('customer.book.store');
+    });
     Route::prefix('checkins')->group(function () {
         Route::get('index/{table}', [CheckinController::class, 'index'])->name('customer.checkin.index');
         Route::get('notice', [CheckinController::class, 'notice'])->name('customer.checkin.notice');
