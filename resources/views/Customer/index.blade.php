@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="min-h-screen">
-
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+        @endif
         <div class="flex flex-col text-center mt-[20vh]">
             <h1 class="mb-5">Good morning, {{ $user_name }}</h1>
 
@@ -63,23 +65,7 @@
 @endsection
 
 {{-- <body>
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
-    @endif
-    customer page
     <div class="button-action">
         <a href="" class="btn btn-primary">Payment</a>
-    </div>
-    <div class="button-action">
-        <a href="{{ route('customer.review.create') }}" class="btn btn-primary">Review</a>
-    </div>
-    <div class="button-action">
-        <form action="{{ route('customer.notification.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <button type="submit" class="btn btn-primary">Call Staff</button>
-        </form>
-    </div>
-    <div class="button-action">
-        <a href="{{ route('customer.menu.index') }}" class="btn btn-primary">Menu</a>
     </div>
 </body> --}}
