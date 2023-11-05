@@ -16,6 +16,7 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Id</th>
+                <th scope="col">Table</th>
                 <th scope="col">Date</th>
                 <th scope="col">&nbsp;</th>
             </tr>
@@ -24,6 +25,7 @@
             @foreach ($notifications as $notification)
                 <tr>
                     <td>{{ $notification->id }}</td>
+                    <td>{{ $notification->session_id }}</td>
                     <td>{{ $notification->created_at }}</td>
                     <td>
                         <form action="{{ route('manager.notification.destroy', ['notification' => $notification]) }}"
@@ -38,6 +40,8 @@
             @endforeach
         </tbody>
     </table>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+
     <script>
         async function updateEvent() {
             let url = "{{ route('manager.notification.event') }}";
@@ -46,11 +50,13 @@
 
             let element = window.document.querySelector('#notification_data');
             element.innerHTML = '';
+
             for (const obj of notification) {
 
                 let tr = `<tr>
                     <td>${obj.id}</td>
-                    <td>${obj.created_at}</td>
+                    <td>${obj.session_id}</td>
+                    <td>${moment(obj.created_at).format('YYYY-MM-DD HH:mm:ss')}</td>
                     <td>
                         <form action="/managers/notifications/${obj.id}/destroy"
                             method="POST" class="d-inline"
@@ -65,7 +71,7 @@
             }
         }
 
-        setInterval(updateEvent,1000);
+        setInterval(updateEvent, 1000);
     </script>
 </body>
 

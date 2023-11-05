@@ -21,10 +21,11 @@ class NotificationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Notification $notification)
+    public function store(Notification $notification, Request $request)
     {
         //
-        $notification->save();
+        $data = $request->all();
+        $notification->fill($data)->save();
         return to_route("customer.index")->with('success', 'Notification created successfully!');
     }
 
