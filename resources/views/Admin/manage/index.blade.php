@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @include('layouts.link')
+    {{-- @include('layouts.link') --}}
     <title>Manage Account</title>
 </head>
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Manage Account') }}
-        </h2>
-    </x-slot>
 
-    <body>
+
+<body>
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Manage Account') }}
+            </h2>
+        </x-slot>
         @if (Session::has('success'))
             <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
         @endif
@@ -23,30 +24,30 @@
             <a type="button" href="{{ route('admin.create') }}" class="btn btn-primary"
                 style="font-weight: bold; font-size: 20px;">+</a>
         </div>
-        <br><br>
-        <table class="table table-hover">
-            <thead class="thead-dark">
+
+        <table class="table-auto mx-auto" style="width:70%;">
+            <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Role</th>
+                    <th class="px-4 py-2 font-semibold text-xs text-white">Name</th>
+                    <th class="px-4 py-2 font-semibold text-xs text-white">Role</th>
                 </tr>
             </thead>
-            <tbody class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">>
+            <tbody class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 @foreach ($users as $user)
-                
                     <tr onclick="redirectTo('{{ route('admin.show', ['user' => $user]) }}')">
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->role }}</td>
+                        <td class="border px-4 py-2 font-semibold text-xs text-white">{{ $user->name }}</td>
+                        <td class="border px-4 py-2 font-semibold text-xs text-white">{{ $user->role }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <script>
-            function redirectTo(url) {
-                window.location.href = url;
-            }
-        </script>
-    </body>
-</x-app-layout>
+    </x-app-layout>
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+
 
 </html>

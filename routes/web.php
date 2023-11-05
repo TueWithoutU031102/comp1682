@@ -3,6 +3,7 @@
 use App\Events\NotificationEvent;
 use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\is\Customer;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
@@ -155,6 +156,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 });
 //cổng thanh toán
 Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name("vnpay_payment");

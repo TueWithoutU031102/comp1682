@@ -79,7 +79,7 @@
                 </li>
             </ul>
             <ul class="hidden md:block">
-                <li><a href="{{ route('customer.book.create') }}">Booking</a></li>
+                <li><a onclick="showModal()">Booking</a></li>
             </ul>
 
             <ul class="hidden md:block">
@@ -110,9 +110,8 @@
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu p-4 w-80 min-h-full bg-base-200">
                 <!-- Sidebar content here -->
-                <li><a class="no-underline">Booking</a></li>
-                <li><a class="no-underline">About</a></li>
-                <li><a class="no-underline">Login</a></li>
+                <li><a class="no-underline" onclick="showModal()">Booking</a></li>
+                <li><a class="no-underline" href="/login">Login</a></li>
             </ul>
         </div>
     </div>

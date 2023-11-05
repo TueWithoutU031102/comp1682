@@ -50,9 +50,6 @@
         <div class="button-action">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-        <div class="button-action">
-            <a href="/" class="btn btn-primary">Back</a>
-        </div>
     </form>
 </body>
 
