@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::post('/{review}/destroy', [ManagerReviewController::class, 'destroy'])->name('manager.review.destroy');
         });
         Route::prefix('notifications')->group(function () {
-            Route::get('index', [NotificationController::class, 'index'])->name('manager.notifications.index');
+            Route::get('index', [NotificationController::class, 'index'])->name('manager.notification.index');
             Route::post('/{notification}/destroy', [NotificationController::class, 'destroy'])->name('manager.notification.destroy');
             Route::get('/event', [NotificationController::class, 'event'])->name('manager.notification.event');
         });
@@ -111,8 +111,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
     Route::group(['prefix' => 'staffs', 'middleware' => ['auth', 'staffs']], function () {
     });
 });
-// Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
-Route::group(['prefix' => 'customers'], function () {
+Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
 

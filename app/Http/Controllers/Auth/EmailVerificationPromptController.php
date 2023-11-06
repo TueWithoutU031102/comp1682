@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class EmailVerificationPromptController extends Controller
 {
@@ -15,8 +16,14 @@ class EmailVerificationPromptController extends Controller
      */
     public function __invoke(Request $request): RedirectResponse|View
     {
-        return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended(RouteServiceProvider::HOME)
-                    : view('auth.verify-email');
+        if ($request->user()->hasVerifiedEmail()) {
+            if (Auth::user()->role->name === 'Admin') {
+                return redirect()->intended(RouteServiceProvider::HOME1);
+            } else if (Auth::user()->role->name === 'Manager') {
+                return redirect()->intended(RouteServiceProvider::HOME2);
+            }
+        } else {
+            return view('auth.verify-email');
+        }
     }
 }
