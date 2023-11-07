@@ -28,15 +28,15 @@
         <table class="table-auto mx-auto" style="width:70%;">
             <thead>
                 <tr>
-                    <th class="px-4 py-2 font-semibold text-xs text-white">Name</th>
-                    <th class="px-4 py-2 font-semibold text-xs text-white">Role</th>
+                    <th class="px-4 py-2 font-semibold text-xs text-black">Name</th>
+                    <th class="px-4 py-2 font-semibold text-xs text-black">Role</th>
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 @foreach ($users as $user)
                     <tr onclick="redirectTo('{{ route('admin.show', ['user' => $user]) }}')">
-                        <td class="border px-4 py-2 font-semibold text-xs text-white">{{ $user->name }}</td>
-                        <td class="border px-4 py-2 font-semibold text-xs text-white">{{ $user->role }}</td>
+                        <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->name }}</td>
+                        <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->role }}</td>
                     </tr>
                 @endforeach
             </tbody>
