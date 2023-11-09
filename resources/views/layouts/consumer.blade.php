@@ -117,41 +117,48 @@
 
                                     <div class="flex justify-between mt-3">
                                         <div class="join border border-stone-200">
-                                            <span class="join-item w-8 text-center count">{{ $details['quantity'] }}
-                                            </span>
+                                            <button class="btn btn-xs join-item">-</button>
+                                            <input type="number"
+                                                class="input input-xs join-item w-8 text-center quantity"
+                                                value="{{ $details['quantity'] }}">
+                                            <button class="btn btn-xs join-item">+</button>
                                         </div>
-                                        <span class="text-red-500 price">{{ $details['price'] }} đ</span>
                                     </div>
+                                    <span class="text-red-500 price">{{ $details['price'] }} đ</span>
                                 </div>
                             </div>
-                        @endforeach
-                    @endif
+                </div>
+                @endforeach
+                @endif
+            </div>
+
+            <div>
+                <hr class="border-t h-1 border-black border-dashed w-full my-2">
+                <div class="flex justify-between">
+                    @php $total = 0 @endphp
+                    @foreach ((array) session('cart') as $id => $details)
+                        @php $total += $details['price'] * $details['quantity'] @endphp
+                    @endforeach
+                    <span>Total price:</span>
+                    <span> {{ $total }}đ</span>
                 </div>
 
-                <div>
-                    <hr class="border-t h-1 border-black border-dashed w-full my-2">
-                    <div class="flex justify-between">
-                        @php $total = 0 @endphp
-                        @foreach ((array) session('cart') as $id => $details)
-                            @php $total += $details['price'] * $details['quantity'] @endphp
-                        @endforeach
-                        <span>Total price:</span>
-                        <span> {{ $total }}đ</span>
-                    </div>
-                    <button class="btn btn-info w-full mt-2">Checkout</button>
+                <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <button type="submit" class="btn btn-info w-full mt-2">Order</button>
+                </form>
+                <div class="lg:mt-3 w-full text-center">
+                    <label class="swap swap-flip opacity-40">
 
-                    <div class="lg:mt-3 w-full text-center">
-                        <label class="swap swap-flip opacity-40">
-
-                            <!-- this hidden checkbox controls the state -->
-                            <input type="checkbox" class="hidden" />
-                            <div class="swap-off"><span class="text-4xl">😀</span></div>
-                            <div class="swap-on"><span class="text-4xl">🤡</span></div>
-                        </label>
-                    </div>
+                        <!-- this hidden checkbox controls the state -->
+                        <input type="checkbox" class="hidden" />
+                        <div class="swap-off"><span class="text-4xl">😀</span></div>
+                        <div class="swap-on"><span class="text-4xl">🤡</span></div>
+                    </label>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="bg-white rounded-t-xl">
