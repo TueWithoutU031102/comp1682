@@ -1,4 +1,4 @@
-@extends('layouts.consumer')
+@extends('layouts.bill')
 
 @section('content')
     <div class="min-h-screen">
