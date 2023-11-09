@@ -33,7 +33,7 @@ class CustomerController extends Controller
         $user_name = Session::find(session()->get('customer.session'))->name;
         $session_id = session()->get('customer.session');
         $bill = Cart::where('session_id', $session_id)->get();
-        dd($bill);
+        // dd($bill[1]['status']);
         return view("customer.index", ["table_id" => $table_id, "user_name" => $user_name, "session_id" => $session_id, "bill" => $bill]);
     }
 

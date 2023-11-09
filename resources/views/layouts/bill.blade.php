@@ -106,46 +106,49 @@
             <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200 min-h-full">
                 <div class="flex flex-col space-y-3">
                     @if ($bill)
+                        @php $total = 0 @endphp
                         @foreach ($bill as $b)
-                            <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
-                                <div class="cart-detail-img">
-                                    <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b['image']) }}"
-                                        alt="">
-                                </div>
-                                <div>
-                                    <p>{{ $b['name'] }}</p>
-
-                                    <div class="flex justify-between mt-3">
-                                        <div class="join border border-stone-200">
-                                            <button class="btn btn-xs join-item">-</button>
-                                            <input type="number"
-                                                class="input input-xs join-item w-8 text-center quantity"
-                                                value="{{ $b['quantity'] }}">
-                                            <button class="btn btn-xs join-item">+</button>
-                                        </div>
+                            @if ($b['status'] === 'Completed')
+                                <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
+                                    <div class="cart-detail-img">
+                                        <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b->menu->image) }}"
+                                            alt="">
                                     </div>
-                                    <span class="text-red-500 price">{{ $b['price'] }} đ</span>
+                                    <div>
+                                        <p>{{ $b->menu->name }}</p>
+
+                                        <div class="flex justify-between mt-3">
+                                            <div class="join border border-stone-200">
+                                                <button class="btn btn-xs join-item">-</button>
+                                                <input type="number"
+                                                    class="input input-xs join-item w-8 text-center quantity"
+                                                    value="{{ $b['quantity'] }}">
+                                                <button class="btn btn-xs join-item">+</button>
+                                            </div>
+                                        </div>
+                                        @php
+                                            $price = $b->menu->price * $b['quantity'];
+                                        @endphp
+                                        <span class="text-red-500 price">{{ $price }} đ</span>
+                                        @php $total += $price @endphp
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
-                @endforeach
-                @endif
             </div>
 
             <div>
                 <hr class="border-t h-1 border-black border-dashed w-full my-2">
                 <div class="flex justify-between">
-                    @php $total = 0 @endphp
-                    @foreach ((array) $bill as $b)
-                        @php $total += $b['price'] * $b['quantity'] @endphp
-                    @endforeach
                     <span>Total price:</span>
                     <span> {{ $total }}đ</span>
                 </div>
 
-                <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <button type="submit" class="btn btn-info w-full mt-2">Order</button>
+                    <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
                 </form>
                 <div class="lg:mt-3 w-full text-center">
                     <label class="swap swap-flip opacity-40">
@@ -158,7 +161,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <div class="bg-white rounded-t-xl">

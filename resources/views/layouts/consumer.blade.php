@@ -114,7 +114,6 @@
                                 </div>
                                 <div>
                                     <p>{{ $details['name'] }}</p>
-
                                     <div class="flex justify-between mt-3">
                                         <div class="join border border-stone-200">
                                             <button class="btn btn-xs join-item">-</button>
@@ -127,9 +126,9 @@
                                     <span class="text-red-500 price">{{ $details['price'] }} đ</span>
                                 </div>
                             </div>
+                        @endforeach
+                    @endif
                 </div>
-                @endforeach
-                @endif
             </div>
 
             <div>
