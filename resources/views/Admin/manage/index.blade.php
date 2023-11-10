@@ -22,17 +22,17 @@
         @endif
         <div class="create-btn">
             <a type="button" href="{{ route('admin.create') }}" class="btn btn-primary"
-                style="font-weight: bold; font-size: 20px;">+</a>
+                style="font-weight: bold; font-size: 20px; color:white;">+</a>
         </div>
 
         <table class="table-auto mx-auto" style="width:70%;">
             <thead>
-                <tr>
+                <tr class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <th class="px-4 py-2 font-semibold text-xs text-black">Name</th>
                     <th class="px-4 py-2 font-semibold text-xs text-black">Role</th>
                 </tr>
             </thead>
-            <tbody class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <tbody class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 @foreach ($users as $user)
                     <tr onclick="redirectTo('{{ route('admin.show', ['user' => $user]) }}')">
                         <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->name }}</td>
