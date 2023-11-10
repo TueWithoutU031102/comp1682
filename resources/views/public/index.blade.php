@@ -82,7 +82,8 @@
 
             <footer>
                 <form class="inline-block" method="dialog">
-                    <button>Close</button>
+                    <button
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Close</button>
                 </form>
             </footer>
         </article>
