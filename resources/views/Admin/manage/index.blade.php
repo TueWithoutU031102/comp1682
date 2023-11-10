@@ -34,17 +34,37 @@
             </thead>
             <tbody class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 @foreach ($users as $user)
-                    <tr onclick="redirectTo('{{ route('admin.show', ['user' => $user]) }}')">
+                    <tr onclick="showModal('{{ route('admin.show', ['user' => $user]) }}')">
                         <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->name }}</td>
                         <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->role }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <dialog id="modal">
+            <article style="width:500px;height:500px">
+                <form method="dialog">
+                    <a href="javascript:void(0)" class="close" onclick="modal.close()"></a>
+                </form>
+
+                <iframe style="width:100%; height:100%" src="{{ route('admin.show', ['user' => $user]) }}"></iframe>
+
+                <footer>
+                    <form class="inline-block" method="dialog">
+                        <button>Close</button>
+                    </form>
+                </footer>
+            </article>
+        </dialog>
     </x-app-layout>
+
     <script>
-        function redirectTo(url) {
-            window.location.href = url;
+        function showModal(url) {
+            var modal = document.getElementById("modal");
+            // Thiết lập iframe để hiển thị nội dung tương ứng với đường dẫn
+            document.querySelector('#modal iframe').src = url;
+            modal.showModal();
+            console.log('Modal opened');
         }
     </script>
 </body>

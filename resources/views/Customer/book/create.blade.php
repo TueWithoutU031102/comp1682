@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @include('layouts.link')
+    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- @include('layouts.link') --}}
     <title>Book Table</title>
 </head>
 
 <body>
-    <form action="{{ route('customer.book.store') }}" method="POST">
+    <form class="w-full max-w-lg" action="{{ route('customer.book.store') }}" method="POST">
         @csrf
-        <br>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -22,33 +22,51 @@
                 </ul>
             </div>
         @endif
-        <h1>Book table</h1>
-        <div class="input-box">
-            <label for="bookName" class="form-label">Your name:</label>
-            <input type="text" class="form-control" value="{{ old('bookName') }}" id="bookName" name="bookName">
-        </div>
-        <div class="input-box">
-            <label for="phonenumber" class="form-label">Phonenumber:</label>
-            <input type="text" class="form-control" value="{{ old('phonenumber') }}" id="phonenumber"
-                name="phonenumber">
-        </div>
-        <div class="input-box">
-            <label for="numberofPeople" class="form-label">Number of people:</label>
-            <input type="text" id="numberofPeople" class="form-control" value="{{ old('numberofPeople') }}"
-                name="numberofPeople">
-        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <h1 class="text-4xl text-center mt-10 font-bold mb-2">Book table</h1>
+                <div class="input-box">
+                    <label for="bookName"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Your name:</label>
+                    <input type="text"
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        value="{{ old('bookName') }}" id="bookName" name="bookName">
+                </div>
+                <div class="input-box">
+                    <label for="phonenumber"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Phone:</label>
+                    <input type="text"
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        value="{{ old('phonenumber') }}" id="phonenumber" name="phonenumber">
+                </div>
+                <div class="input-box">
+                    <label for="numberofPeople"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Number of
+                        people:</label>
+                    <input type="text" id="numberofPeople"
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        value="{{ old('numberofPeople') }}" name="numberofPeople">
+                </div>
 
-        <div class="input-box">
-            <label for="arrivalTime" class="form-label">Arrival time:</label>
-            <input type="datetime-local" class="form-control" value="{{ old('arrivalTime') }}" id="arrivalTime"
-                name="arrivalTime">
-        </div>
-        <div class="input-box">
-            <label for="note" class="form-label">Note:</label>
-            <input type="text" class="form-control" value="{{ old('note') }}" id="note" name="note">
-        </div>
-        <div class="button-action">
-            <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="input-box">
+                    <label for="arrivalTime"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Arrival time:</label>
+                    <input type="datetime-local"
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        value="{{ old('arrivalTime') }}" id="arrivalTime" name="arrivalTime">
+                </div>
+                <div class="input-box">
+                    <label for="note"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Note:</label>
+                    <input type="text"
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        value="{{ old('note') }}" id="note" name="note">
+                </div>
+                <div class="button-action">
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Submit</button>
+                </div>
+            </div>
         </div>
     </form>
 </body>

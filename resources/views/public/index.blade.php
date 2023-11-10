@@ -73,12 +73,12 @@
     </div> --}}
 
     <dialog id="modal">
-        <article style="width:100%;height:70%">
+        <article style="width:100%;height:100%">
             <form method="dialog">
                 <a href="javascript:void(0)" class="close" onclick="modal.close()"></a>
             </form>
 
-            <iframe style="width:100%; height:80%" src="{{ route('customer.book.create') }}"></iframe>
+            <iframe style="width:100%; height:80%;" src="{{ route('customer.book.create') }}"></iframe>
 
             <footer>
                 <form class="inline-block" method="dialog">
