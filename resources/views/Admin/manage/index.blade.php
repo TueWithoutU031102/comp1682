@@ -60,16 +60,10 @@
             <div class="modal-box">
                 <article style="width:400px;height:400px">
                     <form method="dialog">
-                        <button href="javascript:void(0)"
-                            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 close"
-                            onclick="modal.close()">X</button>
+                        <button method="dialog"
+                            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">X</button>
                     </form>
                     <iframe style="width:100%; height:100%" src="{{ route('admin.show', ['user' => $user]) }}"></iframe>
-                    <footer>
-                        <form class="inline-block" method="dialog">
-                            <button>Close</button>
-                        </form>
-                    </footer>
                 </article>
             </div>
         </dialog>
