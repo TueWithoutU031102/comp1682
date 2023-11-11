@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.2/dist/full.css" rel="stylesheet" type="text/css" />
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"> --}}
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    {{-- <script>
         tailwind.config = {
             corePlugins: {
                 preflight: false
@@ -21,7 +20,7 @@
                 }
             }
         }
-    </script>
+    </script> --}}
     <title>Manage Account</title>
 </head>
 
@@ -57,25 +56,28 @@
                 @endforeach
             </tbody>
         </table>
-        <dialog id="modal">
-            <article style="width:400px;height:400px">
-                <form method="dialog">
-                    <a href="javascript:void(0)" class="close" onclick="modal.close()"></a>
-                </form>
-                <iframe style="width:100%; height:100%" src="{{ route('admin.show', ['user' => $user]) }}"></iframe>
-                <footer>
-                    <form class="inline-block" method="dialog">
-                        <button>Close</button>
+        <dialog id="modal" class="modal">
+            <div class="modal-box">
+                <article style="width:400px;height:400px">
+                    <form method="dialog">
+                        <button href="javascript:void(0)"
+                            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 close"
+                            onclick="modal.close()">X</button>
                     </form>
-                </footer>
-            </article>
+                    <iframe style="width:100%; height:100%" src="{{ route('admin.show', ['user' => $user]) }}"></iframe>
+                    <footer>
+                        <form class="inline-block" method="dialog">
+                            <button>Close</button>
+                        </form>
+                    </footer>
+                </article>
+            </div>
         </dialog>
     </x-app-layout>
 
     <script>
         function showModal(url) {
             var modal = document.getElementById("modal");
-            // Thiết lập iframe để hiển thị nội dung tương ứng với đường dẫn
             document.querySelector('#modal iframe').src = url;
             modal.showModal();
         }
