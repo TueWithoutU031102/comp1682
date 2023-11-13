@@ -63,7 +63,9 @@ class AdminController extends Controller
         ]);
         if (!$request['password']) {
             $data['password'] = User::find($request['id'])->password;
-        } else $data['password'] = Hash::make($request->password);
+        } else
+            $data['password'] = Hash::make($request->password);
+        dd($data);
         $user->fill($data)->save();
         return to_route('admin.index');
     }

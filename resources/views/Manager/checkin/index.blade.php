@@ -10,29 +10,35 @@
 </head>
 
 <body>
-    <h1>Session table list</h1>
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
-    @endif
-    <br><br>
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Table</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($session as $ses)
-                <tr onclick="redirectTo('{{ route('manager.checkin.show', ['session' => $ses]) }}')">
-                    <td>{{ $ses->id }}</td>
-                    <td>{{ $ses->name }}</td>
-                    <td>{{ $ses->table->name }}</td>
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Session table list') }}
+            </h2>
+        </x-slot>
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+        @endif
+        <br><br>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Table</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($session as $ses)
+                    <tr onclick="redirectTo('{{ route('manager.checkin.show', ['session' => $ses]) }}')">
+                        <td>{{ $ses->id }}</td>
+                        <td>{{ $ses->name }}</td>
+                        <td>{{ $ses->table->name }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </x-app-layout>
     <script>
         function redirectTo(url) {
             window.location.href = url;

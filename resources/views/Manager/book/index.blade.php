@@ -10,40 +10,47 @@
 </head>
 
 <body>
-    <h1>Book</h1>
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Number of people</th>
-                <th scope="col">Arrival time</th>
-                <th scope="col">Note</th>
-                <th scope="col">Status</th>
-                <th scope="col">&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody id="book_data">
-            @foreach ($books as $book)
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Booking') }}
+            </h2>
+        </x-slot>
+        <table class="table table-hover">
+            <thead class="thead-dark">
                 <tr>
-                    <td>{{ $book->bookName }}</td>
-                    <td>{{ $book->phonenumber }}</td>
-                    <td>{{ $book->numberofPeople }}</td>
-                    <td>{{ $book->arrivalTime }}</td>
-                    <td>{{ $book->note }}</td>
-                    <td>{{ $book->status }}</td>
-                    <td>
-                        <form action="{{ route('manager.book.destroy', ['book' => $book]) }}" method="POST"
-                            class="d-inline" onsubmit="return confirm('Are you sure to delete this booking !!!???')">
-                            @csrf
-                            <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i
-                                        class="fa-solid fa-trash"></i></button>
-                        </form>
-                    </td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Number of people</th>
+                    <th scope="col">Arrival time</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">&nbsp;</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="book_data">
+                @foreach ($books as $book)
+                    <tr>
+                        <td>{{ $book->bookName }}</td>
+                        <td>{{ $book->phonenumber }}</td>
+                        <td>{{ $book->numberofPeople }}</td>
+                        <td>{{ $book->arrivalTime }}</td>
+                        <td>{{ $book->note }}</td>
+                        <td>{{ $book->status }}</td>
+                        <td>
+                            <form action="{{ route('manager.book.destroy', ['book' => $book]) }}" method="POST"
+                                class="d-inline"
+                                onsubmit="return confirm('Are you sure to delete this booking !!!???')">
+                                @csrf
+                                <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i
+                                            class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </x-app-layout>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
 
     <script>
