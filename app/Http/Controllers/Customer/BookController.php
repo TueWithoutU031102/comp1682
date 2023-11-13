@@ -21,7 +21,7 @@ class BookController extends Controller
             'bookName' => 'required',
             'phonenumber' => 'required|digits:10|starts_with:0',
             'numberofPeople' => 'required|numeric|min:1',
-            'arrivalTime' => ['required', 'after:'.now()->addHour()->toDateTimeString()],
+            'arrivalTime' => ['required', 'after:' . now()->addHour()->toDateTimeString()],
             'note' => 'nullable',
         ], [
             'phonenumber.digits' => 'Phone number must be numeric and 10 characters long',
@@ -30,6 +30,6 @@ class BookController extends Controller
             'arrivalTime.after' => 'Please reserve a table 1 hour in advance',
         ]);
         $book->fill($data)->save();
-        return to_route('index')->with('success', 'Booking created successfully!');
+        return to_route('customer.book.create')->with('success', 'Booking created successfully!');
     }
 }

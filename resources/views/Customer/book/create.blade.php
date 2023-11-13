@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com"></script>
-    {{-- @include('layouts.link') --}}
+    @include('layouts.link')
     <title>Book Table</title>
 </head>
 
-<body>
+<body class="bg-white">
     <form class="w-full max-w-lg" action="{{ route('customer.book.store') }}" method="POST">
         @csrf
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+        @endif
         @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
                 <ul>
@@ -43,9 +45,9 @@
                     <label for="numberofPeople"
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Number of
                         people:</label>
-                    <input type="text" id="numberofPeople"
+                    <input type="number" id="numberofPeople"
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        value="{{ old('numberofPeople') }}" name="numberofPeople">
+                        value="{{ old('numberofPeople') }}" name="numberofPeople" min="1">
                 </div>
 
                 <div class="input-box">

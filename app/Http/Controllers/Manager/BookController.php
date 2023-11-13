@@ -19,4 +19,9 @@ class BookController extends Controller
         $book->delete();
         return to_route('manager.book.index')->with('success', 'Deleted successfully!');
     }
+
+    public function event()
+    {
+        return Book::all();
+    }
 }

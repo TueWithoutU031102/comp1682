@@ -11,7 +11,6 @@
 
 <body>
     <h1>Notification list</h1>
-    <br><br>
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>

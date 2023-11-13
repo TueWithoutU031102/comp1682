@@ -72,21 +72,17 @@
         </div>
     </div> --}}
 
-    <dialog id="modal">
-        <article style="width:100%;height:100%">
-            <form method="dialog">
-                <a href="javascript:void(0)" class="close" onclick="modal.close()"></a>
-            </form>
-
-            <iframe style="width:100%; height:80%;" src="{{ route('customer.book.create') }}"></iframe>
-
-            <footer>
-                <form class="inline-block" method="dialog">
-                    <button
-                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Close</button>
+    <dialog id="modal" class="modal">
+        <div class="modal-box w-full h-full">
+            <article class="w-full h-full">
+                <form method="dialog">
+                    <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
+                        X
+                    </button>
                 </form>
-            </footer>
-        </article>
+                <iframe class="w-full h-full" src="{{ route('customer.book.create') }}"></iframe>
+            </article>
+        </div>
     </dialog>
 @endsection
 
