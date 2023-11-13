@@ -61,11 +61,15 @@ class AdminController extends Controller
             'email' => [Rule::unique('users')->ignore($request->id)],
             'phone_number' => [Rule::unique('users')->ignore($request->id)],
         ]);
+        if (!$request['role'])
+            $data['role'] = User::find($request['id'])->role;
+        else
+            $data['role'] = $request->role;
+
         if (!$request['password']) {
             $data['password'] = User::find($request['id'])->password;
         } else
             $data['password'] = Hash::make($request->password);
-        dd($data);
         $user->fill($data)->save();
         return to_route('admin.index');
     }
