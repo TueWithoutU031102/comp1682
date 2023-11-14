@@ -9,6 +9,7 @@
     @stack('header')
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.2/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <script>
@@ -48,7 +49,7 @@
             -moz-appearance: textfield;
         }
     </style>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('styles')
 </head>
 
@@ -115,12 +116,16 @@
                                 <div>
                                     <p>{{ $details['name'] }}</p>
                                     <div class="flex justify-between mt-3">
-                                        <div class="join border border-stone-200">
-                                            <button class="btn btn-xs join-item">-</button>
-                                            <input type="number"
-                                                class="input input-xs join-item w-8 text-center quantity"
-                                                value="{{ $details['quantity'] }}">
-                                            <button class="btn btn-xs join-item">+</button>
+                                        <div class="join border border-stone-200 ">
+                                            <button class="btn btn-xs join-item"
+                                                onclick="decreaseQuantity(this)">-</button>
+                                            <div class="cart_update" data-id="{{ $id }}">
+                                                <input type="number"
+                                                    class="input input-xs join-item w-8 text-center quantity"
+                                                    value="{{ $details['quantity'] }}">
+                                            </div>
+                                            <button class="btn btn-xs join-item"
+                                                onclick="increaseQuantity(this)">+</button>
                                         </div>
                                     </div>
                                     <span class="text-red-500 price">{{ $details['price'] }} đ</span>
@@ -139,9 +144,8 @@
                         @php $total += $details['price'] * $details['quantity'] @endphp
                     @endforeach
                     <span>Total price:</span>
-                    <span> {{ $total }}đ</span>
+                    <span id="total-amount"> {{ $total }}đ</span>
                 </div>
-
                 <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <button type="submit" class="btn btn-info w-full mt-2">Order</button>
@@ -157,7 +161,73 @@
                 </div>
             </div>
         </div>
-    </div>
+        <script type="text/javascript">
+            $(document).on('click', '.cart_remove', function() {
+                let id = $(this).data('id');
+                remove(id);
+            });
+
+            $(document).on('input', '.cart_update input.quantity', function() {
+                let id = $(this).closest('.cart_detail').find('.cart_update').data('id');
+                let quantity = $(this).val();
+                update(id, quantity);
+            });
+
+
+            function update(id, quantity) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('customer.order.update') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        id: id,
+                        quantity: quantity
+                    }
+                });
+                console.log(event.data)
+                // location.reload();
+                var total = 0;
+                $('.cart-detail').each(function() {
+                    var quantity = $(this).find('.quantity').val();
+                    var price = parseFloat($(this).find('.price').text());
+                    total += price * quantity;
+                });
+
+                // Cập nhật tổng giá trị trong giao diện người dùng
+                $('#total-amount').text(total + 'đ');
+            }
+
+            function remove(id) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('customer.order.remove') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        id: id
+                    },
+                });
+            }
+
+            function decreaseQuantity(button) {
+                var inputElement = button.parentElement.querySelector('.quantity');
+                if (inputElement.value > 1) {
+                    inputElement.value = parseInt(inputElement.value) - 1;
+                    let id = $(button).closest('.cart-detail').find('.cart_update').data('id');
+                    update(id, inputElement.value);
+                }
+            }
+
+            function increaseQuantity(button) {
+                var inputElement = button.parentElement.querySelector('.quantity');
+                inputElement.value = parseInt(inputElement.value) + 1;
+                let id = $(button).closest('.cart-detail').find('.cart_update').data('id');
+                update(id, inputElement.value);
+            }
+        </script>
     </div>
 
     <div class="bg-white rounded-t-xl">
@@ -198,7 +268,6 @@
             </nav>
         </footer>
     </div>
-
     @stack('scripts')
 </body>
 

@@ -16,7 +16,7 @@
                             </div>
                             <p class="flex flex-col p-2">
                                 <strong>{{ $menu->name }}</strong>
-                                <span class="opacity-50 text-sm">{{ $menu->price }}</span>
+                                <span class="opacity-50 text-sm">{{ $menu->price }} đ</span>
                             </p>
                         </div>
                     @endforeach

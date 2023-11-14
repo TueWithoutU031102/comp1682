@@ -37,7 +37,7 @@
                             </div>
                             <p class="flex flex-col p-2">
                                 <strong>{{ $menu->name }}</strong>
-                                <span class="opacity-50 text-sm">{{ $menu->price }}</span>
+                                <span class="opacity-50 text-sm">{{ $menu->price }} đ</span>
                                 <span class="opacity-50 text-sm">{{ $menu->status }}</span>
                                 <span class="opacity-50 text-sm">{{ $menu->description }}</span>
                             </p>
