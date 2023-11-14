@@ -52,10 +52,6 @@
             <input type="password" class="input input-bordered w-full max-w-xs" value="{{ old('password') }}"
                 id="password" name="password">
         </div>
-        {{-- <div class="input-box">
-            <label for="image" class="font-weight-bold">Image</label>
-            <input type="file" name="image" class="form-control" id="image">
-        </div> --}}
         <div class="button-action">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

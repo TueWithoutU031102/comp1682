@@ -88,6 +88,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('/event', [ManagerBookController::class, 'event'])->name('manager.book.event');
         });
         Route::prefix('reviews')->group(function () {
+            Route::get('/event', [ManagerReviewController::class, 'event'])->name('manager.review.event');
             Route::get('index', [ManagerReviewController::class, 'index'])->name('manager.review.index');
             Route::get('/{review}', [ManagerReviewController::class, 'show'])->name('manager.review.show');
             Route::post('/{review}/destroy', [ManagerReviewController::class, 'destroy'])->name('manager.review.destroy');

@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
     //
+    public function event()
+    {
+        return Review::all();
+    }
     public function index()
     {
         $reviews = Review::all();

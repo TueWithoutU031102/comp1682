@@ -13,7 +13,6 @@
 <body>
     <form action="{{ route('customer.review.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <br>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -23,49 +22,50 @@
                 </ul>
             </div>
         @endif
-        <h1>Review</h1>
-        <div class="input-box">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" class="form-control" value="{{ old('name') }}" id="name" name="name">
+        <h1 class="text-2xl font-bold">Review</h1>
+        <div class="form-control w-full max-w-xs">
+            <label for="name" class="label-text">Name:</label>
+            <input type="text" class="input input-bordered w-full max-w-xs" value="{{ old('name') }}"
+                id="name" name="name">
         </div>
 
-        <div class="input-box">
-            <label for="phone" class="form-label">Phone:</label>
-            <input type="text" class="form-control" value="{{ old('phone') }}" id="phone" name="phone">
+        <div class="form-control w-full max-w-xs">
+            <label for="phone" class="label-text">Phone:</label>
+            <input type="text" class="input input-bordered w-full max-w-xs" value="{{ old('phone') }}"
+                id="phone" name="phone">
         </div>
 
-        <div class="input-box">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" value="{{ old('email') }}" id="email" name="email">
+        <div class="form-control w-full max-w-xs">
+            <label for="email" class="label-text">Email:</label>
+            <input type="email" class="input input-bordered w-full max-w-xs" value="{{ old('email') }}"
+                id="email" name="email">
         </div>
 
-        <div class="input-box">
-            <label for="foodQuality" class="form-label">Food quality:</label>
+        <div class="form-control w-full max-w-xs">
+            <label for="foodQuality" class="label-text">Food quality:</label>
 
-            <select name="foodQuality" value="{{ old('foodQuality') }}" class="form-select" id="foodQuality">
+            <select name="foodQuality" value="{{ old('foodQuality') }}" class="select w-full max-w-xs" id="foodQuality">
                 @foreach ($foodQuality as $food)
                     <option value="{{ $food->value }}">{{ $food->name }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="input-box">
-            <label for="serviceQuality" class="form-label">Service quality:</label>
+        <div class="form-control w-full max-w-xs">
+            <label for="serviceQuality" class="label-text">Service quality:</label>
 
-            <select name="serviceQuality" value="{{ old('status') }}" class="form-select" id="statusMenu">
+            <select name="serviceQuality" value="{{ old('status') }}" class="select w-full max-w-xs" id="statusMenu">
                 @foreach ($serviceQuality as $service)
                     <option value="{{ $service->value }}">{{ $service->name }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="input-box">
-            <label for="detail" class="form-label">Detail:</label>
-            <input type="text" class="form-control" value="{{ old('detail') }}" id="detail" name="detail">
+        <div class="form-control w-full max-w-xs">
+            <label for="detail" class="label-text">Detail:</label>
+            <input type="text" class="input input-bordered w-full max-w-xs" value="{{ old('detail') }}"
+                id="detail" name="detail">
         </div>
         <div class="button-action">
             <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        <div class="button-action">
-            <a href="{{ route('customer.index') }}" class="btn btn-primary">Back</a>
         </div>
     </form>
 </body>

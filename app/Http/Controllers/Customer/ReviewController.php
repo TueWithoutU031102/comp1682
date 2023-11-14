@@ -37,6 +37,6 @@ class ReviewController extends Controller
             'detail' => 'required',
         ]);
         $review->fill($data)->save();
-        return to_route("customer.index")->with('success', 'Review created successfully!');
+        return view("customer.review.create")->with('success', 'Review created successfully!');
     }
 }
