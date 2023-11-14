@@ -39,7 +39,7 @@ Route::get('view/{name}', fn($name) => view($name));
 
 Route::get('index', [IndexController::class, 'index'])->name('index');
 Route::get('/forbiddenPage', function () {
-    return view('403');
+    abort(403);
 })->name("forbidden");
 Route::group(['middleware' => ['auth', 'users']], function () {
     Route::group(['prefix' => 'admins', 'middleware' => ['auth', 'admins']], function () {

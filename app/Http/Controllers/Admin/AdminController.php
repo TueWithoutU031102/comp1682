@@ -74,7 +74,10 @@ class AdminController extends Controller
     }
     public function destroy(User $user)
     {
-        return $user->delete();
+        $user->delete();
+        return '<script>
+        window.parent.postMessage("user deleted", "*")
+        </script>';
     }
     public function event()
     {

@@ -75,7 +75,12 @@
         <nav class="container">
             <ul>
                 <li>
-                    <a class="text-gray-700 hover:text-gray-900"><strong>Brand</strong></a>
+                    <div class="shrink-0 flex items-center">
+                        <a href="{{ route('manager.index') }}">
+                            <x-application-logo
+                                class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        </a>
+                    </div>
                 </li>
             </ul>
             <ul class="hidden md:block">

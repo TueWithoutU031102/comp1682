@@ -37,12 +37,13 @@
                 <strong>{{ Session::get('success') }}</strong>
             </div>
         @endif
+
         <div class="create-btn">
             <button onclick="showModal('{{ route('admin.create') }}')" class="btn btn-primary"
                 style="font-weight: bold; font-size: 20px; color:white;">+</button>
         </div>
 
-        <table class="table-auto mx-auto" style="width:70%;">
+        <table class="table-auto mx-auto w-3/4">
             <thead>
                 <tr class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <th class="px-4 py-2 font-semibold text-xs text-black">Name</th>
@@ -77,8 +78,6 @@
             document.querySelector('#modal iframe').src = url;
             modal.showModal();
         }
-    </script>
-    <script>
         async function updateEvent() {
             let url = "{{ route('admin.event') }}";
             let response = await fetch(url);
@@ -95,8 +94,13 @@
                 element.insertAdjacentHTML('beforeend', tr);
             }
         }
-
         setInterval(updateEvent, 2000);
+
+        window.addEventListener('message', function(event) {
+            if (event.data === "user deleted") {
+                window.document.querySelector("#modal").close()
+            }
+        })
     </script>
 </body>
 
