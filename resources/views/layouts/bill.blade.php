@@ -66,8 +66,8 @@
                 </label>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Home</a></li>
-                    <li><a>Menu</a></li>
+                    <li><a href="{{ route('customer.index') }}">Home</a></li>
+                    <li><a href="{{ route('customer.menu.index') }}">Menu</a></li>
                     <li><a>About</a></li>
                 </ul>
             </div>
