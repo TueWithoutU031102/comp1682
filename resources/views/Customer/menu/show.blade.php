@@ -22,13 +22,13 @@
             <p><span>Price: </span>{{ $menu->price }}</p>
             <p><span>Description: </span>{{ $menu->description }}</p>
             @if ($menu->status->value === 'Available')
-                <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
-                    <button class="btn btn-primary" title="Order" class="btn btn-info add">Order</button>
-                </a>
+                <td>
+                    <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
+                        <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
+                        </button>
+                    </a>
+                </td>
             @endif
-            <a href="{{ route('customer.menu.index') }}">
-                <button class="btn btn-primary">Back</button>
-            </a>
         </div>
     </div>
 </body>

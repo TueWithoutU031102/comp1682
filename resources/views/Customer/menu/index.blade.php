@@ -13,7 +13,7 @@
                 <h2 class="text-center my-5 text-3xl font-bold">{{ $type->name }}</h2>
                 <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
                     @foreach ($type->menus as $menu)
-                        <div onclick="redirectTo('{{ route('customer.menu.show', ['menu' => $menu]) }}')">
+                        <div onclick="showModal('{{ route('customer.menu.show', ['menu' => $menu]) }}')">
                             <div
                                 class="relative overflow-hidden transition hover:shadow-md duration-300 shadow rounded :[&>img]:rounded">
                                 @if ($menu->id == 1)
@@ -46,13 +46,24 @@
                 </div>
             @endforeach
         </div>
+        <dialog id="modal" class="modal ">
+            <div class="modal-box">
+                <article class="w-80 h-96">
+                    <form method="dialog">
+                        <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
+                            X
+                        </button>
+                    </form>
+                    <iframe style="width:110%; height:100%"></iframe>
+                </article>
+            </div>
+        </dialog>
     </div>
-    <a href="{{ route('customer.index') }}">
-        <button class="btn btn-primary">Back</button>
-    </a>
-    <script>
-        function redirectTo(url) {
-            window.location.href = url;
+    <script defer>
+        function showModal(url) {
+            var modal = document.getElementById("modal");
+            document.querySelector('#modal iframe').src = url;
+            modal.showModal();
         }
     </script>
 @endsection
