@@ -78,6 +78,11 @@
             document.querySelector('#modal iframe').src = url;
             modal.showModal();
         }
+        window.addEventListener('message', function(event) {
+            if (event.data === "review created") {
+                window.document.querySelector("#modal").close()
+            }
+        })
     </script>
 @endsection
 

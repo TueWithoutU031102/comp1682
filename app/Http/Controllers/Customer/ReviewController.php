@@ -37,6 +37,8 @@ class ReviewController extends Controller
             'detail' => 'required',
         ]);
         $review->fill($data)->save();
-        return view("customer.review.create")->with('success', 'Review created successfully!');
+        return '<script>
+        window.parent.postMessage("review created", "*")
+        </script>';
     }
 }
