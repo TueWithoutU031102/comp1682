@@ -41,7 +41,7 @@ class AdminController extends Controller
             ],
         ]);
         $user->fill($data)->save();
-        return to_route('admin.index');
+        return to_route('admin.create');
     }
 
     public function show(User $user)
@@ -71,11 +71,14 @@ class AdminController extends Controller
         } else
             $data['password'] = Hash::make($request->password);
         $user->fill($data)->save();
-        return to_route('admin.index');
+        return view('admin.manage.show', ['user' => $user]);
     }
     public function destroy(User $user)
     {
-        $user->delete();
-        return to_route('admin.index');
+        return $user->delete();
+    }
+    public function event()
+    {
+        return User::all();
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Controller;
 use App\Events\NotificationEvent;
 use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\is\Customer;
@@ -44,6 +44,7 @@ Route::get('/forbiddenPage', function () {
 Route::group(['middleware' => ['auth', 'users']], function () {
     Route::group(['prefix' => 'admins', 'middleware' => ['auth', 'admins']], function () {
         Route::prefix('manages')->group(function () {
+            Route::get('/event', [AdminController::class, 'event'])->name('admin.event');
             Route::get('index', [AdminController::class, 'index'])->name('admin.index');
             Route::get('create', [AdminController::class, 'create'])->name('admin.create');
             Route::post('store', [AdminController::class, 'store'])->name('admin.store');

@@ -33,11 +33,13 @@
             </h2>
         </x-slot>
         @if (Session::has('success'))
-            <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+            <div class="alert alert-success" role="alert">
+                <strong>{{ Session::get('success') }}</strong>
+            </div>
         @endif
         <div class="create-btn">
-            <a type="button" href="{{ route('admin.create') }}" class="btn btn-primary"
-                style="font-weight: bold; font-size: 20px; color:white;">+</a>
+            <button onclick="showModal('{{ route('admin.create') }}')" class="btn btn-primary"
+                style="font-weight: bold; font-size: 20px; color:white;">+</button>
         </div>
 
         <table class="table-auto mx-auto" style="width:70%;">
@@ -47,7 +49,7 @@
                     <th class="px-4 py-2 font-semibold text-xs text-black">Role</th>
                 </tr>
             </thead>
-            <tbody class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <tbody class="bg-white overflow-hidden shadow-sm sm:rounded-lg" id="user_data">
                 @foreach ($users as $user)
                     <tr onclick="showModal('{{ route('admin.show', ['user' => $user]) }}')">
                         <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->name }}</td>
@@ -64,18 +66,37 @@
                             X
                         </button>
                     </form>
-                    <iframe style="width:100%; height:100%" src="{{ route('admin.show', ['user' => $user]) }}"></iframe>
+                    <iframe style="width:100%; height:100%"></iframe>
                 </article>
             </div>
         </dialog>
     </x-app-layout>
-
-    <script>
+    <script defer>
         function showModal(url) {
             var modal = document.getElementById("modal");
             document.querySelector('#modal iframe').src = url;
             modal.showModal();
         }
+    </script>
+    <script>
+        async function updateEvent() {
+            let url = "{{ route('admin.event') }}";
+            let response = await fetch(url);
+            let user = await response.json();
+
+            let element = window.document.querySelector('#user_data');
+            element.innerHTML = '';
+
+            for (const obj of user) {
+                let tr = `<tr onclick="showModal('/admins/manages/${obj.id}')">
+                    <td class="border px-4 py-2 font-semibold text-xs text-black">${obj.name}</td>
+                    <td class="border px-4 py-2 font-semibold text-xs text-black">${obj.role}</td>
+                </tr>`
+                element.insertAdjacentHTML('beforeend', tr);
+            }
+        }
+
+        setInterval(updateEvent, 2000);
     </script>
 </body>
 
