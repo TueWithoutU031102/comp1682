@@ -61,15 +61,14 @@ class AdminController extends Controller
             'email' => [Rule::unique('users')->ignore($request->id)],
             'phone_number' => [Rule::unique('users')->ignore($request->id)],
         ]);
-        if (!$request['role'])
-            $data['role'] = User::find($request['id'])->role;
-        else
-            $data['role'] = $request->role;
+        $data['role'] = $request->has('role') ? $request->role : User::find($request['id'])->role;
 
-        if (!$request['password']) {
-            $data['password'] = User::find($request['id'])->password;
-        } else
-            $data['password'] = Hash::make($request->password);
+
+        $data['password'] = !$request['password']
+            ? User::find($request['id'])->password
+            : Hash::make($request->validate([
+                'password' => ['required', Password::min(8)->mixedCase()->letters()->numbers()->uncompromised()]
+            ])['password']);
         $user->fill($data)->save();
         return view('admin.manage.show', ['user' => $user]);
     }
