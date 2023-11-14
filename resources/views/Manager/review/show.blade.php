@@ -20,9 +20,6 @@
             <p><span>Food quality: </span> {{ $review->foodQuality }}</p>
             <p><span>Service quality: </span>{{ $review->serviceQuality }}</p>
             <p><span>Description: </span>{{ $review->detail }}</p>
-            <a href="{{ route('manager.review.index') }}">
-                <button class="btn btn-primary">Back</button>
-            </a>
             <form action="{{ route('manager.review.destroy', ['review' => $review]) }}" method="POST" class="d-inline"
                 onsubmit="return confirm('Are you sure to delete this review !!!???')">
                 @csrf

@@ -46,7 +46,12 @@
         </dialog>
     </x-app-layout>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
-    <script>
+    <script defer>
+        function showModal(url) {
+            var modal = document.getElementById("modal");
+            document.querySelector('#modal iframe').src = url;
+            modal.showModal();
+        }
         async function updateEvent() {
             let url = "{{ route('manager.review.event') }}";
             let response = await fetch(url);
@@ -66,13 +71,11 @@
         }
 
         setInterval(updateEvent, 1000);
-    </script>
-    <script defer>
-        function showModal(url) {
-            var modal = document.getElementById("modal");
-            document.querySelector('#modal iframe').src = url;
-            modal.showModal();
-        }
+        window.addEventListener('message', function(event) {
+            if (event.data === "review deleted") {
+                window.document.querySelector("#modal").close()
+            }
+        })
     </script>
 </body>
 

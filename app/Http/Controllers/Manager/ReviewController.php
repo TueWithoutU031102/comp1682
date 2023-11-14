@@ -27,6 +27,8 @@ class ReviewController extends Controller
     public function destroy(Review $review)
     {
         $review->delete();
-        return to_route('manager.review.index')->with('success', 'Review deleted successfully!');
+        return '<script>
+        window.parent.postMessage("review deleted", "*")
+        </script>';
     }
 }
