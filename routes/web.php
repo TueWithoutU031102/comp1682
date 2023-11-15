@@ -70,8 +70,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('index', [TableController::class, 'index'])->name('manager.table.index');
             Route::get('create', [TableController::class, 'create'])->name('manager.table.create');
             Route::post('store', [TableController::class, 'store'])->name('manager.table.store');
-            Route::get('/{table}/edit', [TableController::class, 'edit'])->name('manager.table.edit');
-            Route::post('/{table}/update', [TableController::class, 'update'])->name('manager.table.update');
             Route::post('/{table}/destroy', [TableController::class, 'destroy'])->name('manager.table.destroy');
         });
         Route::prefix('types')->group(function () {

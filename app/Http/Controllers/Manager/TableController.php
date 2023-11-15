@@ -27,19 +27,6 @@ class TableController extends Controller
         $table->fill($data)->save();
         return to_route('manager.table.index');
     }
-    public function edit(Table $table)
-    {
-        return view("manager.table.edit", ['table' => $table]);
-    }
-    public function update(Table $table, Request $request)
-    {
-        //update table
-        $data = $request->validate([
-            'name' => 'required|string|min:1|max:5'
-        ]);
-        $table->fill($data)->save();
-        return to_route('manager.table.index');
-    }
     public function destroy(Table $table)
     {
         //destroy table

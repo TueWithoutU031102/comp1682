@@ -38,9 +38,6 @@
                         <td>{{ $table->name }}</td>
                         <td>{{ asset($table->link) }}</td>
                         <td>
-                            <a href="{{ route('manager.table.edit', ['table' => $table]) }}" title="Edit"
-                                class="btn btn-primary btn-sm"><i aria-hidden="true"><i class="fa-solid fa-pen"></i>
-                            </a>
                             <form action="{{ route('manager.table.destroy', ['table' => $table]) }}" method="POST"
                                 class="d-inline"
                                 onsubmit="return confirm('Are you sure to delete {{ $table->name }} !!!???')">
