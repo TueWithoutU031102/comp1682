@@ -28,9 +28,9 @@
                     <th scope="col">Table</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="ses_data">
                 @foreach ($session as $ses)
-                    <tr onclick="redirectTo('{{ route('manager.checkin.show', ['session' => $ses]) }}')">
+                    <tr onclick="showModal('{{ route('manager.checkin.show', ['session' => $ses]) }}')">
                         <td>{{ $ses->id }}</td>
                         <td>{{ $ses->name }}</td>
                         <td>{{ $ses->table->name }}</td>
@@ -38,11 +38,48 @@
                 @endforeach
             </tbody>
         </table>
+        <dialog id="modal" class="modal">
+            <div class="modal-box">
+                <article style="width:400px;height:400px">
+                    <form method="dialog">
+                        <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
+                            X
+                        </button>
+                    </form>
+                    <iframe style="width:100%; height:100%"></iframe>
+                </article>
+            </div>
+        </dialog>
     </x-app-layout>
     <script>
-        function redirectTo(url) {
-            window.location.href = url;
+        function showModal(url) {
+            var modal = document.getElementById("modal");
+            document.querySelector('#modal iframe').src = url;
+            modal.showModal();
         }
+        async function updateEvent() {
+            let url = "{{ route('manager.checkin.event') }}";
+            let response = await fetch(url);
+            let data = await response.json();
+            let ses = data.sessions;
+            let table = data.tables;
+            let element = window.document.querySelector('#ses_data');
+            element.innerHTML = '';
+            for (const obj of ses) {
+                let tableName = table.find(table => table.id === obj.table_id).name;
+                let tr = `<tr onclick="showModal('/managers/checkins/${obj.id}')">
+                <td>${obj.id}</td>
+                <td>${obj.name}</td>
+                <td>${tableName}</td>
+            </tr>`
+                element.insertAdjacentHTML('beforeend', tr);
+            }
+        }
+
+        setInterval(updateEvent, 1000);
+        window.addEventListener('message', function(event) {
+            if (event.data === "session table deleted") window.document.querySelector("#modal").close()
+        })
     </script>
 </body>
 

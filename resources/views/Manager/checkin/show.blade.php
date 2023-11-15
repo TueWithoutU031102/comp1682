@@ -17,9 +17,6 @@
             <p><span>ID: </span>{{ $session->id }}</p>
             <p><span>Name: </span>{{ $session->name }}</p>
             <p><span>Table: </span>{{ $session->table->name }}</p>
-            <a href="{{ route('manager.checkin.index') }}">
-                <button class="btn btn-primary">Back</button>
-            </a>
             <form action="{{ route('manager.checkin.destroy', ['session' => $session]) }}" method="POST"
                 class="d-inline" onsubmit="return confirm('Are you sure to delete {{ $session->name }} !!!???')">
                 @csrf

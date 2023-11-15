@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('/event', [NotificationController::class, 'event'])->name('manager.notification.event');
         });
         Route::prefix('checkins')->group(function () {
+            Route::get('/event', [ManagerCheckInController::class, 'event'])->name('manager.checkin.event');
             Route::get('index', [ManagerCheckInController::class, 'index'])->name('manager.checkin.index');
             Route::get('/{session}', [ManagerCheckInController::class, 'show'])->name('manager.checkin.show');
             Route::post('/{session}/destroy', [ManagerCheckInController::class, 'destroy'])->name('manager.checkin.destroy');
