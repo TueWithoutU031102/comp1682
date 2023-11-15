@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::post('/{table}/destroy', [TableController::class, 'destroy'])->name('manager.table.destroy');
         });
         Route::prefix('types')->group(function () {
+            Route::get('/event', [TypeController::class, 'event'])->name('manager.type.event');
             Route::get('index', [TypeController::class, 'index'])->name('manager.type.index');
             Route::get('create', [TypeController::class, 'create'])->name('manager.type.create');
             Route::post('store', [TypeController::class, 'store'])->name('manager.type.store');

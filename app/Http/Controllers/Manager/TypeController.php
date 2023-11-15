@@ -21,7 +21,9 @@ class TypeController extends Controller
     {
         $data = $request->validate(['name' => 'required']);
         $type->fill($data)->save();
-        return to_route('manager.type.index')->with('success', 'Type created successfully!');
+        return '<script>
+        window.parent.postMessage("type created", "*")
+        </script>';
     }
     public function edit(Type $type)
     {
@@ -31,11 +33,17 @@ class TypeController extends Controller
     {
         $data = $request->validate(['name' => 'required']);
         $type->fill($data)->save();
-        return to_route('manager.type.index')->with('success', 'Type edited successfully!');
+        return '<script>
+        window.parent.postMessage("type edited", "*")
+        </script>';
     }
     public function destroy(Type $type)
     {
         $type->delete();
         return to_route('manager.type.index')->with('success', 'Type deleted successfully');
+    }
+    public function event()
+    {
+        return Type::all();
     }
 }
