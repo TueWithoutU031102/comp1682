@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Manager;
 use App\Enums\StatusDish;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Menu;
+use App\Models\Session;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -30,5 +33,18 @@ class OrderController extends Controller
     {
         $cart->delete();
         return to_route('manager.order.index')->with('success', 'Dish in cart deleted successfully!');
+    }
+    public function event()
+    {
+        $carts = Cart::all();
+        $menus = Menu::all();
+        $sessions = Session::all();
+        $tables = Table::all();
+        return response()->json([
+            'carts' => $carts,
+            'menus' => $menus,
+            'sessions' => $sessions,
+            'tables' => $tables,
+        ]);
     }
 }

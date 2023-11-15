@@ -71,7 +71,7 @@
                 <td>${obj.id}</td>
                 <td>${obj.name}</td>
                 <td>${tableName}</td>
-            </tr>`
+                </tr>`
                 element.insertAdjacentHTML('beforeend', tr);
             }
         }
