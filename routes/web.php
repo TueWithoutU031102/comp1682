@@ -67,9 +67,12 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::post('/{menu}/destroy', [ManagerMenuController::class, 'destroy'])->name('manager.menu.destroy');
         });
         Route::prefix('tables')->group(function () {
+            Route::get('/event', [TableController::class, 'event'])->name('manager.table.event');
             Route::get('index', [TableController::class, 'index'])->name('manager.table.index');
             Route::get('create', [TableController::class, 'create'])->name('manager.table.create');
             Route::post('store', [TableController::class, 'store'])->name('manager.table.store');
+            Route::get('/{table}/edit', [TableController::class, 'edit'])->name('manager.table.edit');
+            Route::post('/{table}/update', [TableController::class, 'update'])->name('manager.table.update');
             Route::post('/{table}/destroy', [TableController::class, 'destroy'])->name('manager.table.destroy');
         });
         Route::prefix('types')->group(function () {
