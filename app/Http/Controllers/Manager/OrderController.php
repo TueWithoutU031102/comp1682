@@ -17,13 +17,13 @@ class OrderController extends Controller
     {
         $statuses = StatusDish::cases();
         $carts = Cart::all();
-        return view('Manager.order.index', ['carts' => $carts, 'statuses' => $statuses]);
+        return view('manager.order.index', ['carts' => $carts, 'statuses' => $statuses]);
     }
 
     public function edit(Cart $cart)
     {
         $statuses = StatusDish::cases();
-        return view('Manager.order.edit', ['cart' => $cart, 'statuses' => $statuses]);
+        return view('manager.order.edit', ['cart' => $cart, 'statuses' => $statuses]);
     }
     public function update(Cart $cart, Request $request)
     {

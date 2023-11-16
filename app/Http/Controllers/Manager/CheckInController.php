@@ -12,12 +12,12 @@ class CheckInController extends Controller
     public function index()
     {
         $session = Session::all();
-        return view('Manager.checkin.index', ['session' => $session]);
+        return view('manager.checkin.index', ['session' => $session]);
     }
     public function show(Session $session)
     {
 
-        return view("Manager.checkin.show", ['session' => $session]);
+        return view("manager.checkin.show", ['session' => $session]);
     }
     public function destroy(Session $session)
     {
