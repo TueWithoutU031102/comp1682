@@ -25,6 +25,17 @@ class OrderController extends Controller
         $data = [
             'status' => $request->status,
         ];
+        if ($cart['status'] === 'Completed' && $data['status'] !== 'Completed') {
+            $menu = Menu::find($cart->menu_id);
+            if (is_int($menu->saled) && $menu->saled >= $cart->quantity) {
+                $menu->update(['saled' => $menu->saled - $cart->quantity]);
+            }
+        } else if ($cart['status'] !== 'Completed' && $data['status'] === 'Completed') {
+            $menu = Menu::find($cart->menu_id);
+            if (is_int($menu->saled)) {
+                $menu->increment('saled', $cart->quantity);
+            }
+        }
         $cart->update($data);
         return to_route('manager.order.index')->with('success', 'Dish status edited successfully!');
     }

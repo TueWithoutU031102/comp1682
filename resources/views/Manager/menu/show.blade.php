@@ -19,6 +19,7 @@
             <p><span>Name: </span>{{ $menu->name }}</p>
             <p><span>Type: </span>{{ $menu->type->name }}</p>
             <p><span>Status: </span> {{ $menu->status }}</p>
+            <p><span>Quantity sold: </span> {{ $menu->saled }}</p>
             <p><span>Price: </span>{{ $menu->price }}</p>
             <p><span>Description: </span>{{ $menu->description }}</p>
             <div class="mt-6 flex items-center justify-end gap-x-6">

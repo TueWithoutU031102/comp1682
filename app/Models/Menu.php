@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 class Menu extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'type_id', 'price', 'image', 'description', 'status'];
+    protected $fillable = ['name', 'type_id', 'price', 'image', 'description', 'status', 'saled'];
 
     protected $casts = [
         'status' => StatusMenu::class
