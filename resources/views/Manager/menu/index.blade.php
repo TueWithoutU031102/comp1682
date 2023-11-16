@@ -20,24 +20,18 @@
             <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
         @endif
         <div class="create-btn">
-            <a type="button" href="{{ route('manager.menu.create') }}" class="btn btn-primary"
+            <a type="button" onclick="showModal('{{ route('manager.menu.create') }}')" class="btn btn-primary"
                 style="font-weight: bold; font-size: 20px;">+</a>
         </div>
-        <br><br>
-        <table class="table table-hover">
+        {{-- <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Description</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($menus as $menu)
-                    <tr onclick="redirectTo('{{ route('manager.menu.show', ['menu' => $menu]) }}')">
+                    <tr onclick="showModal('{{ route('manager.menu.show', ['menu' => $menu]) }}')">
                         <td>
                             <ul class="img">
                                 <li>
@@ -46,20 +40,93 @@
                                 </li>
                             </ul>
                         </td>
-                        <td>{{ $menu->name }}</td>
-                        <td>{{ $menu->type->name }}</td>
-                        <td>{{ $menu->status }}</td>
-                        <td>{{ $menu->price }}</td>
-                        <td>{{ $menu->description }}</td>
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
+        <div id="menu_data">
+            @foreach ($types as $type)
+                <div class="py-10">
+                    <div class="container">
+                        {{-- small banner --}}
+                        <h2 class="text-center mt-10">{{ $type->name }}</h2>
+
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-7">
+                            @foreach ($type->menus as $menu)
+                                <div>
+                                    <div class="transition rounded hover:shadow-md hover:scale-105 duration-300">
+                                        <img onclick="showModal('{{ route('manager.menu.show', ['menu' => $menu]) }}')"
+                                            class="aspect-square object-cover w-full rounded"
+                                            src="{{ asset($menu->image) }}" alt="">
+                                    </div>
+                                    <p class="flex flex-col p-2">
+                                        <strong>{{ $menu->name }}</strong>
+                                        <span class="opacity-50 text-sm">{{ $menu->price }} đ</span>
+                                    </p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <dialog id="modal" class="modal">
+            <div class="modal-box">
+                <article style="width:400px;height:400px">
+                    <form method="dialog">
+                        <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
+                            X
+                        </button>
+                    </form>
+                    <iframe style="width:100%; height:100%"></iframe>
+                </article>
+            </div>
+        </dialog>
     </x-app-layout>
-    <script>
-        function redirectTo(url) {
-            window.location.href = url;
+    <script defer>
+        function showModal(url) {
+            var modal = document.getElementById("modal");
+            document.querySelector('#modal iframe').src = url;
+            modal.showModal();
         }
+        async function updateEvent() {
+            let url = "{{ route('manager.menu.event') }}";
+            let response = await fetch(url);
+            let data = await response.json();
+            let type = data.types;
+            let menu = data.menus;
+            let element = window.document.querySelector('#menu_data');
+            element.innerHTML = '';
+
+            for (const obj of type) {
+                let div = `<div class="container">
+                <h2 class="text-center mt-10">${obj.name}</h2>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-7">
+                    ${menu.filter(menu => menu.type_id === obj.id).map(menu => `
+                            <div>
+                                <div class="transition rounded hover:shadow-md hover:scale-105 duration-300">
+                                    <img onclick="showModal('/managers/menus/${menu.id}])')"
+                                        class="aspect-square object-cover w-full rounded"
+                                        src="{{ asset('${menu.image}') }}" alt="">
+                                </div>
+                                <p class="flex flex-col p-2">
+                                    <strong>${menu.name}</strong>
+                                    <span class="opacity-50 text-sm">${menu.price} đ</span>
+                                </p>
+                            </div>`).join('')}
+                </div>
+            </div>`
+
+                element.insertAdjacentHTML('beforeend', div);
+            }
+        }
+        setInterval(updateEvent, 2000);
+
+        window.addEventListener('message', function(event) {
+            if (event.data === "menu edited" || event.data === "menu deleted") {
+                window.document.querySelector("#modal").close()
+            }
+        })
     </script>
 </body>
 

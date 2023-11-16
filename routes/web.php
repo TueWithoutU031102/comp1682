@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
     Route::group(['prefix' => 'managers', 'middleware' => ['auth', 'managers']], function () {
         Route::get('index', [ManagerController::class, 'index'])->name('manager.index');
         Route::prefix('menus')->group(function () {
+            Route::get('/event', [ManagerMenuController::class, 'event'])->name('manager.menu.event');
             Route::get('index', [ManagerMenuController::class, 'index'])->middleware(['auth', 'verified'])->name('manager.menu.index');
             Route::get('create', [ManagerMenuController::class, 'create'])->name('manager.menu.create');
             Route::post('store', [ManagerMenuController::class, 'store'])->name('manager.menu.store');

@@ -13,10 +13,20 @@ use Illuminate\Validation\Rules\Enum;
 class MenuController extends Controller
 {
     //
+    public function event()
+    {
+        $types = Type::all();
+        $menus = Menu::all();
+        return response()->json([
+            'menus' => $menus,
+            'types' => $types,
+        ]);
+    }
     public function index()
     {
         $menus = Menu::all();
-        return view("manager.menu.index", ['menus' => $menus]);
+        $types = Type::all();
+        return view("manager.menu.index", ['menus' => $menus, 'types' => $types]);
     }
     public function create()
     {
@@ -64,13 +74,17 @@ class MenuController extends Controller
         } else
             $request['image'] = $menu->image;
         $menu->fill($data)->save();
-        return to_route('manager.menu.index')->with('success', 'Dish edited successfully!');
+        return '<script>
+        window.parent.postMessage("menu edited", "*")
+        </script>';
     }
     public function destroy(Menu $menu)
     {
         $menu->removeImage();
         $menu->delete();
-        return to_route('manager.menu.index')->with('success', 'Dish deleted successfully!');
+        return '<script>
+        window.parent.postMessage("menu deleted", "*")
+        </script>';
     }
     protected function saveImage(UploadedFile $file)
     {

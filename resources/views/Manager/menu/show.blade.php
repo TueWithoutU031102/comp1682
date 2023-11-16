@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1 class="display-4" style="text-align: center; font-weight: bold">DISH INFORMATION</h1><br>
+    <h1 class="display-4" style="text-align: center; font-weight: bold">DISH INFORMATION</h1>
     <div class="user-card">
         <img src="{{ asset($menu->image) }}">
         <div class="submission-information">
@@ -21,17 +21,17 @@
             <p><span>Status: </span> {{ $menu->status }}</p>
             <p><span>Price: </span>{{ $menu->price }}</p>
             <p><span>Description: </span>{{ $menu->description }}</p>
-            <a href="{{ route('manager.menu.index') }}">
-                <button class="btn btn-primary">Back</button>
-            </a>
-            <a href="{{ route('manager.menu.edit', ['menu' => $menu]) }}" title="Edit Account"
-                class="btn btn-primary btn-sm"><i aria-hidden="true"><i class="fa-solid fa-pen"></i>
-            </a>
-            <form action="{{ route('manager.menu.destroy', ['menu' => $menu]) }}" method="POST" class="d-inline"
-                onsubmit="return confirm('Are you sure to delete {{ $menu->name }} !!!???')">
-                @csrf
-                <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i class="fa-solid fa-trash"></i></button>
-            </form>
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <a href="{{ route('manager.menu.edit', ['menu' => $menu]) }}" title="Edit Account"
+                    class="btn btn-outline btn-success"><i aria-hidden="true"><i class="fa-solid fa-pen"></i>
+                </a>
+                <form action="{{ route('manager.menu.destroy', ['menu' => $menu]) }}" method="POST" class="d-inline"
+                    onsubmit="return confirm('Are you sure to delete {{ $menu->name }} !!!???')">
+                    @csrf
+                    <button class="btn btn-outline btn-error"><i aria-hidden="true"><i
+                                class="fa-solid fa-trash"></i></button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
