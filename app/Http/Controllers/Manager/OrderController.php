@@ -20,6 +20,11 @@ class OrderController extends Controller
         return view('Manager.order.index', ['carts' => $carts, 'statuses' => $statuses]);
     }
 
+    public function edit(Cart $cart)
+    {
+        $statuses = StatusDish::cases();
+        return view('Manager.order.edit', ['cart' => $cart, 'statuses' => $statuses]);
+    }
     public function update(Cart $cart, Request $request)
     {
         $data = [
@@ -37,7 +42,9 @@ class OrderController extends Controller
             }
         }
         $cart->update($data);
-        return to_route('manager.order.index')->with('success', 'Dish status edited successfully!');
+        return '<script>
+        window.parent.postMessage("status edited", "*")
+        </script>';
     }
 
     public function destroy(Cart $cart)

@@ -110,6 +110,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         Route::prefix('orders')->group(function () {
             Route::get('/event', [ManagerOrderController::class, 'event'])->name('manager.order.event');
             Route::get('index', [ManagerOrderController::class, 'index'])->name('manager.order.index');
+            Route::get('/{cart}/edit', [ManagerOrderController::class, 'edit'])->name('manager.order.edit');
             Route::put('/{cart}/update', [ManagerOrderController::class, 'update'])->name('manager.order.update');
             Route::post('/{cart}/destroy', [ManagerOrderController::class, 'destroy'])->name('manager.order.destroy');
         });

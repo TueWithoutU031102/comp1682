@@ -39,7 +39,9 @@
                         <td>{{ $cart->menu->name }}</td>
                         <td>{{ $cart->session->table->name }}</td>
                         <td>{{ $cart->quantity }}</td>
-                        <td onclick="showModal('')">{{ $cart->status }}</td>
+                        <td onclick="showModal('{{ route('manager.order.edit', ['cart' => $cart]) }}')">
+                            {{ $cart->status }}
+                        </td>
                         <td>{{ $cart->created_at }}</td>
                         <td>
                             <form action="{{ route('manager.order.destroy', ['cart' => $cart]) }}" method="POST"
@@ -60,26 +62,7 @@
                                         X
                                     </button>
                                 </form>
-                                <form method="POST" action="{{ route('manager.order.update', ['cart' => $cart]) }}">
-                                    @method('PUT')
-                                    @csrf
-                                    <h1 class="text-2xl font-bold">Edit status order</h1>
-                                    <label for="StatusDish"
-                                        class="block text-sm font-medium leading-6 text-gray-900">Status</label>
-                                    <select name="status" value="{{ $cart->status }}"
-                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                                        id="status">
-                                        @foreach ($statuses as $status)
-                                            <option value="{{ $status->value }}">{{ $status->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="mt-6 flex items-center justify-end gap-x-6">
-                                        <button type="submit"
-                                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                            Submit
-                                        </button>
-                                    </div>
-                                </form>
+                                <iframe style="width:100%; height:100%"></iframe>
                             </article>
                         </div>
                     </dialog>
@@ -90,8 +73,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js" defer></script>
     <script>
-        function showModal() {
+        function showModal(url) {
             var modal = document.getElementById("modal");
+            document.querySelector('#modal iframe').src = url;
             modal.showModal();
         }
 
@@ -117,8 +101,8 @@
                 <td>${menuName}</td>
                 <td>${tableName}</td>
                 <td>${obj.quantity}</td>
-                <td onclick="showModal('')">${obj.status}</td>
-                <td>${moment(obj.create_at).format('YYYY-MM-DD HH:mm:ss') }</td>
+                <td onclick="showModal('/managers/orders/${obj.id}/edit')">${obj.status}</td>
+                <td>${moment(obj.created_at).format('YYYY-MM-DD HH:mm:ss') }</td>
                 <td>
                     <form action="/managers/orders/${obj.id}/destroy" method="POST"
                         class="d-inline"
@@ -134,7 +118,12 @@
                 element.insertAdjacentHTML('beforeend', tr);
             }
         }
-        setInterval(updateEvent, 2000);
+        setInterval(updateEvent, 1000);
+        window.addEventListener('message', function(event) {
+            if (event.data === "status edited") {
+                window.document.querySelector("#modal").close()
+            }
+        })
     </script>
 </body>
 
