@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('view/{name}', fn($name) => view($name));
 
-Route::get('index', [IndexController::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/forbiddenPage', function () {
     abort(403);
 })->name("forbidden");

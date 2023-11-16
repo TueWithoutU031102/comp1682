@@ -30,6 +30,11 @@
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Manage Dashboard') }}
+                <button
+                    onclick="showModal('{{ route('admin.create') }}')"
+                    class="btn btn-primary btn-sm btn-square text-lg">
+                    +
+                </button>
             </h2>
         </x-slot>
         @if (Session::has('success'))
@@ -38,36 +43,37 @@
             </div>
         @endif
 
-        <div class="create-btn">
-            <button onclick="showModal('{{ route('admin.create') }}')" class="btn btn-primary"
-                style="font-weight: bold; font-size: 20px; color:white;">+</button>
+        <div class="card shadow bg-base-100 max-w-xl mx-auto mt-5">
+            <div class="card-body">
+                <h3 class="card-title">Manage role</h3>
+                <table class="table table table-zebra border">
+                    <thead>
+                        <tr class="font-semibold">
+                            <th>Name</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user_data">
+                        @foreach ($users as $user)
+                            <tr class="cursor-pointer" onclick="showModal('{{ route('admin.show', ['user' => $user]) }}')">
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->role }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <table class="table-auto mx-auto w-3/4">
-            <thead>
-                <tr class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <th class="px-4 py-2 font-semibold text-xs text-black">Name</th>
-                    <th class="px-4 py-2 font-semibold text-xs text-black">Role</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white overflow-hidden shadow-sm sm:rounded-lg" id="user_data">
-                @foreach ($users as $user)
-                    <tr onclick="showModal('{{ route('admin.show', ['user' => $user]) }}')">
-                        <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->name }}</td>
-                        <td class="border px-4 py-2 font-semibold text-xs text-black">{{ $user->role }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
         <dialog id="modal" class="modal">
             <div class="modal-box">
-                <article style="width:400px;height:400px">
+                <article>
                     <form method="dialog">
                         <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
                             X
                         </button>
                     </form>
-                    <iframe style="width:100%; height:100%"></iframe>
+                    <iframe class="w-full h-full aspect-[4/3]"></iframe>
                 </article>
             </div>
         </dialog>
@@ -78,6 +84,7 @@
             document.querySelector('#modal iframe').src = url;
             modal.showModal();
         }
+
         async function updateEvent() {
             let url = "{{ route('admin.event') }}";
             let response = await fetch(url);
@@ -87,9 +94,9 @@
             element.innerHTML = '';
 
             for (const obj of user) {
-                let tr = `<tr onclick="showModal('/admins/manages/${obj.id}')">
-                    <td class="border px-4 py-2 font-semibold text-xs text-black">${obj.name}</td>
-                    <td class="border px-4 py-2 font-semibold text-xs text-black">${obj.role}</td>
+                let tr = `<tr class="cursor-pointer" onclick="showModal('/admins/manages/${obj.id}')">
+                    <td>${obj.name}</td>
+                    <td>${obj.role}</td>
                 </tr>`
                 element.insertAdjacentHTML('beforeend', tr);
             }
