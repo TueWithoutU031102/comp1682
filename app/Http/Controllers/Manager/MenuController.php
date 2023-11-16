@@ -47,7 +47,9 @@ class MenuController extends Controller
 
         $imagePath = $this->saveImage($request->file('image'));
         Menu::create(array_merge($data, ['image' => $imagePath]));
-        return to_route("manager.menu.index")->with('success', 'Dish created successfully!');
+        return '<script>
+        window.parent.postMessage("menu created", "*")
+        </script>';
     }
 
     public function show(Menu $menu)

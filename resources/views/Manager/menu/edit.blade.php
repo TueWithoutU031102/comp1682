@@ -35,7 +35,7 @@
                 <div class="form-control w-full max-w-xs w-full max-w-xs">
                     <label for="type" class="label-text">Type</label>
 
-                    <select name="type_id" value="{{ $menu->type_id }}" class="form-select" id="type">
+                    <select name="type_id" value="{{ $menu->type_id }}" class="select select-bordered w-full max-w-xs" id="type">
                         @foreach ($types as $type)
                             <option value="{{ $type->id }}">{{ $type->name }}</option>
                         @endforeach
@@ -44,7 +44,7 @@
                 <div class="form-control w-full max-w-xs w-full max-w-xs">
                     <label for="statusMenu" class="label-text">Status</label>
 
-                    <select name="status" value="{{ $menu->status }}" class="form-select" id="status">
+                    <select name="status" value="{{ $menu->status }}" class="select select-bordered w-full max-w-xs" id="status">
                         @foreach ($statuses as $status)
                             <option value="{{ $status->value }}">{{ $status->name }}</option>
                         @endforeach

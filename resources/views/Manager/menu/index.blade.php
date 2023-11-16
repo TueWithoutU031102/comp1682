@@ -103,17 +103,17 @@
                 <h2 class="text-center mt-10">${obj.name}</h2>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-7">
                     ${menu.filter(menu => menu.type_id === obj.id).map(menu => `
-                            <div>
-                                <div class="transition rounded hover:shadow-md hover:scale-105 duration-300">
-                                    <img onclick="showModal('/managers/menus/${menu.id}])')"
-                                        class="aspect-square object-cover w-full rounded"
-                                        src="{{ asset('${menu.image}') }}" alt="">
-                                </div>
-                                <p class="flex flex-col p-2">
-                                    <strong>${menu.name}</strong>
-                                    <span class="opacity-50 text-sm">${menu.price} đ</span>
-                                </p>
-                            </div>`).join('')}
+                                <div>
+                                    <div class="transition rounded hover:shadow-md hover:scale-105 duration-300">
+                                        <img onclick="showModal('/managers/menus/${menu.id}])')"
+                                            class="aspect-square object-cover w-full rounded"
+                                            src="{{ asset('${menu.image}') }}" alt="">
+                                    </div>
+                                    <p class="flex flex-col p-2">
+                                        <strong>${menu.name}</strong>
+                                        <span class="opacity-50 text-sm">${menu.price} đ</span>
+                                    </p>
+                                </div>`).join('')}
                 </div>
             </div>`
 
@@ -123,7 +123,7 @@
         setInterval(updateEvent, 2000);
 
         window.addEventListener('message', function(event) {
-            if (event.data === "menu edited" || event.data === "menu deleted") {
+            if (event.data === "menu edited" || event.data === "menu deleted" || event.data === "menu created") {
                 window.document.querySelector("#modal").close()
             }
         })
