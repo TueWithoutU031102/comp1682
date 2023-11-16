@@ -68,11 +68,12 @@ class MenuController extends Controller
             'price' => 'required',
             'description' => 'required',
         ]);
+
         if ($request->hasFile('image')) {
             $menu->removeImage();
-            $request['image'] = $this->saveImage($request->file('image'));
+            $data['image'] = $this->saveImage($request->file('image'));
         } else
-            $request['image'] = $menu->image;
+            $data['image'] = $menu->image;
         $menu->fill($data)->save();
         return '<script>
         window.parent.postMessage("menu edited", "*")
