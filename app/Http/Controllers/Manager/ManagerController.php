@@ -12,7 +12,6 @@ class ManagerController extends Controller
     {
         $managerSuccess = session('managerSuccess');
         $totalSaled = Menu::all()->sum('saled');
-        dd($totalSaled);
         return view("manager.index", ['managerSuccess' => $managerSuccess]);
     }
 }
