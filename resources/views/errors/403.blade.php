@@ -31,7 +31,7 @@
     <div class="message">
         <h1>Oops!</h1>
         <h1>403</h1>
-        <a href="/index">
+        <a href="/">
             <h2>&rightarrow; BACK TO HOME &LeftArrow;</h2>
         </a>
         <p>YOU DO NOT HAVE PERMISSION TO ACCESS THE DOCUMENT OR PROGRAM THAT YOU REQUESTED.</p>
