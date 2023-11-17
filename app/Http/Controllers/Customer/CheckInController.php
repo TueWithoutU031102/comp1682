@@ -12,7 +12,7 @@ class CheckinController extends Controller
     //
     public function index(Table $table)
     {
-        return view('Customer.checkin.index', ['table' => $table]);
+        return view('customer.checkin.index', ['table' => $table]);
     }
 
     public function create(Table $table, Request $request)
@@ -24,7 +24,7 @@ class CheckinController extends Controller
             ]);
             return to_route('customer.checkin.index', ['table' => $table]);
         } else {
-            return view('Customer.checkin.notice');
+            return view('customer.checkin.notice');
         }
     }
 

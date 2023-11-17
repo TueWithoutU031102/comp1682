@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Customer\CheckinController;
+use App\Http\Controllers\Customer\CheckInController;
 use App\Http\Controllers\Manager\TypeController;
 use App\Http\Controllers\Manager\TableController;
 use App\Http\Controllers\IndexController;
@@ -48,7 +48,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('index', [AdminController::class, 'index'])->name('admin.index');
             Route::get('create', [AdminController::class, 'create'])->name('admin.create');
             Route::post('store', [AdminController::class, 'store'])->name('admin.store');
-            Route::get('/{user}', [AdminController::class, 'show'])->name('admin.show');
             Route::get('/{user}/edit', [AdminController::class, 'edit'])->name('admin.edit');
             Route::post('/{user}/update', [AdminController::class, 'update'])->name('admin.update');
             Route::post('/{user}/destroy', [AdminController::class, 'destroy'])->name('admin.destroy');
@@ -148,12 +147,10 @@ Route::group(['prefix' => 'customers'], function () {
         Route::post('store', [CustomerBookController::class, 'store'])->name('customer.book.store');
     });
     Route::prefix('checkins')->group(function () {
-        Route::get('index/{table}', [CheckinController::class, 'index'])->name('customer.checkin.index');
-        Route::get('notice', [CheckinController::class, 'notice'])->name('customer.checkin.notice');
-        Route::get('tables/{table}', [CheckinController::class, 'create'])->name('customer.checkin.table');
-        Route::post('store/{table}', [CheckinController::class, 'store'])->name('customer.checkin.store');
-        //xử lý check in:
-        //Đối với table k có session, cho phép người dùng tao session và chuyển hướng người dùng sang trang order
+        Route::get('index/{table}', [CheckInController::class, 'index'])->name('customer.checkin.index');
+        Route::get('notice', [CheckInController::class, 'notice'])->name('customer.checkin.notice');
+        Route::get('tables/{table}', [CheckInController::class, 'create'])->name('customer.checkin.table');
+        Route::post('store/{table}', [CheckInController::class, 'store'])->name('customer.checkin.store');
     });
 });
 Route::get('/dashboard', function () {

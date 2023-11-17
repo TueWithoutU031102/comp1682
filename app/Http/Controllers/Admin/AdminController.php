@@ -14,14 +14,12 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view('admin.manage.index', ['users' => $users]);
+        return view('admin.manage.index', ['users' => User::all()]);
     }
 
     public function create()
     {
-        $roles = Role::cases();
-        return view('admin.manage.create', ['roles' => $roles]);
+        return view('admin.manage.create', ['roles' => Role::cases()]);
     }
 
     public function store(User $user, Request $request)
@@ -40,29 +38,26 @@ class AdminController extends Controller
                     ->uncompromised(),
             ],
         ]);
-        $user->fill($data)->save();
-        return to_route('admin.create');
-    }
 
-    public function show(User $user)
-    {
-        return view('admin.manage.show', ['user' => $user]);
+        $user->fill($data)->save();
+        return to_route('admin.index');
     }
 
     public function edit(User $user)
     {
-        $roles = Role::cases();
-        return view('admin.manage.edit', ['user' => $user, 'roles' => $roles]);
+        return view('admin.manage.edit', [
+            'user' => $user,
+            'roles' => Role::cases()
+        ]);
     }
 
     public function update(User $user, Request $request)
     {
         $data = $request->validate([
-            'email' => [Rule::unique('users')->ignore($request->id)],
-            'phone_number' => [Rule::unique('users')->ignore($request->id)],
+            'email' => [Rule::unique('users')->ignore($user->id)],
+            'phone_number' => [Rule::unique('users')->ignore($user->id)],
         ]);
         $data['role'] = $request->has('role') ? $request->role : User::find($request['id'])->role;
-
 
         $data['password'] = !$request['password']
             ? User::find($request['id'])->password
@@ -70,17 +65,14 @@ class AdminController extends Controller
                 'password' => ['required', Password::min(8)->mixedCase()->letters()->numbers()->uncompromised()]
             ])['password']);
         $user->fill($data)->save();
-        return view('admin.manage.show', ['user' => $user]);
+        return to_route('admin.index');
     }
+
     public function destroy(User $user)
     {
         $user->delete();
-        return '<script>
-        window.parent.postMessage("user deleted", "*")
-        </script>';
-    }
-    public function event()
-    {
-        return User::all();
+        session()->flash('success', 'User deleted successfully!');
+
+        return to_route('admin.index');
     }
 }
