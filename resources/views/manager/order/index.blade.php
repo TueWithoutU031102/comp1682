@@ -94,7 +94,9 @@
             let tableID = session.find(session => session.id === obj.session_id).table_id;
             let tableName = table.find(table => table.id === tableID).name;
 
-            let dialog = `<dialog id="status${obj.id}" class="modal">
+            let created = document.querySelector(`#status${obj.id}`)
+
+            let dialog = created ? '' : `<dialog id="status${obj.id}" class="modal">
                                 <div class="modal-box max-w-xs">
                                     <article>
                                         <form method="dialog">
