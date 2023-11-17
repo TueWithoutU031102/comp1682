@@ -20,7 +20,7 @@
                 <td>
                     <form action="/managers/books/${obj.id}/destroy" method="POST"
                         class="d-inline"
-                        onsubmit="confirm('Are you sure to delete this booking !!!???')">
+                        onsubmit="return confirm('Are you sure to delete this booking !!!???')">
                         @csrf
                         <button class="btn btn-error btn-square btn-outline btn-sm">
                             <i class="fa-solid fa-trash"></i>
@@ -70,7 +70,7 @@
                                 <td>
                                     <form action="{{ route('manager.book.destroy', ['book' => $book]) }}" method="POST"
                                         class="d-inline"
-                                        onsubmit="confirm('Are you sure to delete this booking !!!???')">
+                                        onsubmit="return confirm('Are you sure to delete this booking !!!???')">
                                         @csrf
                                         <button class="btn btn-error btn-square btn-outline btn-sm">
                                             <i class="fa-solid fa-trash"></i>

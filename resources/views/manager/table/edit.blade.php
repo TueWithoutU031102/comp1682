@@ -1,41 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-app-layout>
+    <div class="card bg-base-100 shadow max-w-lg mx-auto my-5">
+        <form action="{{ route('manager.table.update', $table) }}" method="POST" class="card-body">
+            <h3 class="card-title mb-3">Edit the Table</h3>
+            @csrf
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @include('layouts.link')
-    <title>Edit</title>
-</head>
+            @include('components.notification')
 
-<body>
-    <form action="{{ route('manager.table.update', ['table' => $table]) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="space-y-12">
-            <div class="border-b border-gray-900/10 pb-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <h1 class="text-2xl font-bold">Edit table</h1>
-                <div class="form-control w-full max-w-xs">
-                    <label for="name" class="label-text">Name:</label>
-                    <input type="text" class="input input-bordered w-full max-w-xs" value="{{ $table->name }}"
-                        id="name" name="name">
-                </div>
-                <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="submit"
-                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
-                </div>
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" value="{{ $table->name }}" id="name" name="name" placeholder="Name" class="input input-bordered">
             </div>
-        </div>
-    </form>
-</body>
 
-</html>
+            <div class="flex justify-between mt-5">
+                <a href="{{ route('manager.table.index') }}" class="btn btn-ghost">Back</a>
+                <button type="submit" class="btn btn-info">
+                    <span class="text-primary">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</x-app-layout>

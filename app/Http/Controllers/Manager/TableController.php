@@ -13,41 +13,48 @@ class TableController extends Controller
     {
         return view("manager.table.index", ['tables' => Table::all()]);
     }
+
+    /**
+     * @deprecated 
+     */
     public function create()
     {
         //show form create table
         return view("manager.table.create");
     }
+
     public function store(Request $request, Table $table)
     {
         //save form create table
         $data = $request->validate([
-            'name' => 'required|string|min:1|max:5'
+            'name' => 'required|string|min:3|max:5'
         ]);
+    
         $table->fill($data)->save();
-        return view("manager.table.create");
+
+        return back()->with('success', "Table {$table->name} created");
     }
+
     public function edit(Table $table)
     {
         return view("manager.table.edit", ['table' => $table]);
     }
+
     public function update(Table $table, Request $request)
     {
         //update table
-        $data = $request->validate([
-            'name' => 'required|string|min:1|max:5'
-        ]);
+        $data = $request->validate(['name' => 'required|string|min:3|max:5']);
         $table->fill($data)->save();
-        return '<script>
-        window.parent.postMessage("table edited", "*")
-        </script>';
+
+        return back()->with('success', "Table {$table->name} updated");
     }
     public function destroy(Table $table)
     {
         //destroy table
         $table->delete();
-        return to_route('manager.table.index');
+        return to_route('manager.table.index')->with('success', "Table {$table->name} deleted");
     }
+
     public function event()
     {
         return Table::all();
