@@ -8,6 +8,7 @@
 
     <div class="card bg-base-100 max-w-2xl mx-auto my-5">
         <div class="card-body">
+            @include('components.notification')
             <div class="overflow-x-auto">
                 <table class="table">
                     <thead>
