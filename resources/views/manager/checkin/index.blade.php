@@ -1,56 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+{{-- TEST REQUIRED --}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @include('layouts.link')
-    <title>Session table list</title>
-</head>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Session table list') }}
+        </h2>
+    </x-slot>
 
-<body>
-    <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Session table list') }}
-            </h2>
-        </x-slot>
-        @if (Session::has('success'))
-            <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
-        @endif
-        <br><br>
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Table</th>
-                </tr>
-            </thead>
-            <tbody id="ses_data">
-                @foreach ($session as $ses)
-                    <tr onclick="showModal('{{ route('manager.checkin.show', ['session' => $ses]) }}')">
-                        <td>{{ $ses->id }}</td>
-                        <td>{{ $ses->name }}</td>
-                        <td>{{ $ses->table->name }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <dialog id="modal" class="modal">
-            <div class="modal-box">
-                <article style="width:400px;height:400px">
-                    <form method="dialog">
-                        <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
-                            X
-                        </button>
-                    </form>
-                    <iframe style="width:100%; height:100%"></iframe>
-                </article>
+    <div class="card bg-base-100 max-w-2xl mx-auto my-5">
+        <div class="card-body">
+            @include('components.notification')
+
+            <div class="overflow-x-auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Table</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ses_data">
+                        @foreach ($session as $ses)
+                            <tr class="hover">
+                                <td>{{ $ses->id }}</td>
+                                <td>{{ $ses->name }}</td>
+                                <td>{{ $ses->table->name }}</td>
+                                <td>
+                                    <form action="{{ route('manager.checkin.destroy', $ses) }}" method="POST" onsubmit="return confirm('Are you sure to delete {{ $ses->name }} !!!???')">
+                                        @csrf
+                                        <button type="submit" class="btn btn-square btn-outline btn-error btn-sm">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-        </dialog>
-    </x-app-layout>
+        </div>
+    </div>
+
     <script>
         function showModal(url) {
             var modal = document.getElementById("modal");
@@ -65,22 +57,26 @@
             let table = data.tables;
             let element = window.document.querySelector('#ses_data');
             element.innerHTML = '';
+
             for (const obj of ses) {
                 let tableName = table.find(table => table.id === obj.table_id).name;
-                let tr = `<tr onclick="showModal('/managers/checkins/${obj.id}')">
+                let tr = `<tr class="hover">
                 <td>${obj.id}</td>
                 <td>${obj.name}</td>
                 <td>${tableName}</td>
+                <td>
+                    <form action="/managers/checkins/${obj.id}/destroy" method="POST" onsubmit="return confirm('Are you sure to delete this !!!???')">
+                        @csrf
+                        <button type="submit" class="btn btn-square btn-outline btn-error btn-sm">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
                 </tr>`
                 element.insertAdjacentHTML('beforeend', tr);
             }
         }
 
         setInterval(updateEvent, 1000);
-        window.addEventListener('message', function(event) {
-            if (event.data === "session table deleted") window.document.querySelector("#modal").close()
-        })
     </script>
-</body>
-
-</html>
+</x-app-layout>

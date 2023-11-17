@@ -14,16 +14,22 @@ class CheckInController extends Controller
         $session = Session::all();
         return view('manager.checkin.index', ['session' => $session]);
     }
+    
+    /**
+     * @deprecated
+     *
+     */
     public function show(Session $session)
     {
-
         return view("manager.checkin.show", ['session' => $session]);
     }
+
     public function destroy(Session $session)
     {
         session()->pull('customer.session', [Session::where('table_id', $session->id)->first()]);
         $session->delete();
-        return '<script>window.parent.postMessage("session table deleted", "*")</script>';
+
+        return back()->with('success', "Session {$session->name} deleted");
     }
 
     public function event()
