@@ -1,62 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
+{{-- TEST REQUIRED --}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @include('layouts.link')
-    <title>Create Account</title>
-</head>
+<x-app-layout>
+    <div class="card bg-base-100 shadow my-5 max-w-lg mx-auto">
+        <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data" class="card-body">
+            @csrf
+            <h3 class="card-title">Create Account</h3>
 
-<body>
-    <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <br>
-        @if ($errors->any())
-            <div class="alert alert-danger">
+            @if ($errors->any())
+            <div class="alert alert-danger my-3">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
-        @endif
-        <h1 class="text-2xl font-bold">Add new account</h1>
-        <div class="form-control w-full max-w-xs">
-            <label for="name" class="label-text">Name:</label>
-            <input type="text" class="input input-bordered w-full max-w-xs" value="{{ old('name') }}"
-                id="name" name="name">
-        </div>
-        <div class="form-control w-full max-w-xs">
-            <label for="email" class="label-text">Email:</label>
-            <input type="email" class="input input-bordered w-full max-w-xs" value="{{ old('email') }}"
-                id="email" name="email">
-        </div>
-        <div class="form-control w-full max-w-xs">
-            <label for="phone" class="label-text">Phone</label>
-            <input type="text" class="input input-bordered w-full max-w-xs" value="{{ old('phone') }}"
-                id="phone" name="phone">
-        </div>
-        <div class="form-control w-full max-w-xs">
-            <label for="role" class="label-text">Role</label>
+            @endif
 
-            <select name="role" value="{{ old('role') }}" class="select w-full max-w-xs" id="role">
-                @foreach ($roles as $role)
-                    <option value="{{ $role->value }}">{{ $role->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-control w-full max-w-xs">
-            <label for="password" class="label-text">Password</label>
-            <input type="password" class="input input-bordered w-full max-w-xs" value="{{ old('password') }}"
-                id="password" name="password">
-        </div>
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="submit"
-                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
-        </div>
-    </form>
-</body>
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" value="{{ old('name') }}" id="name" name="name" placeholder="Name" class="input input-bordered">
+            </div>
 
-</html>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="email" value="{{ old('email') }}" id="email" name="email" placeholder="Email" class="input input-bordered">
+            </div>
+
+            <div class="form-control">
+                <label for="phone">Phone</label>
+                <input type="text" value="{{ old('phone') }}" id="phone" name="phone" placeholder="Phone" class="input input-bordered">
+            </div>
+
+            <div class="form-control">
+                <label for="role">Role</label>
+
+                <select name="role" value="{{ old('role') }}" class="select select-bordered w-full" id="role">
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->value }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" class="input input-bordered">
+            </div>
+
+            <div class="flex justify-between mt-5">
+                <a href="{{ route('admin.index') }}" class="btn btn-ghost">Back</a>
+                <button type="submit" class="btn btn-info">
+                    <span class="text-primary">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</x-app-layout>
