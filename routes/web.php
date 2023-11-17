@@ -6,6 +6,7 @@ use App\Http\Middleware\is\Customer;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\ProfileController;
@@ -113,6 +114,9 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::put('/{cart}/update', [ManagerOrderController::class, 'update'])->name('manager.order.update');
             Route::post('/{cart}/destroy', [ManagerOrderController::class, 'destroy'])->name('manager.order.destroy');
         });
+        Route::prefix('checkouts')->group(function () {
+            Route::get('/index', [CheckoutController::class, 'index'])->name('manager.checkout.index');
+        });
     });
 
     Route::group(['prefix' => 'staffs', 'middleware' => ['auth', 'staffs']], function () {
@@ -121,7 +125,9 @@ Route::group(['middleware' => ['auth', 'users']], function () {
 Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
-
+    Route::prefix('checkouts')->group(function () {
+        Route::get('create', [CheckoutController::class, 'create'])->name('customer.checkout.index');
+    });
     Route::prefix('menus')->group(function () {
         Route::get('index', [CustomerMenuController::class, 'index'])->name('customer.menu.index');
         Route::get('/{menu}', [CustomerMenuController::class, 'show'])->name('customer.menu.show');
