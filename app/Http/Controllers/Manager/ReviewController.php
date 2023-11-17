@@ -8,17 +8,23 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    //
+    /**
+     * @deprecated 
+     */
     public function event()
     {
         return Review::all();
     }
+
     public function index()
     {
         $reviews = Review::all();
         return view("manager.review.index", ['reviews' => $reviews]);
     }
 
+    /**
+     * @deprecated
+     */
     public function show(Review $review)
     {
         return view("manager.review.show", ['review' => $review]);
@@ -27,8 +33,7 @@ class ReviewController extends Controller
     public function destroy(Review $review)
     {
         $review->delete();
-        return '<script>
-        window.parent.postMessage("review deleted", "*")
-        </script>';
+
+        return redirect()->route('manager.review.index')->with('success', 'Review deleted successfully');
     }
 }
