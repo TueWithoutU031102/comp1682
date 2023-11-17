@@ -20,15 +20,6 @@ class OrderController extends Controller
         return view('manager.order.index', ['carts' => $carts, 'statuses' => $statuses]);
     }
 
-    /**
-     * @deprecated 
-     */
-    public function edit(Cart $cart)
-    {
-        $statuses = StatusDish::cases();
-        return view('manager.order.edit', ['cart' => $cart, 'statuses' => $statuses]);
-    }
-
     public function update(Cart $cart, Request $request)
     {
         $data = [

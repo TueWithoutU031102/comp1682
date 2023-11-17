@@ -1,5 +1,3 @@
-{{-- TEST REQUIRED --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -28,10 +26,12 @@
                                 <td>{{ $review->name }}</td>
                                 <td>{{ $review->created_at->diffForHumans() }}</td>
                                 <td class="flex space-x-3">
-                                    <button data-review='@json($review)' class="btn btn-sm btn-circle btn-info btn-outline">
+                                    <button data-review='@json($review)'
+                                        class="btn btn-sm btn-circle btn-info btn-outline">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
-                                    <form class="delete-review" action="{{ route('manager.review.destroy', $review) }}" method="POST">
+                                    <form class="delete-review" action="{{ route('manager.review.destroy', $review) }}"
+                                        method="POST">
                                         @csrf
                                         <button class="btn btn-sm btn-circle btn-error btn-outline">
                                             <i class="fa-solid fa-trash"></i>
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    
+
     <dialog id="modal" class="modal">
         <div class="modal-box">
             <article>
@@ -60,27 +60,27 @@
         </div>
     </dialog>
 
-<x-slot name="scripts">
-<script defer>
-    window.addEventListener('load', function() {
-        const modal = document.querySelector('#modal');
-        const content = modal.querySelector('#modal .content');
+    <x-slot name="scripts">
+        <script defer>
+            window.addEventListener('load', function() {
+                const modal = document.querySelector('#modal');
+                const content = modal.querySelector('#modal .content');
 
-        for (const form of document.querySelectorAll('delete-review')) {
-            form.addEventListener('submit', event => {
-                event.preventDefault();
-                const confirm = window.confirm('Are you sure to delete this review !!!???');
-                if (confirm) {
-                    form.submit();
+                for (const form of document.querySelectorAll('delete-review')) {
+                    form.addEventListener('submit', event => {
+                        event.preventDefault();
+                        const confirm = window.confirm('Are you sure to delete this review !!!???');
+                        if (confirm) {
+                            form.submit();
+                        }
+                    })
                 }
-            })
-        }
 
-        document.querySelectorAll('button[data-review]').forEach(button => {
-            const review = JSON.parse(button.dataset.review);
+                document.querySelectorAll('button[data-review]').forEach(button => {
+                    const review = JSON.parse(button.dataset.review);
 
-            button.addEventListener('click', () => {
-                content.innerHTML = `
+                    button.addEventListener('click', () => {
+                        content.innerHTML = `
                 <h3 class="font-bold text-lg">Review from ${review.name}</h3>
                 <table class="table bg-base-200 mt-5">
                     <tr>
@@ -106,10 +106,10 @@
                     <p>${review.detail}</p>
                 </div>
                 `
-                modal.showModal();
+                        modal.showModal();
+                    })
+                })
             })
-        })
-    })
-</script>
-</x-slot>
+        </script>
+    </x-slot>
 </x-app-layout>

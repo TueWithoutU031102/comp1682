@@ -14,22 +14,13 @@ class TableController extends Controller
         return view("manager.table.index", ['tables' => Table::all()]);
     }
 
-    /**
-     * @deprecated 
-     */
-    public function create()
-    {
-        //show form create table
-        return view("manager.table.create");
-    }
-
     public function store(Request $request, Table $table)
     {
         //save form create table
         $data = $request->validate([
             'name' => 'required|string|min:3|max:5'
         ]);
-    
+
         $table->fill($data)->save();
 
         return back()->with('success', "Table {$table->name} created");

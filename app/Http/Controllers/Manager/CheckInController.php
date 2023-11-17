@@ -14,15 +14,6 @@ class CheckInController extends Controller
         $session = Session::all();
         return view('manager.checkin.index', ['session' => $session]);
     }
-    
-    /**
-     * @deprecated
-     *
-     */
-    public function show(Session $session)
-    {
-        return view("manager.checkin.show", ['session' => $session]);
-    }
 
     public function destroy(Session $session)
     {

@@ -1,5 +1,3 @@
-{{-- TEST REQUIRED --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -17,6 +15,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Phone</th>
                             <th>Table</th>
                             <th>Action</th>
                         </tr>
@@ -26,9 +25,11 @@
                             <tr class="hover">
                                 <td>{{ $ses->id }}</td>
                                 <td>{{ $ses->name }}</td>
+                                <td>{{ $ses->phone }}</td>
                                 <td>{{ $ses->table->name }}</td>
                                 <td>
-                                    <form action="{{ route('manager.checkin.destroy', $ses) }}" method="POST" onsubmit="return confirm('Are you sure to delete {{ $ses->name }} !!!???')">
+                                    <form action="{{ route('manager.checkin.destroy', $ses) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure to delete {{ $ses->name }} !!!???')">
                                         @csrf
                                         <button type="submit" class="btn btn-square btn-outline btn-error btn-sm">
                                             <i class="fa-solid fa-trash"></i>
@@ -63,6 +64,7 @@
                 let tr = `<tr class="hover">
                 <td>${obj.id}</td>
                 <td>${obj.name}</td>
+                <td>${obj.phone}</td>
                 <td>${tableName}</td>
                 <td>
                     <form action="/managers/checkins/${obj.id}/destroy" method="POST" onsubmit="return confirm('Are you sure to delete this !!!???')">

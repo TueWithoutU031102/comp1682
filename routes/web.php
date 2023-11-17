@@ -70,7 +70,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         Route::prefix('tables')->group(function () {
             Route::get('/event', [TableController::class, 'event'])->name('manager.table.event');
             Route::get('index', [TableController::class, 'index'])->name('manager.table.index');
-            Route::get('create', [TableController::class, 'create'])->name('manager.table.create');
             Route::post('store', [TableController::class, 'store'])->name('manager.table.store');
             Route::get('/{table}/edit', [TableController::class, 'edit'])->name('manager.table.edit');
             Route::post('/{table}/update', [TableController::class, 'update'])->name('manager.table.update');
@@ -93,7 +92,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         Route::prefix('reviews')->group(function () {
             Route::get('/event', [ManagerReviewController::class, 'event'])->name('manager.review.event');
             Route::get('index', [ManagerReviewController::class, 'index'])->name('manager.review.index');
-            Route::get('/{review}', [ManagerReviewController::class, 'show'])->name('manager.review.show');
             Route::post('/{review}/destroy', [ManagerReviewController::class, 'destroy'])->name('manager.review.destroy');
         });
         Route::prefix('notifications')->group(function () {
@@ -110,7 +108,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         Route::prefix('orders')->group(function () {
             Route::get('/event', [ManagerOrderController::class, 'event'])->name('manager.order.event');
             Route::get('index', [ManagerOrderController::class, 'index'])->name('manager.order.index');
-            Route::get('/{cart}/edit', [ManagerOrderController::class, 'edit'])->name('manager.order.edit');
             Route::put('/{cart}/update', [ManagerOrderController::class, 'update'])->name('manager.order.update');
             Route::post('/{cart}/destroy', [ManagerOrderController::class, 'destroy'])->name('manager.order.destroy');
         });
