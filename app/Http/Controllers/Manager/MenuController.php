@@ -24,6 +24,7 @@ class MenuController extends Controller
     }
     public function index()
     {
+        // $menus = Menu::orderByDesc('saled');
         $menus = Menu::all();
         $types = Type::all();
         return view("manager.menu.index", ['menus' => $menus, 'types' => $types]);

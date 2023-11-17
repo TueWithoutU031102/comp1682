@@ -103,7 +103,7 @@
 
                 <div class="form-control mt-5">
                     <p class="font-semibold">Description</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde explicabo dolores minus facere obcaecati illum enim aut nobis iusto fugiat. Earum fuga repudiandae similique, repellat accusantium illo qui corrupti minima.</p>
+                    <p>${review.detail}</p>
                 </div>
                 `
                 modal.showModal();
