@@ -108,7 +108,7 @@
                         </a>
                         <form action="/managers/tables/${obj.id}/destroy" method="POST"
                             class="d-inline"
-                            onsubmit="return confirm('Are you sure to delete {{ $table->name }} !!!???')">
+                            onsubmit="return confirm('Are you sure to delete ${obj.name} !!!???')">
                             @csrf
                             <button class="btn btn-error btn-outline btn-sm">
                                 <i class="fa-solid fa-trash"></i>
