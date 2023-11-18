@@ -104,7 +104,7 @@
         </div>
         <div class="drawer-side z-20">
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200 min-h-full">
+            <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200 lg:h-auto">
                 <div class="flex flex-col space-y-3">
                     @if (session('cart'))
                         @foreach (session('cart') as $id => $details)
@@ -128,7 +128,9 @@
                                                 onclick="increaseQuantity(this)">+</button>
                                         </div>
                                     </div>
-                                    <span class="text-red-500 price">{{ $details['price'] }} đ</span>
+                                    <span class="text-red-500 price" data-price="{{ $details['price'] }}">
+                                        {{ number_format($details['price']) }} đ
+                                    </span>
                                 </div>
                             </div>
                         @endforeach
@@ -136,7 +138,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="w-80 p-4">
                 <hr class="border-t h-1 border-black border-dashed w-full my-2">
                 <div class="flex justify-between">
                     @php $total = 0 @endphp
@@ -144,7 +146,7 @@
                         @php $total += $details['price'] * $details['quantity'] @endphp
                     @endforeach
                     <span>Total price:</span>
-                    <span id="total-amount"> {{ $total }}đ</span>
+                    <span id="total-amount"> {{ number_format($total) }} đ</span>
                 </div>
                 <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -162,6 +164,11 @@
             </div>
         </div>
         <script type="text/javascript">
+            const formater = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+            });
+
             $(document).on('click', '.cart_remove', function() {
                 let id = $(this).data('id');
                 remove(id);
@@ -191,12 +198,13 @@
                 var total = 0;
                 $('.cart-detail').each(function() {
                     var quantity = $(this).find('.quantity').val();
-                    var price = parseFloat($(this).find('.price').text());
+                    var price = parseFloat($(this).find('.price').data('price'));
                     total += price * quantity;
                 });
 
                 // Cập nhật tổng giá trị trong giao diện người dùng
-                $('#total-amount').text(total + 'đ');
+
+                $('#total-amount').text(formater.format(total));
             }
 
             function remove(id) {
