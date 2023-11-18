@@ -25,7 +25,8 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function pay(VNPay $payment, Checkout $checkout, Request $request) {
+    public function pay(VNPay $payment, Checkout $checkout, Request $request)
+    {
         $session = Session::find(session()->get('customer.session'));
         $before = Checkout::where('table_id', $session->table_id)->where('status', StatusCheckout::Pending)->first();
 
@@ -36,12 +37,12 @@ class CheckoutController extends Controller
         $items = Cart::where('session_id', $session->id)->with('menu')->get();
 
         if ($items->count() == 0) {
-            return; // card is empty then abort checkout
+            return to_route('customer.index'); // card is empty then abort checkout
         }
 
         $checkout->forceFill([
             'table_id' => $session->table_id,
-            'total' => $items->sum(fn ($item) => $item->total()),
+            'total' => $items->sum(fn($item) => $item->total()),
         ])->save();
 
         $checkout->carts()->saveMany($items);
@@ -57,7 +58,8 @@ class CheckoutController extends Controller
         return redirect($url);
     }
 
-    public function verify(VNPay $payment) {
+    public function verify(VNPay $payment)
+    {
         $payload = $payment->read();
 
         if (!$payload) {
