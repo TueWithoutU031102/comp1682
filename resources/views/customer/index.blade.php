@@ -59,19 +59,9 @@
                 </div>
             </div>
         </div>
-        <dialog id="modal" class="modal ">
-            <div class="modal-box">
-                <article class="w-80 h-96">
-                    <form method="dialog">
-                        <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
-                            X
-                        </button>
-                    </form>
-                    <iframe style="width:110%; height:100%"></iframe>
-                </article>
-            </div>
-        </dialog>
     </div>
+    
+
     <script defer>
         function showModal(url) {
             var modal = document.getElementById("modal");

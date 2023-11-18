@@ -103,7 +103,7 @@
         </div>
         <div class="drawer-side z-20">
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200 min-h-full">
+            <div class="flex flex-col justify-between p-4 w-80 bg-base-200 h-full lg:h-auto">
                 <div class="flex flex-col space-y-3">
                     @if ($bill)
                         @php $total = 0 @endphp
@@ -139,7 +139,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="w-80 p-5">
                 <hr class="border-t h-1 border-black border-dashed w-full my-2">
                 <div class="flex justify-between">
                     <span>Total price:</span>
