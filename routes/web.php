@@ -6,7 +6,7 @@ use App\Http\Middleware\is\Customer;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\CheckoutController;
+
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\ProfileController;
@@ -14,6 +14,8 @@ use App\Http\Controllers\Customer\CheckInController;
 use App\Http\Controllers\Manager\TypeController;
 use App\Http\Controllers\Manager\TableController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Customer\CheckoutController as CustomerCheckoutController;
+use App\Http\Controllers\Manager\CheckoutController as ManagerCheckoutController;
 use App\Http\Controllers\Manager\OrderController as ManagerOrderController;
 use App\Http\Controllers\Manager\CheckInController as ManagerCheckInController;
 use App\Http\Controllers\Customer\MenuController as CustomerMenuController;
@@ -112,7 +114,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::post('/{cart}/destroy', [ManagerOrderController::class, 'destroy'])->name('manager.order.destroy');
         });
         Route::prefix('checkouts')->group(function () {
-            Route::get('/index', [CheckoutController::class, 'index'])->name('manager.checkout.index');
+            Route::get('/index', [ManagerCheckoutController::class, 'index'])->name('manager.checkout.index');
         });
     });
 
@@ -123,7 +125,7 @@ Route::group(['prefix' => 'customers', 'middleware' => Customer::class], functio
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
     Route::prefix('checkouts')->group(function () {
-        Route::get('create', [CheckoutController::class, 'create'])->name('customer.checkout.index');
+        Route::get('create', [CustomerCheckoutController::class, 'create'])->name('customer.checkout.index');
     });
     Route::prefix('menus')->group(function () {
         Route::get('index', [CustomerMenuController::class, 'index'])->name('customer.menu.index');
