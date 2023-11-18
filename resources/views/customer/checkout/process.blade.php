@@ -26,7 +26,9 @@
         <div class="card bg-base-100 max-w-xl mx-auto w-full shadow">
             <div class="card-body">
                 <h3 class="card-title">Payment process</h3>
-
+                @if (Session::has('message'))
+                    <div class="alert alert-error" role="alert"><strong>{{ Session::get('message') }}</strong></div>
+                @endif
                 <div class="bg-base-200 p-3 rounded shadow-inner my-3 space-y-3 max-h-screen overflow-y-auto">
                     @php
                         $total = 0;

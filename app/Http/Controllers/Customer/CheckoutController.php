@@ -72,15 +72,13 @@ class CheckoutController extends Controller
 
         if (!$payload->success) {
             $process->forceFill(['status' => StatusCheckout::Canceled])->save();
-            return; // Redirect failed payment page
+            return to_route('customer.checkout.show')->with('message',$payload->message);
         }
 
         $process->forceFill([
             'status' => StatusCheckout::Transfer,
             'transaction_id' => $payload->transaction_id,
         ])->save();
-
-        // TODO: invalid the session and cart
 
         $session = Session::find(session()->get('customer.session'));
         if ($session) {
