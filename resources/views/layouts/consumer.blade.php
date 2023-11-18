@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost normal-case text-xl">Brand</a>
+            <a class="btn btn-ghost normal-case text-xl">Wibu Coffee</a>
         </div>
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle">
