@@ -69,7 +69,7 @@ class VNPay
     /**
      * Read payment result
      *
-     * @return null|object null if invalid hash otherwise return object with properties: transaction_id, ref, amount, code, success, message
+     * @return null|\App\Payment\Status null if invalid hash otherwise return object with properties: transaction_id, ref, amount, code, success, message
      */
     public function read() {
         $payload = [];
@@ -91,13 +91,13 @@ class VNPay
 
         $payload = (object) $payload;
 
-        return (object) [
+        return new Status([
             'transaction_id' => $payload->vnp_TransactionNo,
             'ref' => $payload->vnp_TxnRef,
             'amount' => $payload->vnp_Amount / 100,
             'code' => $payload->vnp_ResponseCode,
             'success' => $payload->vnp_ResponseCode === '00',
             'message' => $this->responseCode[$payload->vnp_ResponseCode] ?? 'Lỗi không xác định',
-        ];
+        ]);
     }
 }

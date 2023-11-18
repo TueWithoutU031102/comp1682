@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusCheckout;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +16,14 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
             $table->integer('total');
-            $table->string('status')->nullable();
+            $table->string('status')->default(StatusCheckout::Pending->value);
+            $table->string('reference')->nullable();
             $table->timestamps();
+        });
+
+        Schema::create('cart_checkout', function (Blueprint $table) {
+            $table->foreignId('checkout_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
         });
     }
 

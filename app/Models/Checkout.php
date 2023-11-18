@@ -20,4 +20,9 @@ class Checkout extends Model
     {
         return $this->belongsTo(Table::class, 'table_id');
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
