@@ -16,13 +16,11 @@ class CheckoutController extends Controller
      * Show checkout page.
      *
      */
-    public function show()
+    public function show(Checkout $checkouts)
     {
         $session = Session::find(session()->get('customer.session'));
-
-        return view('customer.checkout.process', [
-
-        ]);
+        $bill = Cart::where('session_id', $session->id)->get();
+        return view('customer.checkout.process', ['session' => $session, 'bill' => $bill]);
     }
 
     public function pay(VNPay $payment, Checkout $checkout, Request $request)
@@ -45,7 +43,7 @@ class CheckoutController extends Controller
             'total' => $items->sum(fn($item) => $item->total()),
         ])->save();
 
-        $checkout->carts()->saveMany($items);
+        //$checkout->carts()->attach($items->pluck('id'));
 
         $url = $payment->create(
             $checkout->id,
@@ -63,13 +61,13 @@ class CheckoutController extends Controller
         $payload = $payment->read();
 
         if (!$payload) {
-            return; // Redirect to invalid page
+            return to_route('vnpay.invalid');
         }
 
         $process = Checkout::find($payload->ref);
 
         if (!$process || $process->status !== StatusCheckout::Pending) {
-            return; // Redirect to invalid page
+            return to_route('vnpay.invalid');
         }
 
         if (!$payload->success) {
@@ -84,6 +82,13 @@ class CheckoutController extends Controller
 
         // TODO: invalid the session and cart
 
-        return; // redirect to success page
+        $session = Session::find(session()->get('customer.session'));
+        if ($session) {
+            $session->delete();
+            session()->forget('customer.session');
+            session()->forget('cart');
+        }
+
+        return view('customer.checkout.thankyou', ['checkout' => $process]);
     }
 }

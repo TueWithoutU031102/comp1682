@@ -108,20 +108,21 @@
                     @if ($bill)
                         @php $total = 0 @endphp
                         @foreach ($bill as $b)
-                        <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
-                            <div class="cart-detail-img">
-                                <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b->menu->image) }}" alt="">
-                            </div>
-                            <div>
-                                <p>
-                                    {{ $b['quantity'] }} X
-                                    {{ $b->menu->name }}
-                                    @if ($b['status'] !== 'Completed')
-                                    <span class="text-sm opacity-50">({{ $b['status'] }})</span>
-                                    @endif
-                                </p>
+                            <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
+                                <div class="cart-detail-img">
+                                    <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b->menu->image) }}"
+                                        alt="">
+                                </div>
+                                <div>
+                                    <p>
+                                        {{ $b['quantity'] }} X
+                                        {{ $b->menu->name }}
+                                        @if ($b['status'] !== 'Completed')
+                                            <span class="text-sm opacity-50">({{ $b['status'] }})</span>
+                                        @endif
+                                    </p>
 
-                                {{-- <div class="flex justify-between mt-3">
+                                    {{-- <div class="flex justify-between mt-3">
                                     <div class="join border border-stone-200">
                                         <button class="btn btn-xs join-item">-</button>
                                         <input type="number"
@@ -130,13 +131,13 @@
                                         <button class="btn btn-xs join-item">+</button>
                                     </div>
                                 </div> --}}
-                                @php
-                                    $price = $b->menu->price * $b['quantity'];
-                                @endphp
-                                <span class="text-red-500 price">{{ number_format($price) }} đ</span>
-                                @php $total += $price @endphp
+                                    @php
+                                        $price = $b->menu->price * $b['quantity'];
+                                    @endphp
+                                    <span class="text-red-500 price">{{ number_format($price) }} đ</span>
+                                    @php $total += $price @endphp
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     @endif
                 </div>
@@ -149,10 +150,9 @@
                     <span> {{ number_format($total) }}đ</span>
                 </div>
 
-                <form action="" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <a href="{{ route('customer.checkout.show') }}">
                     <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
-                </form>
+                </a>
                 <div class="lg:mt-3 w-full text-center">
                     <label class="swap swap-flip opacity-40">
 

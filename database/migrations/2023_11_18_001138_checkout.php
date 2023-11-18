@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
             $table->integer('total');
             $table->string('status')->default(StatusCheckout::Pending->value);
-            $table->string('reference')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->timestamps();
         });
 

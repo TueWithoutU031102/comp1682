@@ -1,9 +1,5 @@
 <?php
-use App\Http\Controllers\Controller;
-use App\Events\NotificationEvent;
-use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\is\Customer;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\AdminController;
 
@@ -121,11 +117,14 @@ Route::group(['middleware' => ['auth', 'users']], function () {
     Route::group(['prefix' => 'staffs', 'middleware' => ['auth', 'staffs']], function () {
     });
 });
+Route::get('payment/verify', [CustomerCheckoutController::class, 'verify'])->name('vnpay.verify');
+Route::get('payment/invalid', fn() => view('customer.checkout.invalid'))->name('vnpay.invalid');
 Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
     Route::prefix('checkouts')->group(function () {
-        Route::get('create', [CustomerCheckoutController::class, 'create'])->name('customer.checkout.index');
+        Route::get('show', [CustomerCheckoutController::class, 'show'])->name('customer.checkout.show');
+        Route::post('pay', [CustomerCheckoutController::class, 'pay'])->name('customer.checkout.pay');
     });
     Route::prefix('menus')->group(function () {
         Route::get('index', [CustomerMenuController::class, 'index'])->name('customer.menu.index');
@@ -165,8 +164,5 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-
 });
-//cổng thanh toán
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name("vnpay_payment");
 require __DIR__ . '/auth.php';
