@@ -21,27 +21,38 @@ class TypeController extends Controller
     {
         $data = $request->validate(['name' => 'required']);
         $type->fill($data)->save();
-        return '<script>
-        window.parent.postMessage("type created", "*")
-        </script>';
+        return back()->with('success', 'Type created successfully');
     }
+
+    /**
+     * @deprecated version
+     *
+     * @param Type $type
+     * @return void
+     */
     public function edit(Type $type)
     {
         return view("manager.type.edit", ["type" => $type]);
     }
+
     public function update(Request $request, Type $type)
     {
         $data = $request->validate(['name' => 'required']);
         $type->fill($data)->save();
-        return '<script>
-        window.parent.postMessage("type edited", "*")
-        </script>';
+        return back()->with('success', 'Type updated successfully');
     }
+
     public function destroy(Type $type)
     {
         $type->delete();
         return to_route('manager.type.index')->with('success', 'Type deleted successfully');
     }
+
+    /**
+     * @deprecated version
+     *
+     * @return void
+     */
     public function event()
     {
         return Type::all();
