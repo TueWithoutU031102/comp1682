@@ -12,7 +12,11 @@ use Illuminate\Validation\Rules\Enum;
 
 class MenuController extends Controller
 {
-    //
+    /**
+     * @deprecated version
+     *
+     * @return void
+     */
     public function event()
     {
         $types = Type::all();
@@ -22,19 +26,20 @@ class MenuController extends Controller
             'types' => $types,
         ]);
     }
+
     public function index()
     {
-        // $menus = Menu::orderByDesc('saled');
-        $menus = Menu::all();
-        $types = Type::all();
-        return view("manager.menu.index", ['menus' => $menus, 'types' => $types]);
+        $types = Type::with('menus')->get(); // Fix n+1 query
+        return view("manager.menu.index", ['types' => $types]);
     }
+
     public function create()
     {
         $listTypes = Type::all();
         $listStatus = StatusMenu::cases();
-        return view("manager.menu.create", ['listTypes' => $listTypes, 'listStatus' => $listStatus]);
+        return view("manager.menu.create", ['types' => $listTypes, 'statuses' => $listStatus]);
     }
+
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -48,21 +53,28 @@ class MenuController extends Controller
 
         $imagePath = $this->saveImage($request->file('image'));
         Menu::create(array_merge($data, ['image' => $imagePath]));
-        return '<script>
-        window.parent.postMessage("menu created", "*")
-        </script>';
+
+        return redirect()->route('manager.menu.index')->with('success', 'Menu created successfully.');
     }
 
+    /**
+     * @deprecated version
+     *
+     * @param Menu $menu
+     * @return void
+     */
     public function show(Menu $menu)
     {
         return view("manager.menu.show", ['menu' => $menu]);
     }
+
     public function edit(Menu $menu)
     {
         $types = Type::all();
         $statuses = StatusMenu::cases();
         return view("manager.menu.edit", ["menu" => $menu, "types" => $types, "statuses" => $statuses]);
     }
+
     public function update(Menu $menu, Request $request)
     {
         $data = $request->validate([
@@ -78,18 +90,17 @@ class MenuController extends Controller
         } else
             $data['image'] = $menu->image;
         $menu->fill($data)->save();
-        return '<script>
-        window.parent.postMessage("menu edited", "*")
-        </script>';
+
+        return redirect()->route('manager.menu.index')->with('success', 'Menu updated successfully.');
     }
+
     public function destroy(Menu $menu)
     {
         $menu->removeImage();
         $menu->delete();
-        return '<script>
-        window.parent.postMessage("menu deleted", "*")
-        </script>';
+        return back()->with('success', 'Menu deleted successfully.');
     }
+
     protected function saveImage(UploadedFile $file)
     {
         //uniqid sinh ra mã ngẫu nhiên, tham số đầu tự động nối thêm vào đằng trước mã

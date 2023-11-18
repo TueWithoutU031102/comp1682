@@ -1,133 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Menu') }}
+            <a href="{{ route('manager.menu.create') }}" class="btn btn-square btn-sm btn-primary">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </h2>
+    </x-slot>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @include('layouts.link')
-    <title>Menu</title>
-</head>
-
-<body>
-    <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Menu') }}
-            </h2>
-        </x-slot>
-        @if (Session::has('success'))
-            <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
-        @endif
-        <div class="create-btn">
-            <a type="button" onclick="showModal('{{ route('manager.menu.create') }}')" class="btn btn-primary"
-                style="font-weight: bold; font-size: 20px;">+</a>
+    <div class="space-y-5 mt-5 pb-10">
+        <div class="max-w-6xl mx-auto">
+            @include('components.notification')
         </div>
-        {{-- <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Image</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($menus as $menu)
-                    <tr onclick="showModal('{{ route('manager.menu.show', ['menu' => $menu]) }}')">
-                        <td>
-                            <ul class="img">
-                                <li>
-                                    <img style="width: 600px;height: 400px" src="{{ asset($menu->image) }}"
-                                        alt="Menu Image">
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table> --}}
-        <div id="menu_data">
-            @foreach ($types as $type)
-                <div class="py-10">
-                    <div class="container">
-                        {{-- small banner --}}
-                        <h2 class="text-center mt-10">{{ $type->name }}</h2>
 
-                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-7">
+        @foreach ($types as $type)
+            <div class="card bg-base-100 max-w-6xl mx-auto shadow hover:shadow-2xl transition-shadow duration-300">
+                <div class="card-body">
+                    <h3 class="card-title">{{ $type->name }}</h3>
+
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <tr>
+                                <th>Image</th>
+                                <th>Status</th>
+                                <th>Sold</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
                             @foreach ($type->menus as $menu)
-                                <div>
-                                    <div class="transition rounded hover:shadow-md hover:scale-105 duration-300">
-                                        <img onclick="showModal('{{ route('manager.menu.show', ['menu' => $menu]) }}')"
-                                            class="aspect-square object-cover w-full rounded"
-                                            src="{{ asset($menu->image) }}" alt="">
+                            <tr class="hover">
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">
+                                          <div class="mask mask-squircle w-12 h-12">
+                                            <img src="{{ asset($menu->image) }}" alt="{{ $menu->name }}" />
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <div class="font-bold">{{ $menu->name }}</div>
+                                          <div class="text-sm text-red-500 opacity-80">{{ number_format($menu->price) }}</div>
+                                        </div>
                                     </div>
-                                    <p class="flex flex-col p-2">
-                                        <strong>{{ $menu->name }}</strong>
-                                        <span class="opacity-50 text-sm">{{ $menu->price }} đ</span>
-                                    </p>
-                                </div>
+                                </td>
+                                <td>
+                                    <span class="badge">{{ $menu->status }}</span>
+                                </td>
+                                <td>{{ $menu->saled }}</td>
+                                <td>{{ $menu->description }}</td>
+                                <td>
+                                    <div class="flex space-x-3">
+                                        <a href="{{ route('manager.menu.edit', $menu) }}" class="btn btn-outline btn-square btn-sm">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+
+                                        <form action="{{ route('manager.menu.destroy', $menu) }}" method="POST" onclick="return confirm('Are you sure to delete this?')">
+                                            @csrf
+                                            <button type="submit" class="btn btn-error btn-sm btn-square">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                    
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
                             @endforeach
-                        </div>
+                        </table>
                     </div>
                 </div>
-            @endforeach
-        </div>
-        <dialog id="modal" class="modal">
-            <div class="modal-box">
-                <article style="width:400px;height:400px">
-                    <form method="dialog">
-                        <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
-                            X
-                        </button>
-                    </form>
-                    <iframe style="width:100%; height:100%"></iframe>
-                </article>
             </div>
-        </dialog>
-    </x-app-layout>
-    <script defer>
-        function showModal(url) {
-            var modal = document.getElementById("modal");
-            document.querySelector('#modal iframe').src = url;
-            modal.showModal();
-        }
-        async function updateEvent() {
-            let url = "{{ route('manager.menu.event') }}";
-            let response = await fetch(url);
-            let data = await response.json();
-            let type = data.types;
-            let menu = data.menus;
-            let element = window.document.querySelector('#menu_data');
-            element.innerHTML = '';
-
-            for (const obj of type) {
-                let div = `<div class="container">
-                <h2 class="text-center mt-10">${obj.name}</h2>
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-7">
-                    ${menu.filter(menu => menu.type_id === obj.id).map(menu => `
-                                <div>
-                                    <div class="transition rounded hover:shadow-md hover:scale-105 duration-300">
-                                        <img onclick="showModal('/managers/menus/${menu.id}])')"
-                                            class="aspect-square object-cover w-full rounded"
-                                            src="{{ asset('${menu.image}') }}" alt="">
-                                    </div>
-                                    <p class="flex flex-col p-2">
-                                        <strong>${menu.name}</strong>
-                                        <span class="opacity-50 text-sm">${menu.price} đ</span>
-                                    </p>
-                                </div>`).join('')}
-                </div>
-            </div>`
-
-                element.insertAdjacentHTML('beforeend', div);
-            }
-        }
-        setInterval(updateEvent, 2000);
-
-        window.addEventListener('message', function(event) {
-            if (event.data === "menu edited" || event.data === "menu deleted" || event.data === "menu created") {
-                window.document.querySelector("#modal").close()
-            }
-        })
-    </script>
-</body>
-
-</html>
+        @endforeach
+    </div>
+</x-app-layout>
