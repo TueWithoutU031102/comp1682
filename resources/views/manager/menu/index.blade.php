@@ -28,41 +28,43 @@
                                 <th>Action</th>
                             </tr>
                             @foreach ($type->menus as $menu)
-                            <tr class="hover">
-                                <td>
-                                    <div class="flex items-center gap-3">
-                                        <div class="avatar">
-                                          <div class="mask mask-squircle w-12 h-12">
-                                            <img src="{{ asset($menu->image) }}" alt="{{ $menu->name }}" />
-                                          </div>
+                                <tr class="hover">
+                                    <td>
+                                        <div class="flex items-center gap-3">
+                                            <div class="avatar">
+                                                <div class="mask mask-squircle w-12 h-12">
+                                                    <img src="{{ asset($menu->image) }}" alt="{{ $menu->name }}" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="font-bold">{{ $menu->name }}</div>
+                                                <div class="text-sm text-red-500 opacity-80">
+                                                    {{ number_format($menu->price) }}</div>
+                                            </div>
                                         </div>
-                                        <div>
-                                          <div class="font-bold">{{ $menu->name }}</div>
-                                          <div class="text-sm text-red-500 opacity-80">{{ number_format($menu->price) }}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="badge">{{ $menu->status }}</span>
-                                </td>
-                                <td>{{ $menu->saled }}</td>
-                                <td>{{ $menu->description }}</td>
-                                <td>
-                                    <div class="flex space-x-3">
-                                        <a href="{{ route('manager.menu.edit', $menu) }}" class="btn btn-outline btn-square btn-sm">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
+                                    </td>
+                                    <td>
+                                        <span class="badge">{{ $menu->status }}</span>
+                                    </td>
+                                    <td>{{ $menu->saled }}</td>
+                                    <td>{{ $menu->description }}</td>
+                                    <td>
+                                        <div class="flex space-x-3">
+                                            <a href="{{ route('manager.menu.edit', $menu) }}"
+                                                class="btn btn-outline btn-square btn-sm">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
 
-                                        <form action="{{ route('manager.menu.destroy', $menu) }}" method="POST" onclick="return confirm('Are you sure to delete this?')">
-                                            @csrf
-                                            <button type="submit" class="btn btn-error btn-sm btn-square">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                    
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                                            <form action="{{ route('manager.menu.destroy', $menu) }}" method="POST"
+                                                onclick="return confirm('Are you sure to delete this?')">
+                                                @csrf
+                                                <button type="submit" class="btn btn-error btn-sm btn-square">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </table>
                     </div>

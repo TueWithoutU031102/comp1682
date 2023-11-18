@@ -74,11 +74,8 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::post('/{table}/destroy', [TableController::class, 'destroy'])->name('manager.table.destroy');
         });
         Route::prefix('types')->group(function () {
-            Route::get('/event', [TypeController::class, 'event'])->name('manager.type.event');
             Route::get('index', [TypeController::class, 'index'])->name('manager.type.index');
-            Route::get('create', [TypeController::class, 'create'])->name('manager.type.create');
             Route::post('store', [TypeController::class, 'store'])->name('manager.type.store');
-            Route::get('/{type}/edit', [TypeController::class, 'edit'])->name('manager.type.edit');
             Route::post('/{type}/update', [TypeController::class, 'update'])->name('manager.type.update');
             Route::post('/{type}/destroy', [TypeController::class, 'destroy'])->name('manager.type.destroy');
         });
@@ -88,7 +85,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::get('/event', [ManagerBookController::class, 'event'])->name('manager.book.event');
         });
         Route::prefix('reviews')->group(function () {
-            Route::get('/event', [ManagerReviewController::class, 'event'])->name('manager.review.event');
             Route::get('index', [ManagerReviewController::class, 'index'])->name('manager.review.index');
             Route::post('/{review}/destroy', [ManagerReviewController::class, 'destroy'])->name('manager.review.destroy');
         });
@@ -100,7 +96,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         Route::prefix('checkins')->group(function () {
             Route::get('/event', [ManagerCheckInController::class, 'event'])->name('manager.checkin.event');
             Route::get('index', [ManagerCheckInController::class, 'index'])->name('manager.checkin.index');
-            Route::get('/{session}', [ManagerCheckInController::class, 'show'])->name('manager.checkin.show');
             Route::post('/{session}/destroy', [ManagerCheckInController::class, 'destroy'])->name('manager.checkin.destroy');
         });
         Route::prefix('orders')->group(function () {
@@ -111,6 +106,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
         });
         Route::prefix('checkouts')->group(function () {
             Route::get('/index', [ManagerCheckoutController::class, 'index'])->name('manager.checkout.index');
+            Route::post('/{checkout}/update', [ManagerCheckoutController::class, 'update'])->name('manager.checkout.update');
         });
     });
 
@@ -132,9 +128,6 @@ Route::group(['prefix' => 'customers', 'middleware' => Customer::class], functio
     });
     Route::prefix('orders')->group(function () {
         Route::get('add/{menu}', [CustomerOrderController::class, 'add'])->name('customer.order.add');
-        Route::get('show', [CustomerOrderController::class, 'show'])->name('customer.order.show');
-        Route::post('update', [CustomerOrderController::class, 'update'])->name('customer.order.update');
-        Route::post('remove', [CustomerOrderController::class, 'remove'])->name('customer.order.remove');
         Route::post('store', [CustomerOrderController::class, 'store'])->name('customer.order.store');
     });
     Route::prefix('reviews')->group(function () {

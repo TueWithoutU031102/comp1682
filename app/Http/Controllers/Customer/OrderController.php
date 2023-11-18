@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function store(Cart $cart)
+    public function store()
     {
         $data_cart = session()->get('cart', []);
         $session_id = session()->get('customer.session');
@@ -45,46 +45,4 @@ class OrderController extends Controller
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Dish added to cart successfully');
     }
-
-    public function show()
-    {
-        $carts = session()->get('cart');
-        return view('Customer.order.viewCart', ['carts' => $carts]);
-    }
-
-    public function update(updateCart $request)
-    {
-        $id = $request->input('id');
-        $quantity = $request->input('quantity');
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity'] = $quantity;
-            session()->put('cart', $cart);
-        }
-    }
-
-    // public function remove(deleteCart $request)
-    // {
-    //     $id = $request->input('id');
-
-    //     $cart = session()->get('cart', []);
-
-    //     if (isset($cart[$id])) {
-    //         unset($cart[$id]);
-    //         session()->put('cart', $cart);
-    //         $carts = session()->get('cart');
-    //         $cartComponents = view('Customer.order.components.cart_component', ['carts' => $carts])->render();
-    //         return response()->json([
-    //             'cart_component' => $cartComponents,
-    //             'code' => 200,
-    //             'message' => 'Dish removed from cart successfully',
-    //         ], 200);
-    //     } else {
-    //         return response()->json([
-    //             'code' => 404,
-    //             'message' => 'Dish not found in cart',
-    //         ], 404);
-    //     }
-    // }
 }

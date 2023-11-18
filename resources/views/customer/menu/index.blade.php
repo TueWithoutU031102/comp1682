@@ -1,6 +1,7 @@
 @extends('layouts.consumer')
 
 @section('content')
+{{-- TODO: làm giao diện cho phần show --}}
     <div class="px-3">
         <div class="py-10">
             @if (Session::has('success'))

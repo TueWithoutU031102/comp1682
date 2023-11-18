@@ -100,6 +100,7 @@
         <input id="navbar" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col bg-stone-50">
             <!-- Page content here -->
+            {{-- TODO: responsive cho điện thoại --}}
             @yield('content')
         </div>
         <div class="drawer-side z-20">
@@ -169,11 +170,6 @@
                 currency: 'VND',
             });
 
-            $(document).on('click', '.cart_remove', function() {
-                let id = $(this).data('id');
-                remove(id);
-            });
-
             $(document).on('input', '.cart_update input.quantity', function() {
                 let id = $(this).closest('.cart_detail').find('.cart_update').data('id');
                 let quantity = $(this).val();
@@ -182,17 +178,6 @@
 
 
             function update(id, quantity) {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('customer.order.update') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        id: id,
-                        quantity: quantity
-                    }
-                });
                 console.log(event.data)
                 // location.reload();
                 var total = 0;
@@ -202,22 +187,7 @@
                     total += price * quantity;
                 });
 
-                // Cập nhật tổng giá trị trong giao diện người dùng
-
                 $('#total-amount').text(formater.format(total));
-            }
-
-            function remove(id) {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('customer.order.remove') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        id: id
-                    },
-                });
             }
 
             function decreaseQuantity(button) {
@@ -226,6 +196,11 @@
                     inputElement.value = parseInt(inputElement.value) - 1;
                     let id = $(button).closest('.cart-detail').find('.cart_update').data('id');
                     update(id, inputElement.value);
+                } else if (inputElement.value == 1) {
+                    inputElement.value = parseInt(inputElement.value) - 1;
+                    let cartDetail = $(button).closest('.cart-detail');
+                    cartDetail.remove();
+                    // TODO:Hướng dẫn em cách xóa item khi số lượng của nó về 0
                 }
             }
 
@@ -233,7 +208,7 @@
                 var inputElement = button.parentElement.querySelector('.quantity');
                 inputElement.value = parseInt(inputElement.value) + 1;
                 let id = $(button).closest('.cart-detail').find('.cart_update').data('id');
-                update(id, inputElement.value);
+
             }
         </script>
     </div>

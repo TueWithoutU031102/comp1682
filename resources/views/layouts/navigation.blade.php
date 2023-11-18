@@ -40,6 +40,9 @@
                         <x-nav-link :href="route('manager.notification.index')" :active="request()->routeIs('manager.notification.index')">
                             {{ __('Notification') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('manager.checkout.index')" :active="request()->routeIs('manager.checkout.index')">
+                            {{ __('Checkout') }}
+                        </x-nav-link>
                     </div>
                 </div>
             @elseif(Auth::user()->isAdmin())

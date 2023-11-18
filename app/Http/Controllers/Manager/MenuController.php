@@ -12,24 +12,9 @@ use Illuminate\Validation\Rules\Enum;
 
 class MenuController extends Controller
 {
-    /**
-     * @deprecated version
-     *
-     * @return void
-     */
-    public function event()
-    {
-        $types = Type::all();
-        $menus = Menu::all();
-        return response()->json([
-            'menus' => $menus,
-            'types' => $types,
-        ]);
-    }
-
     public function index()
     {
-        $types = Type::with('menus')->get(); // Fix n+1 query
+        $types = Type::with('menus')->get();
         return view("manager.menu.index", ['types' => $types]);
     }
 
@@ -55,17 +40,6 @@ class MenuController extends Controller
         Menu::create(array_merge($data, ['image' => $imagePath]));
 
         return redirect()->route('manager.menu.index')->with('success', 'Menu created successfully.');
-    }
-
-    /**
-     * @deprecated version
-     *
-     * @param Menu $menu
-     * @return void
-     */
-    public function show(Menu $menu)
-    {
-        return view("manager.menu.show", ['menu' => $menu]);
     }
 
     public function edit(Menu $menu)
@@ -103,11 +77,7 @@ class MenuController extends Controller
 
     protected function saveImage(UploadedFile $file)
     {
-        //uniqid sinh ra mã ngẫu nhiên, tham số đầu tự động nối thêm vào đằng trước mã
         $name = uniqid("menu_") . "." . $file->getClientOriginalExtension();
-        //move_uploaded_file() là để lưu file ng dùng đã upload lên server
-        // getPathname() là lấy đường dẫn tạm thời (đường dẫn tới file mà ng dùng upload lên server)
-        // public_path() là tạo đường dẫn tuyệt đối từ file tới chỗ mình cần lưu file
         move_uploaded_file($file->getPathname(), public_path('images/' . $name));
         return "images/" . $name;
     }
