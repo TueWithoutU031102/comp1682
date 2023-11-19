@@ -105,7 +105,7 @@
         </div>
         <div class="drawer-side z-20">
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200 lg:h-auto">
+            <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200">
                 <div class="flex flex-col space-y-3">
                     @if (session('cart'))
                         @foreach (session('cart') as $id => $details)
@@ -137,32 +137,34 @@
                         @endforeach
                     @endif
                 </div>
+
+                <div>
+                    <hr class="border-t h-1 border-black border-dashed w-full my-2">
+                    <div class="flex justify-between">
+                        @php $total = 0 @endphp
+                        @foreach ((array) session('cart') as $id => $details)
+                            @php $total += $details['price'] * $details['quantity'] @endphp
+                        @endforeach
+                        <span>Total price:</span>
+                        <span id="total-amount"> {{ number_format($total) }} đ</span>
+                    </div>
+                    <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <button type="submit" class="btn btn-info w-full mt-2">Order</button>
+                    </form>
+                    <div class="lg:mt-3 w-full text-center">
+                        <label class="swap swap-flip opacity-40">
+    
+                            <!-- this hidden checkbox controls the state -->
+                            <input type="checkbox" class="hidden" />
+                            <div class="swap-off"><span class="text-4xl">😀</span></div>
+                            <div class="swap-on"><span class="text-4xl">🤡</span></div>
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <div class="w-80 p-4">
-                <hr class="border-t h-1 border-black border-dashed w-full my-2">
-                <div class="flex justify-between">
-                    @php $total = 0 @endphp
-                    @foreach ((array) session('cart') as $id => $details)
-                        @php $total += $details['price'] * $details['quantity'] @endphp
-                    @endforeach
-                    <span>Total price:</span>
-                    <span id="total-amount"> {{ number_format($total) }} đ</span>
-                </div>
-                <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <button type="submit" class="btn btn-info w-full mt-2">Order</button>
-                </form>
-                <div class="lg:mt-3 w-full text-center">
-                    <label class="swap swap-flip opacity-40">
-
-                        <!-- this hidden checkbox controls the state -->
-                        <input type="checkbox" class="hidden" />
-                        <div class="swap-off"><span class="text-4xl">😀</span></div>
-                        <div class="swap-on"><span class="text-4xl">🤡</span></div>
-                    </label>
-                </div>
-            </div>
+            
         </div>
         <script type="text/javascript">
             const formater = new Intl.NumberFormat('vi-VN', {

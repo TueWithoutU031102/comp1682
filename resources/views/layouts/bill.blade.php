@@ -103,7 +103,7 @@
         </div>
         <div class="drawer-side z-20">
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full lg:h-auto">
+            <div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">
                 <div class="flex flex-col space-y-2">
                     @if ($bill)
                         @php $total = 0 @endphp
@@ -141,26 +141,26 @@
                         @endforeach
                     @endif
                 </div>
-            </div>
 
-            <div class="w-80 p-5">
-                <hr class="border-t h-1 border-black border-dashed w-full my-2">
-                <div class="flex justify-between">
-                    <span>Total price:</span>
-                    <span> {{ number_format($total) }}đ</span>
-                </div>
+                <div>
+                    <hr class="border-t h-1 border-black border-dashed w-full my-2">
+                    <div class="flex justify-between">
+                        <span>Total price:</span>
+                        <span> {{ number_format($total) }}đ</span>
+                    </div>
 
-                <a href="{{ route('customer.checkout.show') }}">
-                    <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
-                </a>
-                <div class="lg:mt-3 w-full text-center">
-                    <label class="swap swap-flip opacity-40">
+                    <a href="{{ route('customer.checkout.show') }}">
+                        <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
+                    </a>
+                    <div class="lg:mt-5 w-full text-center">
+                        <label class="swap swap-flip opacity-40">
 
-                        <!-- this hidden checkbox controls the state -->
-                        <input type="checkbox" class="hidden" />
-                        <div class="swap-off"><span class="text-4xl">😀</span></div>
-                        <div class="swap-on"><span class="text-4xl">🤡</span></div>
-                    </label>
+                            <!-- this hidden checkbox controls the state -->
+                            <input type="checkbox" class="hidden" />
+                            <div class="swap-off"><span class="text-4xl">😀</span></div>
+                            <div class="swap-on"><span class="text-4xl">🤡</span></div>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
