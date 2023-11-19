@@ -22,7 +22,7 @@
 
                 <div class="card-body grid grid-cols-2 md:grid-cols-3 gap-5">
                     <form action="{{ route('customer.notification.store') }}" method="POST" enctype="multipart/form-data"
-                        class="flex flex-col justify-center w-32 h-32 transition border mx-auto">
+                        class="flex flex-col justify-center w-32 h-32 transition border mx-auto cursor-pointer">
                         <div class="flex justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
                                 <path fill="currentColor"
@@ -46,8 +46,8 @@
                         <span class="mt-3 mx-auto">Order</span>
                     </a>
 
-                    <a onclick="showModal('{{ route('customer.review.create') }}')"
-                        class="flex flex-col justify-center w-32 h-32 transition border mx-auto col-span-2 md:col-span-1">
+                    <a href="{{ route('customer.review.create') }}"
+                        class="flex flex-col justify-center w-32 h-32 transition border mx-auto col-span-2 md:col-span-1 cursor-pointer">
                         <div class="flex justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
                                 <path fill="currentColor"
@@ -56,41 +56,9 @@
                         </div>
                         <span class="mt-3 mx-auto">Review</span>
                     </a>
-                    {{-- TODO: chỉnh sửa lại giao diện review --}}
-                    <dialog id="modal" class="modal">
-                        <div class="modal-box">
-                            <article class="w-80 h-96">
-                                <form method="dialog">
-                                    <button method="dialog" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
-                                        X
-                                    </button>
-                                </form>
-                                <iframe style="width:110%; height:100%"></iframe>
-                            </article>
-                        </div>
-                    </dialog>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <script defer>
-        function showModal(url) {
-            var modal = document.getElementById("modal");
-            document.querySelector('#modal iframe').src = url;
-            modal.showModal();
-        }
-        window.addEventListener('message', function(event) {
-            if (event.data === "review created") {
-                window.document.querySelector("#modal").close()
-            }
-        })
-    </script>
 @endsection
 
-{{-- <body>
-    <div class="button-action">
-        <a href="" class="btn btn-primary">Payment</a>
-    </div>
-</body> --}}

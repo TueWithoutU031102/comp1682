@@ -9,14 +9,14 @@ use App\Models\Review;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class ReviewController extends CustomerController
 {
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+
         $foodQuality = foodQuality::cases();
         $serviceQuality = serviceQuality::cases();
         return view("customer.review.create", ['foodQuality' => $foodQuality, 'serviceQuality' => $serviceQuality]);
@@ -36,9 +36,9 @@ class ReviewController extends Controller
             'serviceQuality' => ['required', new Enum(serviceQuality::class)],
             'detail' => 'required',
         ]);
+
         $review->fill($data)->save();
-        return '<script>
-        window.parent.postMessage("review created", "*")
-        </script>';
+
+        return to_route('customer.index')->with('success', 'Review successfully recorded');
     }
 }
