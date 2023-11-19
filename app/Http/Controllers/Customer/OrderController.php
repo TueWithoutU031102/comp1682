@@ -29,6 +29,7 @@ class OrderController extends Controller
         session()->forget('cart');
         return redirect()->route('customer.index');
     }
+
     public function add(Menu $menu)
     {
         $cart = session()->get('cart', []);
@@ -44,5 +45,16 @@ class OrderController extends Controller
         }
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Dish added to cart successfully');
+    }
+
+    public function remove($id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Dish removed from cart successfully');
     }
 }

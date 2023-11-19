@@ -111,7 +111,7 @@
                         @foreach (session('cart') as $id => $details)
                             <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
                                 <div class="cart-detail-img">
-                                    <img class="aspect-square w-12 h-12 rounded" src="{{ asset($details['image']) }}"
+                                    <img class="aspect-square w-12 h-12 rounded object-cover" src="{{ asset($details['image']) }}"
                                         alt="">
                                 </div>
                                 <div>
@@ -178,11 +178,9 @@
 
 
             function update(id, quantity) {
-                console.log(event.data)
-                // location.reload();
                 var total = 0;
                 $('.cart-detail').each(function() {
-                    var quantity = $(this).find('.quantity').val();
+                    var quantity = +$(this).find('.quantity').val();
                     var price = parseFloat($(this).find('.price').data('price'));
                     total += price * quantity;
                 });
@@ -199,8 +197,15 @@
                 } else if (inputElement.value == 1) {
                     inputElement.value = parseInt(inputElement.value) - 1;
                     let cartDetail = $(button).closest('.cart-detail');
+                    let id = cartDetail.find('.cart_update').data('id');
+                    update(id, 0)
                     cartDetail.remove();
-                    // TODO:Hướng dẫn em cách xóa item khi số lượng của nó về 0
+                    fetch('/customers/orders/remove/' + id, { 
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
                 }
             }
 
@@ -208,7 +213,7 @@
                 var inputElement = button.parentElement.querySelector('.quantity');
                 inputElement.value = parseInt(inputElement.value) + 1;
                 let id = $(button).closest('.cart-detail').find('.cart_update').data('id');
-
+                update(id, inputElement.value);
             }
         </script>
     </div>
