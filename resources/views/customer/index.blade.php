@@ -20,9 +20,9 @@
         <div class="w-full mt-5">
             <div class="card max-w-2xl mx-auto w-full bg-white shadow">
 
-                <div class="card-body flex justify-around flex-row">
+                <div class="card-body grid grid-cols-2 md:grid-cols-3 gap-5">
                     <form action="{{ route('customer.notification.store') }}" method="POST" enctype="multipart/form-data"
-                        class="flex flex-col justify-center w-32 h-32 transition border">
+                        class="flex flex-col justify-center w-32 h-32 transition border mx-auto">
                         <div class="flex justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
                                 <path fill="currentColor"
@@ -36,7 +36,7 @@
                     </form>
 
                     <a href="{{ route('customer.menu.index') }}"
-                        class="flex flex-col justify-center w-32 h-32 transition border">
+                        class="flex flex-col justify-center w-32 h-32 transition border mx-auto">
                         <div class="flex justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
                                 <path fill="currentColor"
@@ -47,7 +47,7 @@
                     </a>
 
                     <a onclick="showModal('{{ route('customer.review.create') }}')"
-                        class="flex flex-col justify-center w-32 h-32 transition border">
+                        class="flex flex-col justify-center w-32 h-32 transition border mx-auto col-span-2 md:col-span-1">
                         <div class="flex justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
                                 <path fill="currentColor"

@@ -18,7 +18,7 @@
   <div class="w-full mt-5">
     <div class="card max-w-2xl mx-auto w-full bg-white shadow">
 
-      <div class="card-body flex justify-around flex-row">
+      <div class="card-body flex justify-around flex-col lg:flex-row">
         <a href="#" class="flex flex-col justify-center w-32 h-32 transition border">
           <div class="flex justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5a2 2 0 0 1 2 2c0 .24-.04.47-.12.69C17.95 8.5 21 11.91 21 16H3c0-4.09 3.05-7.5 7.12-8.31c-.08-.22-.12-.45-.12-.69a2 2 0 0 1 2-2m10 14H2v-2h20v2Z"/></svg>

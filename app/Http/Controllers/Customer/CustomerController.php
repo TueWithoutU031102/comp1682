@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Models\VNPay;
 use App\Http\Controllers\Controller;
 use App\Models\Session;
 use App\Models\Cart;
