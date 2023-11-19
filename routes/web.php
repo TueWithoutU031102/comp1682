@@ -128,7 +128,7 @@ Route::group(['prefix' => 'customers', 'middleware' => Customer::class], functio
     });
     Route::prefix('orders')->group(function () {
         Route::get('add/{menu}', [CustomerOrderController::class, 'add'])->name('customer.order.add');
-        Route::post('remove/{menu}', [CustomerOrderController::class, 'remove'])->name('customer.order.remove');
+        Route::post('update/{menu}', [CustomerOrderController::class, 'update'])->name('customer.order.remove');
         Route::post('store', [CustomerOrderController::class, 'store'])->name('customer.order.store');
     });
     Route::prefix('reviews')->group(function () {

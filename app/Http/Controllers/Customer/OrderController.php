@@ -47,14 +47,24 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Dish added to cart successfully');
     }
 
-    public function remove($id)
+    public function update($id, Request $request)
     {
+        $request->validate([
+            'quantity' => 'required|numeric|min:1|max:999',
+        ]);
+
         $cart = session()->get('cart', []);
-        if (isset($cart[$id])) {
+
+        abort_if(empty($cart[$id]), 404, 'Dish not found in cart');
+
+        $cart[$id]['quantity'] = $request->quantity;
+
+        if ($request->quantity < 1) {
             unset($cart[$id]);
         }
 
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Dish removed from cart successfully');
+
+        return ['success' => 'Dish removed from cart successfully'];
     }
 }

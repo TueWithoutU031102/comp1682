@@ -188,6 +188,12 @@
                 });
 
                 $('#total-amount').text(formater.format(total));
+
+                fetch('/customers/orders/update/' + id, { 
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    body: JSON.stringify({ quantity: +quantity })
+                })
             }
 
             function decreaseQuantity(button) {
@@ -202,12 +208,6 @@
                     let id = cartDetail.find('.cart_update').data('id');
                     update(id, 0)
                     cartDetail.remove();
-                    fetch('/customers/orders/remove/' + id, { 
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    })
                 }
             }
 
