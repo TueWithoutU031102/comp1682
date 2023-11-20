@@ -44,7 +44,7 @@ class CheckoutController extends Controller
         ])->save();
 
         //$checkout->carts()->attach($items->pluck('id'));
-
+//TODO: viết lại tư duy để nếu click pay with cash thì chuyển status sang Cash và chuyển sang trang thank you luôn
         $url = $payment->create(
             $checkout->id,
             $checkout->total,
@@ -72,7 +72,7 @@ class CheckoutController extends Controller
 
         if (!$payload->success) {
             $process->forceFill(['status' => StatusCheckout::Canceled])->save();
-            return to_route('customer.checkout.show')->with('message',$payload->message);
+            return to_route('customer.checkout.show')->with('message', $payload->message);
         }
 
         $process->forceFill([
