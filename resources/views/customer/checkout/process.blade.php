@@ -68,7 +68,7 @@
         </div>
 
         <div class="max-w-xl mx-auto mt-3">
-            <a href="#" class="btn btn-ghost">
+            <a href="{{ route('customer.index') }}" class="btn btn-ghost">
                 < Go Back</a>
         </div>
     </div>

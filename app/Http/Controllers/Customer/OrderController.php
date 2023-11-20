@@ -49,10 +49,6 @@ class OrderController extends Controller
 
     public function update($id, Request $request)
     {
-        $request->validate([
-            'quantity' => 'required|numeric|min:1|max:999',
-        ]);
-
         $cart = session()->get('cart', []);
 
         abort_if(empty($cart[$id]), 404, 'Dish not found in cart');
@@ -62,7 +58,6 @@ class OrderController extends Controller
         if ($request->quantity < 1) {
             unset($cart[$id]);
         }
-
         session()->put('cart', $cart);
 
         return ['success' => 'Dish removed from cart successfully'];
