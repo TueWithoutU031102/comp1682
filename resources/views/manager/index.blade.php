@@ -4,4 +4,5 @@
             {{ __('Manager dashboard') }}
         </h2>
     </x-slot>
+    {{-- TODO: hiển thị  một số chartjs liên quan đến thanh toán, có thể dùng iframe để hiển thị trang chart của vnpay cũng được --}}
 </x-app-layout>

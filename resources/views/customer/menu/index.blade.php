@@ -52,6 +52,7 @@
                             <div
                                 class="relative overflow-hidden transition hover:shadow-md duration-300 shadow rounded :[&>img]:rounded">
                                 @if ($menu->id == 1)
+                                {{-- TODO: làm best seller nếu có thể dùng Carousel --}}
                                     <div class="absolute px-5 py-2 bg-yellow-400 top-5 rounded-r-full z-[1] shadow">Best Seller</div>
                                 @endif
 

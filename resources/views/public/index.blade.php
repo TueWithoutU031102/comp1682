@@ -24,7 +24,7 @@
             </div>
         </div>
     @endforeach
-
+    {{-- TODO: chỉnh lại cho Book table không phải iframe --}}
     <dialog id="modal" class="modal">
         <div class="modal-box w-full h-full">
             <article class="w-full h-full">

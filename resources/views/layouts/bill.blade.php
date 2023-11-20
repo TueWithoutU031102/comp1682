@@ -76,13 +76,6 @@
             <a class="btn btn-ghost normal-case text-xl">Wibu Coffee</a>
         </div>
         <div class="navbar-end">
-            <button class="btn btn-ghost btn-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </button>
             <button class="btn btn-ghost btn-circle lg:hidden">
                 <label for="navbar" class="indicator">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -101,6 +94,7 @@
             <!-- Page content here -->
             @yield('content')
         </div>
+        {{-- TODO: responsive điện thoại, phần này chiếm hết toàn bộ màn hình điện thoại em dùng màn hình bé khoảng 299 - 599 là lỗi--}}
         <div class="drawer-side z-20">
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">

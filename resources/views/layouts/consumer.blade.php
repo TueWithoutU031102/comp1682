@@ -100,7 +100,9 @@
         <input id="navbar" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col bg-stone-50">
             <!-- Page content here -->
-            {{-- TODO: responsive cho điện thoại --}}
+            {{-- TODO: responsive cho điện thoại 299 - 599 là lỗi
+                Làm search tìm món ăn --}}
+
             @yield('content')
         </div>
         <div class="drawer-side z-20">

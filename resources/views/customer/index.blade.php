@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        {{-- TODO: làm lại giao diện của trang customer --}}
+        
         <div class="w-full mt-5">
             <div class="card max-w-2xl mx-auto w-full bg-white shadow">
 
