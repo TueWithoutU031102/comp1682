@@ -94,7 +94,6 @@
             <!-- Page content here -->
             @yield('content')
         </div>
-        {{-- TODO: responsive điện thoại, phần này chiếm hết toàn bộ màn hình điện thoại em dùng màn hình bé khoảng 299 - 599 là lỗi--}}
         <div class="drawer-side z-20">
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">
