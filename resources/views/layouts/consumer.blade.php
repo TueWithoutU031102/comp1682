@@ -193,7 +193,10 @@
 
                 fetch('/customers/orders/update/' + id, { 
                     method: 'POST',
-                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({ quantity: +quantity })
                 })
             }

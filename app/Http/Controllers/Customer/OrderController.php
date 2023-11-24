@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Menu;
-use App\Http\Requests\deleteCart;
-use App\Http\Requests\updateCart;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -53,13 +51,18 @@ class OrderController extends Controller
 
         abort_if(empty($cart[$id]), 404, 'Dish not found in cart');
 
-        $cart[$id]['quantity'] = $request->quantity;
+        $body = json_decode(file_get_contents('php://input'));
+
+        $cart[$id]['quantity'] = $body->quantity ?? $request->quantity;
 
         if ($request->quantity < 1) {
             unset($cart[$id]);
         }
+
         session()->put('cart', $cart);
 
-        return ['success' => 'Dish removed from cart successfully'];
+        $message = $request->quantity < 1 ? 'Dish removed from cart successfully' : 'Dish updated successfully';
+
+        return ['success' => $message];
     }
 }
