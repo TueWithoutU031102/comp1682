@@ -62,7 +62,6 @@
                     </p>
                     <div>
                         <button type="submit" class="btn btn-success float-right">Pay with VNPay</button>
-                        {{-- TODO: tạo thêm button Pay with Cash --}}
                     </div>
                 </form>
             </div>
