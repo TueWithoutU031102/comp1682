@@ -25,6 +25,8 @@
                 { name: 'Sale', type: 'line', data: data.sale },
             ]
 
+            const formatter = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+
             const options = {
                 series,
                 title: { text: 'Sale & sold products' },
@@ -35,8 +37,8 @@
 
                 xaxis: { type: 'text' },
                 yaxis: [
-                    { title: { text: 'Sold' } },
-                    { opposite: true, title: { text: 'Sale' } },
+                    { title: { text: 'Sold' }, labels: { formatter: (val) => val.toFixed(0) } },
+                    { opposite: true, title: { text: 'Sale' }, labels: { formatter: (val) => formatter.format(val) } },
                 ]
             }
 
