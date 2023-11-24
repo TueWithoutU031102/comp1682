@@ -10,8 +10,12 @@ class ManagerController extends Controller
     //
     public function index()
     {
-        $managerSuccess = session('managerSuccess');
-        $totalSaled = Menu::all()->sum('saled');
-        return view("manager.index", ['managerSuccess' => $managerSuccess]);
+
+        Menu::all()->pluck('saled');
+
+
+        return view("manager.index", [
+            "menus" => Menu::all()
+        ]);
     }
 }
