@@ -43,8 +43,6 @@ class CheckoutController extends Controller
             'total' => $items->sum(fn($item) => $item->total()),
         ])->save();
 
-        //$checkout->carts()->attach($items->pluck('id'));
-//TODO: viết lại tư duy để nếu click pay with cash thì chuyển status sang Cash và chuyển sang trang thank you luôn
         $url = $payment->create(
             $checkout->id,
             $checkout->total,
