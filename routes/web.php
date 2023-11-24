@@ -145,7 +145,6 @@ Route::group(['prefix' => 'customers'], function () {
         Route::post('store', [CustomerBookController::class, 'store'])->name('customer.book.store');
     });
     Route::prefix('checkins')->group(function () {
-        Route::get('index/{table}', [CheckInController::class, 'index'])->name('customer.checkin.index');
         Route::get('notice', [CheckInController::class, 'notice'])->name('customer.checkin.notice');
         Route::get('tables/{table}', [CheckInController::class, 'create'])->name('customer.checkin.table');
         Route::post('store/{table}', [CheckInController::class, 'store'])->name('customer.checkin.store');
