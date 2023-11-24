@@ -50,7 +50,7 @@ class OrderController extends Controller
         $cart = session()->get('cart', []);
 
         $request->validate([
-            'quantity' => 'required|numeric|min:1',
+            'quantity' => 'required|numeric|min:0',
         ]);
 
         abort_if(empty($cart[$id]), 404, 'Dish not found in cart');
