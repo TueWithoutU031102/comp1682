@@ -30,6 +30,6 @@ class BookController extends Controller
             'arrivalTime.after' => 'Please reserve a table 1 hour in advance',
         ]);
         $book->fill($data)->save();
-        return to_route('customer.book.create')->with('success', 'Booking created successfully!');
+        return to_route('/')->with('success', 'Booking created successfully!');
     }
 }

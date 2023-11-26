@@ -33,7 +33,7 @@
             </form>
             <form class="flex flex-wrap" action="{{ route('customer.book.store') }}" method="POST">
                 @csrf
-                
+
                 <div class="w-full px-3 mb-6">
                     <h1 class="text-4xl text-center mt-10 font-bold mb-2">Book table</h1>
                     @include('components.notification')
@@ -59,7 +59,7 @@
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             value="{{ old('numberofPeople') }}" name="numberofPeople" min="1">
                     </div>
-    
+
                     <div class="input-box">
                         <label for="arrivalTime"
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Arrival time:</label>
@@ -80,15 +80,8 @@
                     </div>
                 </div>
             </form>
-
-          <div class="modal-action">
-            <form method="dialog">
-              <!-- if there is a button in form, it will close the modal -->
-              <button class="btn">Close</button>
-            </form>
-          </div>
         </div>
-      </dialog>
+    </dialog>
 @endsection
 
 
@@ -101,9 +94,9 @@
     </script>
 @endpush
 @if ($errors->any())
-@push('scripts')
-    <script>
-        showModal();
-    </script>
-@endpush
+    @push('scripts')
+        <script>
+            showModal();
+        </script>
+    @endpush
 @endif
