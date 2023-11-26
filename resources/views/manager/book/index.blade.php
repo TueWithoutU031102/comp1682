@@ -16,7 +16,6 @@
                 <td>${obj.numberofPeople }</td>
                 <td>${moment(obj.arrivalTime).format('YYYY-MM-DD HH:mm:ss') }</td>
                 <td>${obj.note}</td>
-                <td>${obj.status}</td>
                 <td>
                     <form action="/managers/books/${obj.id}/destroy" method="POST"
                         class="d-inline"
@@ -54,7 +53,6 @@
                             <th>Number of people</th>
                             <th>Arrival time</th>
                             <th>Note</th>
-                            <th>Status</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -66,7 +64,6 @@
                                 <td>{{ $book->numberofPeople }}</td>
                                 <td>{{ $book->arrivalTime }}</td>
                                 <td>{{ $book->note }}</td>
-                                <td>{{ $book->status }}</td>
                                 <td>
                                     <form action="{{ route('manager.book.destroy', ['book' => $book]) }}" method="POST"
                                         class="d-inline"
