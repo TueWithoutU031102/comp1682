@@ -79,7 +79,7 @@
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js" defer></script>
 <script>
     async function updateEvent() {
-        let url = "{{ route('manager.order.event') }}";
+        let url = "{{ route('manager.order.event',[],false) }}";
         let response = await fetch(url);
         let data = await response.json();
         let cart = data.carts;

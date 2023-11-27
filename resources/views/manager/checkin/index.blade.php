@@ -51,7 +51,7 @@
             modal.showModal();
         }
         async function updateEvent() {
-            let url = "{{ route('manager.checkin.event') }}";
+            let url = "{{ route('manager.checkin.event',[],false) }}";
             let response = await fetch(url);
             let data = await response.json();
             let ses = data.sessions;
