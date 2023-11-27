@@ -42,6 +42,6 @@ class NotificationController extends Controller
 
     public function event()
     {
-        return Notification::all();
+        return Notification::with('session.table')->get();
     }
 }

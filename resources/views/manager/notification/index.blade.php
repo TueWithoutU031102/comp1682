@@ -44,8 +44,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script>
-        async function updateEvent() {
-            let url = "{{ route('manager.notification.event') }}";
+        async function updateEvent() { 
+            let url = "{{ route('manager.notification.event',[],false) }}";
             let response = await fetch(url);
             let notification = await response.json();
 
@@ -56,7 +56,7 @@
 
                 let tr = `<tr class="hover">
                     <td>${obj.id}</td>
-                    <td>${obj.session_id}</td>
+                    <td>${obj.session.table.name}</td>
                     <td>${moment(obj.created_at).format('YYYY-MM-DD HH:mm:ss')}</td>
                     <td>
                         <form action="/managers/notifications/${obj.id}/destroy"
