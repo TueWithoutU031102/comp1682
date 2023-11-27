@@ -10,4 +10,9 @@ class Notification extends Model
     use HasFactory;
     protected $table = 'notifications';
     protected $fillable = ['session_id'];
+
+    public function session()
+    {
+        return $this->belongsTo(Session::class, 'session_id');
+    }
 }

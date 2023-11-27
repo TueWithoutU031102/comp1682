@@ -22,7 +22,7 @@
                         @foreach ($notifications as $notification)
                             <tr class="hover">
                                 <td>{{ $notification->id }}</td>
-                                <td>{{ $notification->session_id }}</td>
+                                <td>{{ $notification->session->table->name }}</td>
                                 <td>{{ $notification->created_at }}</td>
                                 <td>
                                     <form
@@ -30,7 +30,8 @@
                                         method="POST" class="d-inline"
                                         onsubmit="return confirm('Are you sure to delete this notification !!!???')">
                                         @csrf
-                                        <button class="btn btn-error btn-outline btn-square btn-sm"><i class="fa-solid fa-trash"></i></button>
+                                        <button class="btn btn-error btn-outline btn-square btn-sm"><i
+                                                class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -47,12 +48,12 @@
             let url = "{{ route('manager.notification.event') }}";
             let response = await fetch(url);
             let notification = await response.json();
-    
+
             let element = window.document.querySelector('#notification_data');
             element.innerHTML = '';
-    
+
             for (const obj of notification) {
-    
+
                 let tr = `<tr class="hover">
                     <td>${obj.id}</td>
                     <td>${obj.session_id}</td>
@@ -69,7 +70,7 @@
                 element.insertAdjacentHTML('beforeend', tr);
             }
         }
-    
+
         setInterval(updateEvent, 1000);
     </script>
 </x-app-layout>
