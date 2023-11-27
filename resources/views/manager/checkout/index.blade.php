@@ -17,7 +17,6 @@
                             <th>Table</th>
                             <th>Total</th>
                             <th>Status</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="checkout_data">

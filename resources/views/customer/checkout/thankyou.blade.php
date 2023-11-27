@@ -18,7 +18,7 @@
         <div class="flex justify-center">
             <div class="avatar mx-auto my-3">
                 <div class="w-20 mask mask-squircle">
-                    <img src="https://placehold.co/400" alt="">
+                    <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                 </div>
             </div>
         </div>
