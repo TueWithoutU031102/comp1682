@@ -124,6 +124,10 @@
 
         const qrcode = new QRCode(document.querySelector('.qrcode'))
         function preview(link) {
+            if (!link.startsWith('http')) {
+               link = new URL(link, location.origin);
+            }
+
             qrcode.makeCode(link);
             previewer.showModal();
             document.querySelector('.qrcode-link').innerHTML = link;
