@@ -18,7 +18,7 @@ class CheckinController extends Controller
 
         $existingSession = Session::where('table_id', $table->id)->first();
         if ($existingSession) {
-            return to_route('customer.checkin.notice');
+            return to_route('forbidden');
         }
         return view('customer.checkin.index', ['table' => $table]);
     }
@@ -38,11 +38,6 @@ class CheckinController extends Controller
             return to_route('customer.index');
         }
 
-        return to_route('customer.checkin.notice');
-    }
-
-    public function notice()
-    {
-        return view('customer.checkin.notice');
+        return to_route('forbidden');
     }
 }
