@@ -18,7 +18,7 @@ class TableController extends Controller
     {
         //save form create table
         $data = $request->validate([
-            'name' => 'required|string|min:3|max:5'
+            'name' => 'required|string|min:3|max:10'
         ]);
 
         $table->fill($data)->save();

@@ -55,7 +55,6 @@
                                                 </button>
                                             </form>
                                         @endif
-
                                     </div>
                                 </td>
                             </tr>
