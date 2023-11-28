@@ -1,5 +1,7 @@
 @extends('layouts.consumer')
 
+
+
 @section('content')
     <div class="px-3">
         <div class="py-10">
@@ -14,7 +16,7 @@
                 <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
                     @foreach ($type->menus as $menu)
                         @php
-                            $open = "menu{$menu->id}.showModal()"
+                            $open = "menu{$menu->id}.showModal()";
                         @endphp
 
                         <dialog id="menu{{ $menu->id }}" class="modal">
@@ -28,7 +30,8 @@
                                     </form>
                                     <h3 class="font-semibold text-lg mb-3">{{ $menu->name }}</h3>
 
-                                    <img class="w-full aspect-square object-cover" src="{{ asset($menu->image) }}" alt="">
+                                    <img class="w-full aspect-square object-cover" src="{{ asset($menu->image) }}"
+                                        alt="">
                                     <table class="table">
                                         <tr>
                                             <td>Price</td>
@@ -43,7 +46,8 @@
                                             <td>{{ $menu->description }}</td>
                                         </tr>
                                     </table>
-                                    <a href="{{ route('customer.order.add', $menu) }}" class="btn btn-success mt-5">Add to cart</a>
+                                    <a href="{{ route('customer.order.add', $menu) }}" class="btn btn-success mt-5">Add to
+                                        cart</a>
                                 </article>
                             </div>
                         </dialog>
@@ -51,16 +55,8 @@
                         <div>
                             <div
                                 class="relative overflow-hidden transition hover:shadow-md duration-300 shadow rounded :[&>img]:rounded">
-                                @if ($menu->id == 1)
-                                {{-- TODO: làm best seller nếu có thể dùng Carousel --}}
-                                    <div class="absolute px-5 py-2 bg-yellow-400 top-5 rounded-r-full z-[1] shadow">Best Seller</div>
-                                @endif
-
-                                <img
-                                    class="aspect-square object-cover cursor-pointer w-full transition duration-500 hover:scale-125"
-                                    src="{{ asset($menu->image) }}"
-                                    onclick="{{ $open }}"
-                                    alt="">
+                                <img class="aspect-square object-cover cursor-pointer w-full transition duration-500 hover:scale-125"
+                                    src="{{ asset($menu->image) }}" onclick="{{ $open }}" alt="">
 
                                 @if ($menu->status->value === 'Available')
                                     <td>
