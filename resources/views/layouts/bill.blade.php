@@ -114,16 +114,6 @@
                                             <span class="text-sm opacity-50">({{ $b['status'] }})</span>
                                         @endif
                                     </p>
-
-                                    {{-- <div class="flex justify-between mt-3">
-                                    <div class="join border border-stone-200">
-                                        <button class="btn btn-xs join-item">-</button>
-                                        <input type="number"
-                                            class="input input-xs join-item w-8 text-center quantity"
-                                            value="{{ $b['quantity'] }}">
-                                        <button class="btn btn-xs join-item">+</button>
-                                    </div>
-                                </div> --}}
                                     @php
                                         $price = $b->menu->price * $b['quantity'];
                                     @endphp
