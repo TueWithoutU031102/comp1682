@@ -80,7 +80,7 @@
                     <div class="form-control">
                         <label class="lable">Name</label>
                         <input class="input input-bordered" type="text" name="name" id="name"
-                            placeholder="Table name" value="{{ old('name') }}">
+                            placeholder="Type name" value="{{ old('name') }}">
                     </div>
 
                     <button type="submit" class="btn btn-success mt-5">Create</button>

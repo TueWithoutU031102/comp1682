@@ -1,5 +1,5 @@
 @php
-$title = 'Manage Account';
+    $title = 'Manage Account';
 @endphp
 
 <x-app-layout>
@@ -27,8 +27,8 @@ $title = 'Manage Account';
                     <thead>
                         <tr class="font-semibold">
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Role</th>
+                            <th>Email</th>
                             <th>Phone</th>
                             <th>Action</th>
                         </tr>
@@ -42,16 +42,20 @@ $title = 'Manage Account';
                                 <td>{{ $user->phone }}</td>
                                 <td>
                                     <div class="flex space-x-3">
-                                        <a class="btn btn-sm btn-circle btn-info btn-outline" href="{{ route('admin.edit', $user) }}">
+                                        <a class="btn btn-sm btn-circle btn-info btn-outline"
+                                            href="{{ route('admin.edit', $user) }}">
                                             <i class="fas fa-edit"></i>
                                         </a>
+                                        @if ($user->role->name !== 'Admin')
+                                            <form class="delete-user" action="{{ route('admin.destroy', $user) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button class="btn btn-sm btn-circle btn-error btn-outline">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endif
 
-                                        <form class="delete-user" action="{{ route('admin.destroy', $user) }}" method="POST">
-                                            @csrf
-                                            <button class="btn btn-sm btn-circle btn-error btn-outline">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -63,18 +67,18 @@ $title = 'Manage Account';
     </div>
 
 
-<x-slot name="scripts">
-<script>
-    window.addEventListener('load', () => {
-        for (const form of document.querySelectorAll('.delete-user')) {
-            form.addEventListener('submit', e => {
-                e.preventDefault()
-                if (confirm('Are you sure you want to delete this user?')) {
-                    form.submit()
+    <x-slot name="scripts">
+        <script>
+            window.addEventListener('load', () => {
+                for (const form of document.querySelectorAll('.delete-user')) {
+                    form.addEventListener('submit', e => {
+                        e.preventDefault()
+                        if (confirm('Are you sure you want to delete this user?')) {
+                            form.submit()
+                        }
+                    })
                 }
             })
-        }
-    })
-    </script>
-</x-slot>
+        </script>
+    </x-slot>
 </x-app-layout>
