@@ -130,19 +130,33 @@
                         <span>Total price:</span>
                         <span> {{ number_format($total) }}đ</span>
                     </div>
+                    @php
+                        $allCompleted = true;
+                    @endphp
+                    @if ($bill)
+                        @foreach ($bill as $b)
+                            @if ($b['status'] !== 'Completed')
+                                @php
+                                    $allCompleted = false;
+                                @endphp
+                            @endif
+                        @endforeach
+                        @if ($allCompleted)
+                            <a href="{{ route('customer.checkout.show') }}">
+                                <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
+                            </a>
+                        @endif
+                    @endif
 
-                    <a href="{{ route('customer.checkout.show') }}">
-                        <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
-                    </a>
-                    <div class="lg:mt-5 w-full text-center">
+                    {{-- <div class="lg:mt-5 w-full text-center">
                         <label class="swap swap-flip opacity-40">
 
-                            <!-- this hidden checkbox controls the state -->
+                            this hidden checkbox controls the state  
                             <input type="checkbox" class="hidden" />
                             <div class="swap-off"><span class="text-4xl">😀</span></div>
                             <div class="swap-on"><span class="text-4xl">🤡</span></div>
                         </label>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
