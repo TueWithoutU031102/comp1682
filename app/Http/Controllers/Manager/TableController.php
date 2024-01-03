@@ -17,9 +17,7 @@ class TableController extends Controller
     public function store(Request $request, Table $table)
     {
         //save form create table
-        $data = $request->validate([
-            'name' => 'required|string|min:3|max:10'
-        ]);
+        $data = $request->validate(['name' => 'required|string']);
 
         $table->fill($data)->save();
 
@@ -34,7 +32,7 @@ class TableController extends Controller
     public function update(Table $table, Request $request)
     {
         //update table
-        $data = $request->validate(['name' => 'required|string|min:3|max:5']);
+        $data = $request->validate(['name' => 'required|string']);
         $table->fill($data)->save();
 
         return back()->with('success', "Table {$table->name} updated");

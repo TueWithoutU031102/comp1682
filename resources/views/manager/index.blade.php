@@ -20,25 +20,64 @@
                 sale: @json($menus->map(fn($menu) => $menu->price * $menu->saled)),
             }
 
-            const series = [
-                { name: 'Product Sold', type: 'column', data: data.sold },
-                { name: 'Sale', type: 'line', data: data.sale },
+            const series = [{
+                    name: 'Product Sold',
+                    type: 'column',
+                    data: data.sold
+                },
+                {
+                    name: 'Sale',
+                    type: 'line',
+                    data: data.sale
+                },
             ]
 
-            const formatter = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+            const formatter = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            })
 
             const options = {
                 series,
-                title: { text: 'Sale & sold products' },
-                chart: { height: 350, type: 'line', toolbar: { show: false } },
-                dataLabels: { enabled: true, enabledOnSeries: [1] },
+                title: {
+                    text: 'Sale & sold products'
+                },
+                chart: {
+                    height: 400,
+                    type: 'line',
+                    toolbar: {
+                        show: false
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+                },
                 labels: data.name,
-                stroke: { width: [1, 4] },
+                stroke: {
+                    width: [1, 4]
+                },
 
-                xaxis: { type: 'text' },
-                yaxis: [
-                    { title: { text: 'Sold' }, labels: { formatter: (val) => val.toFixed(0) } },
-                    { opposite: true, title: { text: 'Sale' }, labels: { formatter: (val) => formatter.format(val) } },
+                xaxis: {
+                    type: 'text'
+                },
+                yaxis: [{
+                        title: {
+                            text: 'Sold'
+                        },
+                        labels: {
+                            formatter: (val) => val.toFixed(0)
+                        }
+                    },
+                    {
+                        opposite: true,
+                        title: {
+                            text: 'Sale'
+                        },
+                        labels: {
+                            formatter: (val) => formatter.format(val)
+                        }
+                    },
                 ]
             }
 
