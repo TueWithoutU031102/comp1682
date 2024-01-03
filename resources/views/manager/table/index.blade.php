@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Table') }}
-            <button class="btn btn-primary btn-sm btn-square text-lg" onclick="creator.showModal()" >+</button>
+            <button class="btn btn-primary btn-sm btn-square text-lg" onclick="creator.showModal()">+</button>
         </h2>
     </x-slot>
 
@@ -24,13 +24,15 @@
                         @foreach ($tables as $table)
                             <tr class="hover">
                                 <td>{{ $table->name }}</td>
-                                <td><button class="btn-sm btn-ghost" onclick="preview('{{ asset($table->link) }}')">Preview</button></td>
+                                <td><button class="btn-sm btn-ghost"
+                                        onclick="preview('{{ asset($table->link) }}')">Preview</button></td>
                                 <td class="flex space-x-3">
-                                    <a href="{{ route('manager.table.edit', ['table' => $table]) }}" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('manager.table.edit', ['table' => $table]) }}"
+                                        class="btn btn-primary btn-sm">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
-                                    <form action="{{ route('manager.table.destroy', ['table' => $table]) }}" method="POST"
-                                        class="d-inline"
+                                    <form action="{{ route('manager.table.destroy', ['table' => $table]) }}"
+                                        method="POST" class="d-inline"
                                         onsubmit="return confirm('Are you sure to delete {{ $table->name }} !!!???')">
                                         @csrf
                                         <button class="btn btn-error btn-outline btn-sm">
@@ -61,7 +63,8 @@
 
                     <div class="form-control">
                         <label class="lable">Name</label>
-                        <input class="input input-bordered" type="text" name="name" id="name" placeholder="Table name" value="{{ old('name') }}">
+                        <input class="input input-bordered" type="text" name="name" id="name"
+                            placeholder="Table name" value="{{ old('name') }}">
                     </div>
 
                     <button class="btn btn-success mt-5">Create</button>
@@ -85,10 +88,11 @@
         </div>
     </dialog>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-
         async function updateEvent() {
             let url = "{{ route('manager.table.event') }}";
             let response = await fetch(url);
@@ -123,9 +127,10 @@
         setInterval(updateEvent, 2000);
 
         const qrcode = new QRCode(document.querySelector('.qrcode'))
+
         function preview(link) {
             if (!link.startsWith('http')) {
-               link = new URL(link, location.origin).toString();
+                link = new URL(link, location.origin).toString();
             }
 
             qrcode.makeCode(link);
@@ -134,7 +139,7 @@
         }
 
         window.addEventListener('load', function() {
-            
+
         });
     </script>
 
