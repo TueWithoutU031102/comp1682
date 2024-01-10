@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url("/images/tanaka.jpg");
+    background-image: url("/images/Background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -18,7 +18,7 @@ body {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-image: url("/images/tanaka.gif");
+        background-image: url("/images/Background.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center; 
@@ -30,14 +30,14 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 350px;
-    height: 430px;
-    padding: 60px 30px;
+    width: 390px;
+    height: 100%;
+    padding: 60px 25px;
     box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.2);
+    background: transparent;
     padding-bottom: 5%;
     padding-top: 10px;
 }
@@ -47,8 +47,8 @@ body {
     align-items: center;
 }
 .logo img {
-    width: 30%;
-    height: 30%;
+    width: 100%;
+    height: 100%;
 }
 h2 {
     margin: 0;
@@ -57,33 +57,48 @@ h2 {
     color: #f3e541;
     text-align: center;
 }
+.input-box {
+    background: transparent;
+    border: none;
+    border-radius: 40px;
+}
 .input-box label {
     margin: 0;
     padding: 10px;
     font-weight: bold;
-    color: #fff;
+    color: #333333;
 }
 .input-box input {
+    padding: 10px;
+    padding-right: 0;
     width: 100%;
     height: 30px;
     margin-bottom: 25px;
     border: none;
     outline: none;
-    border-bottom: 1px solid #fff;
-    background: transparent;
-    color: #fff;
+    background: #fff;
+    border-radius: 40px;
+    color: #8d8d8d;
+    font-weight: 700;
     font-size: 16px;
+}
+::placeholder{
+    color: rgba(185, 185, 185, 1)
+}
+.button-action{
+    padding-top: 40px;
 }
 .button-action button {
     border: none;
     outline: none;
     width: 100%;
-    height: 40px;
+    height: 50px;
     color: #fff;
     font-size: 16px;
-    background: rgb(149, 125, 97);
+    font-weight: 600;
+    background: rgba(202, 1, 71, 1);
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 40px;
 }
 .button-action button:hover {
     background: rgb(39, 194, 25);

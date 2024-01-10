@@ -105,33 +105,30 @@
             <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200">
                 <div class="flex flex-col space-y-3">
                     @if (session('cart'))
-                        @foreach (session('cart') as $id => $details)
-                            <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
-                                <div class="cart-detail-img">
-                                    <img class="aspect-square w-12 h-12 rounded object-cover"
-                                        src="{{ asset($details['image']) }}" alt="">
-                                </div>
-                                <div>
-                                    <p>{{ $details['name'] }}</p>
-                                    <div class="flex justify-between mt-3">
-                                        <div class="join border border-stone-200 ">
-                                            <button class="btn btn-xs join-item"
-                                                onclick="decreaseQuantity(this)">-</button>
-                                            <div class="cart_update" data-id="{{ $id }}">
-                                                <input type="number"
-                                                    class="input input-xs join-item w-8 text-center quantity"
-                                                    value="{{ $details['quantity'] }}">
-                                            </div>
-                                            <button class="btn btn-xs join-item"
-                                                onclick="increaseQuantity(this)">+</button>
-                                        </div>
+                    @foreach (session('cart') as $id => $details)
+                    <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
+                        <div class="cart-detail-img">
+                            <img class="aspect-square w-12 h-12 rounded object-cover"
+                                src="{{ asset($details['image']) }}" alt="">
+                        </div>
+                        <div>
+                            <p>{{ $details['name'] }}</p>
+                            <div class="flex justify-between mt-3">
+                                <div class="join border border-stone-200 ">
+                                    <button class="btn btn-xs join-item" onclick="decreaseQuantity(this)">-</button>
+                                    <div class="cart_update" data-id="{{ $id }}">
+                                        <input type="number" class="input input-xs join-item w-8 text-center quantity"
+                                            value="{{ $details['quantity'] }}">
                                     </div>
-                                    <span class="text-red-500 price" data-price="{{ $details['price'] }}">
-                                        {{ number_format($details['price']) }} đ
-                                    </span>
+                                    <button class="btn btn-xs join-item" onclick="increaseQuantity(this)">+</button>
                                 </div>
                             </div>
-                        @endforeach
+                            <span class="text-red-500 price" data-price="{{ $details['price'] }}">
+                                {{ number_format($details['price']) }} đ
+                            </span>
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
                 </div>
 
@@ -140,7 +137,7 @@
                     <div class="flex justify-between">
                         @php $total = 0 @endphp
                         @foreach ((array) session('cart') as $id => $details)
-                            @php $total += $details['price'] * $details['quantity'] @endphp
+                        @php $total += $details['price'] * $details['quantity'] @endphp
                         @endforeach
                         <span>Total price:</span>
                         <span id="total-amount"> {{ number_format($total) }} đ</span>
@@ -169,7 +166,7 @@
                 currency: 'VND',
             });
 
-            $(document).on('input', '.cart_update input.quantity', function() {
+            $(document).on('input', '.cart_update input.quantity', function () {
                 let id = $(this).closest('.cart_detail').find('.cart_update').data('id');
                 let quantity = $(this).val();
                 update(id, quantity);
@@ -178,7 +175,7 @@
 
             function update(id, quantity) {
                 var total = 0;
-                $('.cart-detail').each(function() {
+                $('.cart-detail').each(function () {
                     var quantity = +$(this).find('.quantity').val();
                     var price = parseFloat($(this).find('.price').data('price'));
                     total += price * quantity;
@@ -225,7 +222,8 @@
     <div class="bg-white rounded-t-xl">
         <footer class="container p-5 flex justify-between">
             <aside class="">
-                <p class="mt-5">Wibu Coffee<br />Product of Vu Nguyen Duc Tue</p>
+                <p class="mt-5">Tetnolo-Z Web<br />Product of Vu Nguyen Duc Tue<br />Front-end by Vu Hien
+                    Vinh<br />Design by Luu Thao Huong</p>
             </aside>
 
             <nav class="grid grid-cols-1">

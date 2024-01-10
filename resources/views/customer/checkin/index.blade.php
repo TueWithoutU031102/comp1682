@@ -16,39 +16,37 @@
             enctype="multipart/form-data">
             @csrf
             <div class="logo">
-                <img src="/images/logo.png" alt="">
+                <img src="/images/Logotet.png" alt="">
             </div>
             <div class="input-box">
-                <label for="name" class="form-label">Your name:</label>
-                <input type="text" class="form-control" id="name" name="name">
                 @if ($errors->any())
-                    <div class="alert">
-                        <ul>
-                            @foreach ($errors->get('name') as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="alert">
+                    <ul>
+                        @foreach ($errors->get('name') as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
+                <input type="text" class="form-control" placeholder="Tên" id="name" name="name">
             </div>
             <div class="input-box">
-                <label for="phone" class="form-label">Phone number:</label>
-                <input type="text" class="form-control" id="phone" name="phone">
                 @if ($errors->any())
-                    <div class="alert">
-                        <ul>
-                            @foreach ($errors->get('phone') as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="alert">
+                    <ul>
+                        @foreach ($errors->get('phone') as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
+                <input type="text" class="form-control" placeholder="Số điện thoại" id="phone" name="phone">
             </div>
             <div class="input-box" hidden>
                 <input type="text" class="form-control" value="{{ $table->id }}" id="table_id" name="table_id">
             </div>
             <div class="button-action">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Nhận bàn</button>
             </div>
         </form>
     </div>

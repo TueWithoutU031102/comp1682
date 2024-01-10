@@ -124,7 +124,7 @@
     <div class="bg-white rounded-t-xl">
         <footer class="container py-5 flex justify-between">
             <aside class="">
-                <p class="mt-5">Wibu Coffee<br />Product of Vu Nguyen Duc Tue</p>
+                <p class="mt-5">Tetnolo-Z Web<br />Product of Vu Nguyen Duc Tue<br/>Front-end by Vu Hien Vinh<br/>Design by Luu Thao Huong</p>
             </aside>
 
             <nav class="grid grid-cols-1">

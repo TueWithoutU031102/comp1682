@@ -58,11 +58,7 @@
         <div class="navbar-start">
             <div class="dropdown">
                 <label tabindex="0" class="btn btn-ghost btn-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h7" />
-                    </svg>
+                    <img src="/images/Menubar.png" alt="">
                 </label>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -72,16 +68,13 @@
             </div>
         </div>
         <div class="navbar-center">
-            <a class="btn btn-ghost normal-case text-xl">Wibu Coffee</a>
+            <a class="btn btn-ghost normal-case text-xl"></a>
         </div>
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle lg:hidden">
                 <label for="navbar" class="indicator">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.36 2.45c-.15.28-.24.61-.24.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25c0-.05.01-.09.03-.12L8.1 13h7.45c.75 0 1.41-.42 1.75-1.03l3.58-6.47c.07-.16.12-.33.12-.5a1 1 0 0 0-1-1H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2Z" />
-                    </svg>
-                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                    <img src="/images/Bag.png" alt="">
+                    <!-- <span class="badge badge-xs badge-primary indicator-item"></span> -->
                 </label>
             </button>
         </div>
@@ -98,29 +91,28 @@
             <div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">
                 <div class="flex flex-col space-y-2">
                     @if ($bill)
-                        @php $total = 0 @endphp
-                        @foreach ($bill as $b)
-                            <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
-                                <div class="cart-detail-img">
-                                    <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b->menu->image) }}"
-                                        alt="">
-                                </div>
-                                <div>
-                                    <p>
-                                        {{ $b['quantity'] }} X
-                                        {{ $b->menu->name }}
-                                        @if ($b['status'] !== 'Completed')
-                                            <span class="text-sm opacity-50">({{ $b['status'] }})</span>
-                                        @endif
-                                    </p>
-                                    @php
-                                        $price = $b->menu->price * $b['quantity'];
-                                    @endphp
-                                    <span class="text-red-500 price">{{ number_format($price) }} đ</span>
-                                    @php $total += $price @endphp
-                                </div>
-                            </div>
-                        @endforeach
+                    @php $total = 0 @endphp
+                    @foreach ($bill as $b)
+                    <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
+                        <div class="cart-detail-img">
+                            <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b->menu->image) }}" alt="">
+                        </div>
+                        <div>
+                            <p>
+                                {{ $b['quantity'] }} X
+                                {{ $b->menu->name }}
+                                @if ($b['status'] !== 'Completed')
+                                <span class="text-sm opacity-50">({{ $b['status'] }})</span>
+                                @endif
+                            </p>
+                            @php
+                            $price = $b->menu->price * $b['quantity'];
+                            @endphp
+                            <span class="text-red-500 price">{{ number_format($price) }} đ</span>
+                            @php $total += $price @endphp
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
                 </div>
 
@@ -131,27 +123,27 @@
                         <span> {{ number_format($total) }}đ</span>
                     </div>
                     @php
-                        $allCompleted = true;
+                    $allCompleted = true;
                     @endphp
                     @if ($bill)
-                        @foreach ($bill as $b)
-                            @if ($b['status'] !== 'Completed')
-                                @php
-                                    $allCompleted = false;
-                                @endphp
-                            @endif
-                        @endforeach
-                        @if ($allCompleted)
-                            <a href="{{ route('customer.checkout.show') }}">
-                                <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
-                            </a>
-                        @endif
+                    @foreach ($bill as $b)
+                    @if ($b['status'] !== 'Completed')
+                    @php
+                    $allCompleted = false;
+                    @endphp
+                    @endif
+                    @endforeach
+                    @if ($allCompleted)
+                    <a href="{{ route('customer.checkout.show') }}">
+                        <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
+                    </a>
+                    @endif
                     @endif
 
                     {{-- <div class="lg:mt-5 w-full text-center">
                         <label class="swap swap-flip opacity-40">
 
-                            this hidden checkbox controls the state  
+                            this hidden checkbox controls the state
                             <input type="checkbox" class="hidden" />
                             <div class="swap-off"><span class="text-4xl">😀</span></div>
                             <div class="swap-on"><span class="text-4xl">🤡</span></div>
