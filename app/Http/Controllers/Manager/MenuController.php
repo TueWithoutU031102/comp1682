@@ -56,6 +56,7 @@ class MenuController extends Controller
             'type_id' => 'required',
             'price' => 'required',
             'description' => 'required',
+            'status' => ['required', new Enum(StatusMenu::class)],
         ]);
 
         if ($request->hasFile('image')) {
