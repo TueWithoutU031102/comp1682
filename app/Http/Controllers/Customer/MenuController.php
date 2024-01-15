@@ -11,8 +11,11 @@ class MenuController extends Controller
     //
     public function index()
     {
-        $types = Type::all();
-        return view("customer.menu.index", ['types' => $types]);
+        // $types = Type::all();
+        $menus = Menu::all();
+        return view("customer.menu.index"
+        // , ['types' => $types]
+        , ['menus'=> $menus]);
     }
 
     public function show(Menu $menu)
