@@ -18,7 +18,7 @@
             $open = "menu{$menu->id}.showModal()";
             @endphp
 
-            <dialog id="menu{{ $menu->id }}" class="modal">
+            <!-- <dialog id="menu{{ $menu->id }}" class="modal">
                 <div class="modal-box lg:max-w-lg">
                     <article>
                         <form method="dialog">
@@ -47,7 +47,7 @@
                             cart</a>
                     </article>
                 </div>
-            </dialog>
+            </dialog> -->
 
             <div style="background: rgba(5, 38, 142, 1); border-radius: 15px; margin: 40px 0 40px 0">
                 <div
@@ -56,14 +56,14 @@
                         class="aspect-square object-cover cursor-pointer w-full transition duration-500 hover:scale-125"
                         src="{{ asset($menu->image) }}" onclick="{{ $open }}" alt="">
 
-                    @if ($menu->status->value === 'Available')
+                    <!-- @if ($menu->status->value === 'Available')
                     <td>
                         <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
                             <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
                             </button>
                         </a>
                     </td>
-                    @endif
+                    @endif -->
                 </div>
                 <p class="flex flex-col p-2">
                     <strong style="color: #fff" class="cursor-pointer" onclick="{{ $open }}">{{ $menu->name }}</strong>
