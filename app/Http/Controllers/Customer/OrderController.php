@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        $cart = session()->get('cart', []);
+        return view('customer.cart.index', ['cart' => $cart]);
+    }
     public function store()
     {
         $data_cart = session()->get('cart', []);
@@ -28,16 +33,21 @@ class OrderController extends Controller
         return redirect()->route('customer.index');
     }
 
-    public function add(Menu $menu)
+    public function add(Request $request)
     {
+        $request->validate([
+            'menu_id' => 'required|exists:menus,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+        $menu = Menu::findOrFail($request->menu_id);
         $cart = session()->get('cart', []);
         if (isset($cart[$menu->id])) {
-            $cart[$menu->id]['quantity']++;
+            $cart[$menu->id]['quantity'] += $request->quantity;
         } else {
             $cart[$menu->id] = [
                 'name' => $menu->name,
                 'price' => $menu->price,
-                'quantity' => 1,
+                'quantity' => $request->quantity,
                 'image' => $menu->image,
             ];
         }
