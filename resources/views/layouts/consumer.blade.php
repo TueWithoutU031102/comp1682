@@ -97,7 +97,7 @@
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="h-full flex flex-col justify-between p-4 w-80 bg-base-200">
                 <div class="flex flex-col space-y-3">
-                     @if (session('cart'))
+                    @if (session('cart'))
                         @foreach (session('cart') as $id => $details)
                             <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
                                 <div class="cart-detail-img">

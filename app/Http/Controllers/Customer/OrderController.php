@@ -12,7 +12,6 @@ class OrderController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
-        dd($cart);
         return view('customer.cart.index', ['cart' => $cart]);
     }
     public function store()
@@ -51,7 +50,7 @@ class OrderController extends Controller
         }
 
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Dish added to cart successfully');
+        return redirect()->route('customer.menu.index')->with('success', 'Dish added to cart successfully');
     }
 
 
