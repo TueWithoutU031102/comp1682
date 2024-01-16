@@ -37,6 +37,7 @@
                     </div>
                     <form action="{{ route('customer.order.add', ['menu' => $menu]) }}" method="POST"
                         enctype="multipart/form-data">
+                        <input id="submitquantity" name="quantity" type="hidden" value="1">
                         @csrf
                         <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
                         </button>
@@ -62,6 +63,7 @@
 
             // Update price based on quantity
             updatePrice(newQuantity);
+            submitquantity.value = quantity.value
         }
 
         function updatePrice(quantity) {
@@ -74,15 +76,6 @@
 
         // Set initial price when the page loads
         updatePrice(parseInt(quantityInput.value));
-
-        addToCartButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default behavior of the anchor tag
-            const menuId = addToCartButton.dataset.menuId;
-            const quantity = quantityInput.value;
-
-            // Call addToCart function
-            addToCart(menuId, quantity);
-        });
 
         function addToCart(menuId, quantity) {
             // Perform AJAX request to the server to add the item to the cart
