@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.consumer')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
 
-<body>
+
+@section('content')
     <div class="drawer drawer-end lg:drawer-open">
         <input id="navbar" type="checkbox" class="drawer-toggle" />
         <div style="background: #fff" class="drawer-content flex flex-col bg-stone-50">
@@ -29,15 +23,13 @@
                                     <p>{{ $details['name'] }}</p>
                                     <div class="flex justify-between mt-3">
                                         <div class="join border border-stone-200 ">
-                                            <button class="btn btn-xs join-item"
-                                                onclick="decreaseQuantity(this)">-</button>
+                                            <button class="btn btn-xs join-item" onclick="decreaseQuantity(this)">-</button>
                                             <div class="cart_update" data-id="{{ $id }}">
                                                 <input type="number"
                                                     class="input input-xs join-item w-8 text-center quantity"
                                                     value="{{ $details['quantity'] }}">
                                             </div>
-                                            <button class="btn btn-xs join-item"
-                                                onclick="increaseQuantity(this)">+</button>
+                                            <button class="btn btn-xs join-item" onclick="increaseQuantity(this)">+</button>
                                         </div>
                                     </div>
                                     <span class="text-red-500 price" data-price="{{ $details['price'] }}">
@@ -135,6 +127,4 @@
             }
         </script>
     </div>
-</body>
-
-</html>
+@endsection

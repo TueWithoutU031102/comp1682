@@ -35,10 +35,12 @@
                             </span>
                         </div>
                     </div>
-                    <a id="addToCart" data-menu-id="{{ $menu->id }}" data-quantity="1"
-                        href="{{ route('customer.order.add', ['menu' => $menu]) }}">
+                    <form action="{{ route('customer.order.add', ['menu' => $menu]) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
                         <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
                         </button>
+                    </form>
                     </a>
                 </td>
             @endif
@@ -46,77 +48,67 @@
     </div>
 
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            const quantityInput = document.getElementById('quantity');
-            const priceSpan = document.getElementById('price');
+        const quantityInput = document.getElementById('quantity');
+        const priceSpan = document.getElementById('price');
 
-            function updateQuantity(change) {
-                let currentQuantity = parseInt(quantityInput.value);
-                let newQuantity = currentQuantity + change;
+        function updateQuantity(change) {
+            let currentQuantity = parseInt(quantityInput.value);
+            let newQuantity = currentQuantity + change;
 
-                // Ensure quantity is non-negative and has a minimum value of 1
-                newQuantity = Math.max(newQuantity, 1);
+            // Ensure quantity is non-negative and has a minimum value of 1
+            newQuantity = Math.max(newQuantity, 1);
 
-                quantityInput.value = newQuantity;
+            quantityInput.value = newQuantity;
 
-                // Update price based on quantity
-                updatePrice(newQuantity);
-            }
+            // Update price based on quantity
+            updatePrice(newQuantity);
+        }
 
-            function updatePrice(quantity) {
-                // Assuming base price is 10 and increases by 5 for each quantity unit
-                const basePrice = {{ $menu->price }};
+        function updatePrice(quantity) {
+            // Assuming base price is 10 and increases by 5 for each quantity unit
+            const basePrice = {{ $menu->price }};
 
-                const newPrice = basePrice * quantity;
-                priceSpan.textContent = newPrice + ' đ';
-            }
+            const newPrice = basePrice * quantity;
+            priceSpan.textContent = newPrice + ' đ';
+        }
 
-            // Set initial price when the page loads
-            updatePrice(parseInt(quantityInput.value));
+        // Set initial price when the page loads
+        updatePrice(parseInt(quantityInput.value));
 
-            // Attach event listeners to the buttons
-            document.getElementById('decrease').addEventListener('click', function() {
-                updateQuantity(-1);
-            });
+        addToCartButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default behavior of the anchor tag
+            const menuId = addToCartButton.dataset.menuId;
+            const quantity = quantityInput.value;
 
-            document.getElementById('increase').addEventListener('click', function() {
-                updateQuantity(1);
-            });
-            addToCartButton.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default behavior of the anchor tag
-                const menuId = addToCartButton.dataset.menuId;
-                const quantity = quantityInput.value;
-
-                // Call addToCart function
-                addToCart(menuId, quantity);
-            });
-
-            function addToCart(menuId, quantity) {
-                // Perform AJAX request to the server to add the item to the cart
-                // Adjust this URL according to your route configuration
-                const url = '{{ route('customer.order.add', ['menu' => $menu]) }}';
-                const data = {
-                    menu_id: menuId,
-                    quantity: quantity,
-                };
-
-                fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                        body: JSON.stringify(data),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Handle the response (optional)
-                        console.log('Item added to cart:', data);
-                    })
-                    .catch(error => {
-                        console.error('Error adding item to cart:', error);
-                    });
-            }
+            // Call addToCart function
+            addToCart(menuId, quantity);
         });
+
+        function addToCart(menuId, quantity) {
+            // Perform AJAX request to the server to add the item to the cart
+            // Adjust this URL according to your route configuration
+            const url = '{{ route('customer.order.add', ['menu' => $menu]) }}';
+            const data = {
+                menu_id: menuId,
+                quantity: quantity,
+            };
+
+            fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response (optional)
+                    console.log('Item added to cart:', data);
+                })
+                .catch(error => {
+                    console.error('Error adding item to cart:', error);
+                });
+        }
     </script>
 @endsection
