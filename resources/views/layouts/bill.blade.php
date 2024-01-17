@@ -73,7 +73,7 @@
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle lg:hidden">
                 <label for="navbar" class="indicator">
-                    <img src="/images/Bag.png" alt="">
+                    <a href="{{ route('customer.order.index') }}"><img src="/images/Bag.png" alt=""></a>
                     <!-- <span class="badge badge-xs badge-primary indicator-item"></span> -->
                 </label>
             </button>
