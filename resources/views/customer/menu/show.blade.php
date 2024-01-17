@@ -39,6 +39,22 @@
         left: 45px;
         top: 50px;
     }
+
+    .quantity {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .quantity button{
+        text-align: center;
+        background: rgba(5, 38, 142, 1);
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        font-size: 20px;
+        font-weight: none;
+        
+    }
 </style>
 <div class="header">
     <h1>{{ $menu->name }}</h1>
@@ -53,35 +69,36 @@
         <img class="image" src="{{ asset($menu->image) }}">
     </div>
     <div class="submission-information">
-        <p><span>Price: </span>{{ $menu->price }}</p>
-    </div>
-    <div>
         @if ($menu->status->value === 'Available')
         <td>
-            <div class="rounded flex space-x-2 bg-white p-2">
-                <div>
-                    <div class="flex justify-between mt-3">
-                        <div class="join border border-stone-200 ">
-                            <button id="decrease" class="btn btn-xs join-item" onclick="updateQuantity(-1)">-</button>
-                            <div>
-                                <input id="quantity" type="number"
-                                    class="input input-xs join-item w-8 text-center quantity" value="1">
-                            </div>
-                            <button id="increase" class="btn btn-xs join-item" onclick="updateQuantity(1)">+</button>
+            <div>
+                <div class="flex justify-between mt-3">
+                    <div class="quantity">
+                        <button id="decrease" class="btn btn-xs join-item" onclick="updateQuantity(-1)">-</button>
+                        <div>
+                            <input id="quantity" type="number" class="input input-xs join-item w-8 text-center quantity"
+                                value="1">
                         </div>
+                        <button id="increase" class="btn btn-xs join-item" onclick="updateQuantity(1)">+</button>
                     </div>
+                </div>
+            </div>
+            <div>
+                <div>
                     <span id="price" class="text-red-500 price" data-price="{{ $menu->price }}">
                         đ
                     </span>
                 </div>
+                <div>
+                    <form action="{{ route('customer.order.add', ['menu' => $menu]) }}" method="POST"
+                        enctype="multipart/form-data">
+                        <input id="submitquantity" name="quantity" type="hidden" value="1">
+                        @csrf
+                        <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
+                        </button>
+                    </form>
+                </div>
             </div>
-            <form action="{{ route('customer.order.add', ['menu' => $menu]) }}" method="POST"
-                enctype="multipart/form-data">
-                <input id="submitquantity" name="quantity" type="hidden" value="1">
-                @csrf
-                <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
-                </button>
-            </form>
             </a>
         </td>
         @endif
