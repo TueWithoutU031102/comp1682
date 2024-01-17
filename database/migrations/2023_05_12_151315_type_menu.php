@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,10 +19,10 @@ return new class extends Migration
         });
 
         DB::table('types')->insert([
-            ['name' => 'Coffee'],
-            ['name' => 'Cake'],
-            ['name' => 'Smoothie'],
-            ['name' => 'Tea'],
+            ['name' => 'Chè'],
+            ['name' => 'Đồ uống'],
+            ['name' => 'Đồ ăn vặt'],
+            ['name' => 'Combo'],
         ]);
     }
 
