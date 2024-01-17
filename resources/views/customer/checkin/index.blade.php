@@ -20,25 +20,37 @@
             </div>
             <div class="input-box">
                 @if ($errors->any())
-                <div class="alert">
-                    <ul>
-                        @foreach ($errors->get('name') as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert">
+                        <ul>
+                            @foreach ($errors->get('name') as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
                 <input type="text" class="form-control" placeholder="Tên" id="name" name="name">
             </div>
             <div class="input-box">
                 @if ($errors->any())
-                <div class="alert">
-                    <ul>
-                        @foreach ($errors->get('phone') as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert">
+                        <ul>
+                            @foreach ($errors->get('mssv') as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <input type="text" class="form-control" placeholder="Mã số sinh viên" id="mssv" name="mssv">
+            </div>
+            <div class="input-box">
+                @if ($errors->any())
+                    <div class="alert">
+                        <ul>
+                            @foreach ($errors->get('phone') as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
                 <input type="text" class="form-control" placeholder="Số điện thoại" id="phone" name="phone">
             </div>

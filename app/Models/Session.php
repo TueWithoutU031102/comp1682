@@ -9,7 +9,7 @@ class Session extends Model
 {
     use HasFactory;
     protected $table = 'sessions';
-    protected $fillable = ['table_id', 'name', 'phone'];
+    protected $fillable = ['table_id', 'name', 'phone', 'mssv'];
     public function Table()
     {
         return $this->belongsTo(Table::class, 'table_id');
