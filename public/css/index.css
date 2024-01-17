@@ -1,4 +1,20 @@
+/* @font-face{
+    font-family: SFProText;
+    src:url("/fonts/SFProText-Regular.otf") format("opentype");
+}
+@font-face{
+    font-family: SFProText;
+    font-weight: bold;
+    src:url("/fonts/SFProText-Bold.otf") format("opentype");
+}
+@font-face{
+    font-family: SFProText;
+    font-weight: 700;
+    src:url("/fonts/SFProText-Medium.otf") format("opentype");
+} */
+
 html {
+    /* font-family: SFProText; */
     overflow-y: scroll;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;

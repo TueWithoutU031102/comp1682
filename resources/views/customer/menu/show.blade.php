@@ -18,43 +18,6 @@
         color: rgba(67, 93, 107, 1);
         font-size: 14px;
     }
-
-    .image-cover {
-        box-shadow: 0px 0px 20px 0px #c9c9c9;
-        width: 342px;
-        height: 342px;
-        margin-left: 25px;
-        margin-top: 25px;
-        border-radius: 100%;
-        border: none;
-    }
-
-    .image {
-        object-fit: fill;
-        margin-left: 5px;
-        border-radius: 100%;
-        width: 240px;
-        height: 240px;
-        position: relative;
-        left: 45px;
-        top: 50px;
-    }
-
-    .quantity {
-        display: flex;
-        justify-content: space-evenly;
-    }
-    .quantity button{
-        text-align: center;
-        background: rgba(5, 38, 142, 1);
-        color: #fff;
-        width: 40px;
-        height: 40px;
-        border-radius: 40px;
-        font-size: 20px;
-        font-weight: none;
-        
-    }
 </style>
 <div class="header">
     <h1>{{ $menu->name }}</h1>
@@ -64,43 +27,44 @@
     <h3>Hết hàng</h3>
     @endif
 </div>
-<div class="user-card">
-    <div class="image-cover">
-        <img class="image" src="{{ asset($menu->image) }}">
+<div>
+    <div class="px-5 mt-8">
+        <div class="p-12 rounded-full max-w-[400px] mx-auto" style="box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.1);">
+            <img class="aspect-square object-cover rounded-full" src="{{ asset($menu->image) }}">
+        </div>
     </div>
     <div class="submission-information">
         @if ($menu->status->value === 'Available')
-        <td>
+        <div class="flex justify-between mt-12 w-[200px] mx-auto">
+            <button id="decrease" class="rounded-full bg-[rgba(5,38,142,1)] size-10" onclick="updateQuantity(-1)">
+                <span class="text-xl text-white text-center">-</span>
+            </button>
             <div>
-                <div class="flex justify-between mt-3">
-                    <div class="quantity">
-                        <button id="decrease" class="btn btn-xs join-item" onclick="updateQuantity(-1)">-</button>
-                        <div>
-                            <input id="quantity" type="number" class="input input-xs join-item w-8 text-center quantity"
-                                value="1">
-                        </div>
-                        <button id="increase" class="btn btn-xs join-item" onclick="updateQuantity(1)">+</button>
-                    </div>
-                </div>
+                <input style="font-size: 26px; font-weight: 500" id="quantity" type="number"
+                    class="input input-xs join-item w-16 text-center quantity mt-2" value="1">
+            </div>
+            <button id="increase" class="rounded-full bg-[rgba(5,38,142,1)] size-10" onclick="updateQuantity(1)">
+                <span class="text-xl text-white text-center">+</span>
+            </button>
+        </div>
+        <div class="flex justify-between mt-20 mb-20">
+            <div class="pl-5">
+                <p class="text-[rgba(67,93,107,1)] font-medium">Tổng Tiền</p>
+                <span id="price" class="text-black text-2xl font-bold" data-price="{{ $menu->price }}">
+                    đ
+                </span>
             </div>
             <div>
-                <div>
-                    <span id="price" class="text-red-500 price" data-price="{{ $menu->price }}">
-                        đ
-                    </span>
-                </div>
-                <div>
-                    <form action="{{ route('customer.order.add', ['menu' => $menu]) }}" method="POST"
-                        enctype="multipart/form-data">
-                        <input id="submitquantity" name="quantity" type="hidden" value="1">
-                        @csrf
-                        <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
-                        </button>
-                    </form>
-                </div>
+                <form action="{{ route('customer.order.add', ['menu' => $menu]) }}" method="POST"
+                    enctype="multipart/form-data">
+                    <input id="submitquantity" name="quantity" type="hidden" value="1">
+                    @csrf
+                    <button class="text-white font-semibold mt-2 pr-8 pl-4 py-3 bg-[rgba(202,1,71,1)] rounded-l-[20px]">
+                        <span class="">Thêm vào giỏ hàng</span>
+                    </button>
+                </form>
             </div>
-            </a>
-        </td>
+        </div>
         @endif
     </div>
 </div>
