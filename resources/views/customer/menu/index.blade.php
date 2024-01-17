@@ -1,24 +1,22 @@
 @extends('layouts.consumer')
 
-
-
 @section('content')
-    <div class="px-3">
-        <div class="py-10">
-            @if (Session::has('success'))
-                <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
-            @endif
-            @php
-                $currentType = null;
-            @endphp
-            <h2 class="text-center my-5 text-4xl font-bold">MENU</h2>
-            <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
-                @foreach ($menus as $menu)
-                    {{-- @php
-                        $open = "menu{$menu->id}.showModal()";
-                    @endphp --}}
+<div class="px-3">
+    <div class="py-10">
+        @if (Session::has('success'))
+        <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+        @endif
+        @php
+        $currentType = null;
+        @endphp
+        <h2 class="text-center my-5 text-4xl font-bold">MENU</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
+            @foreach ($menus as $menu)
+            {{-- @php
+            $open = "menu{$menu->id}.showModal()";
+            @endphp --}}
 
-                    {{-- <dialog id="menu{{ $menu->id }}" class="modal">
+            {{-- <dialog id="menu{{ $menu->id }}" class="modal">
                 <div class="modal-box lg:max-w-lg">
                     <article>
                         <form method="dialog">
@@ -47,37 +45,36 @@
                             cart</a>
                     </article>
                 </div>
-            </dialog>  --}}
+            </dialog> --}}
 
-                    <div style="background: rgba(5, 38, 142, 1); border-radius: 15px; margin: 40px 0 40px 0">
-                        <div onclick="window.location.href = '{{ route('customer.menu.show', ['menu' => $menu]) }}'"
-                            class="relative overflow-hidden transition hover:shadow-md duration-300 shadow rounded :[&>img]:rounded">
-                            <img style="border-radius: 15px"
-                                class="aspect-square object-cover cursor-pointer w-full transition duration-500 hover:scale-125"
-                                src="{{ asset($menu->image) }}" alt="">
+            <div style="background: rgba(5, 38, 142, 1); border-radius: 15px; margin: 40px 0 40px 0">
+                <div onclick="window.location.href = '{{ route('customer.menu.show', ['menu' => $menu]) }}'"
+                    class="relative overflow-hidden transition hover:shadow-md duration-300 shadow rounded :[&>img]:rounded">
+                    <img class="aspect-square object-cover cursor-pointer w-28 mx-auto my-4 transition duration-500 hover:scale-125"
+                        src="{{ asset($menu->image) }}" alt="">
 
-                            {{-- @if ($menu->status->value === 'Available')
+                    {{-- @if ($menu->status->value === 'Available')
                     <td>
                         <a href="{{ route('customer.order.add', ['menu' => $menu]) }}">
                             <button class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
                             </button>
                         </a>
                     </td>
-                    @endif  --}}
-                        </div>
-                        <p class="flex flex-col p-2">
-                            <strong style="color: #fff" class="cursor-pointer">{{ $menu->name }}</strong>
-                            <span style="color: #fff" class="text-sm">{{ number_format($menu->price) }} đ</span>
-                            @if ($menu->status->value === 'Available')
-                                <span style="color: #fff" class="text-sm">Còn hàng</span>
-                            @elseif ($menu->status->value === 'Unavailable')
-                                <span style="color: #fff" class="text-sm">Hết hàng</span>
-                            @endif
-                            {{-- <span class="opacity-50 text-sm">{{ $menu->description }}</span>  --}}
-                        </p>
-                    </div>
-                @endforeach
+                    @endif --}}
+                </div>
+                <p class="flex flex-col p-2">
+                    <strong style="color: #fff" class="cursor-pointer">{{ $menu->name }}</strong>
+                    <span style="color: #fff" class="text-sm">{{ number_format($menu->price) }} đ</span>
+                    @if ($menu->status->value === 'Available')
+                    <span style="color: #fff" class="text-sm">Còn hàng</span>
+                    @elseif ($menu->status->value === 'Unavailable')
+                    <span style="color: #fff" class="text-sm">Hết hàng</span>
+                    @endif
+                    {{-- <span class="opacity-50 text-sm">{{ $menu->description }}</span> --}}
+                </p>
             </div>
+            @endforeach
         </div>
     </div>
+</div>
 @endsection
