@@ -15,6 +15,9 @@ return new class extends Migration {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('mssv');
+            $table->string('phone');
             $table->integer('total');
             $table->string('status')->default(StatusCheckout::Pending->value);
             $table->string('transaction_id')->nullable();
