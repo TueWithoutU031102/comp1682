@@ -130,6 +130,6 @@
                 element.insertAdjacentHTML('beforeend', dialog + tr);
             }
         }
-        setInterval(updateEvent, 1000);
+        setInterval(updateEvent, 1500);
     </script>
 </x-app-layout>
