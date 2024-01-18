@@ -73,7 +73,7 @@
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle lg:hidden">
                 <label for="navbar" class="indicator">
-                    <a href="{{ route('customer.order.index') }}"><img src="/images/Bag.png" alt=""></a>
+                    <img src="/images/Bag.png" alt=""></a>
                     <!-- <span class="badge badge-xs badge-primary indicator-item"></span> -->
                 </label>
             </button>
@@ -135,7 +135,7 @@
                     @endforeach
                     @if ($allCompleted)
                     <a href="{{ route('customer.checkout.show') }}">
-                        <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
+                        <button type="submit" class="btn btn-info w-full mt-2 bg-[rgba(202,1,71,1)] text-white">Thanh toán</button>
                     </a>
                     @endif
                     @endif

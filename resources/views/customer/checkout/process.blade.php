@@ -16,9 +16,9 @@
     <div class="bg-base-200 min-h-screen pt-10">
 
         <div class="flex justify-center">
-            <div class="avatar mx-auto my-3">
-                <div class="w-20 mask mask-squircle">
-                    <x-application-logo />
+            <div class="avatar mx-auto">
+                <div class="w-48 mask mask-squircle">
+                    <img src="/images/Logotet.png" alt="">
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                         Your total cost is: <span class="text-primary font-bold">{{ number_format($total) }}</span>đ
                     </p>
                     <div>
-                        <button type="submit" class="btn btn-success float-right">Pay with VNPay</button>
+                        <button type="submit" class="btn btn-danger bg-[rgba(202,1,71,1)] text-white float-right">Pay with VNPay</button>
                     </div>
                 </form>
             </div>
