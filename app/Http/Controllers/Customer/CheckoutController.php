@@ -18,9 +18,10 @@ class CheckoutController extends Controller
      */
     public function show(Checkout $checkouts)
     {
+
         $session = Session::find(session()->get('customer.session'));
         $bill = Cart::where('session_id', $session->id)->get();
-        return view('customer.checkout.process', ['session' => $session, 'bill' => $bill]);
+        return view('customer.checkout.process', ['bill' => $bill]);
     }
 
     public function pay(Checkout $checkout) //VNPay $payment,, Request $request
@@ -41,7 +42,9 @@ class CheckoutController extends Controller
 
         $checkout->forceFill([
             'table_id' => $session->table_id,
-            'session_id' => $session->id,
+            'name' => $session->name,
+            'mssv' => $session->mssv,
+            'phone' => $session->phone,
             'total' => $items->sum(fn($item) => $item->total()),
         ])->save();
 
@@ -75,12 +78,7 @@ class CheckoutController extends Controller
         //     return to_route('customer.checkout.show')->with('message', $payload->message);
         // }
 
-        $session = Session::find(session()->get('customer.session'));
-        if ($session) {
-            $session->delete();
-            session()->forget('customer.session');
-            session()->forget('cart');
-        }
+
 
         return view('customer.checkout.thankyou');
     }

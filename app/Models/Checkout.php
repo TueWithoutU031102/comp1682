@@ -10,7 +10,7 @@ class Checkout extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['table_id', 'total', 'status'];
+    protected $fillable = ['table_id', 'total', 'name', 'mssv', 'phone', 'status'];
 
     protected $casts = ['status' => StatusCheckout::class];
 
@@ -19,10 +19,6 @@ class Checkout extends Model
         return $this->belongsTo(Table::class, 'table_id');
     }
 
-    public function Session()
-    {
-        return $this->belongsTo(Session::class, 'session_id');
-    }
     public function carts()
     {
         return $this->hasMany(Cart::class);

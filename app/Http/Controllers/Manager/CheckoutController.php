@@ -6,6 +6,7 @@ use App\Enums\StatusCheckout;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Checkout;
+use App\Models\Session;
 
 class CheckoutController extends Controller
 {
@@ -22,6 +23,14 @@ class CheckoutController extends Controller
         $data = $request->status;
 
         $checkout->update(['status' => $data]);
+        if ($checkout->status != "Pending") {
+            $session = Session::find(session()->get('customer.session'));
+            if ($session) {
+                $session->delete();
+                session()->forget('customer.session');
+                session()->forget('cart');
+            }
+        }
         return to_route('manager.checkout.index')->with('success', 'The invoice has been paid successfully!');
     }
 }

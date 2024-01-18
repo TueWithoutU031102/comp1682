@@ -16,7 +16,9 @@ return new class extends Migration {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Session::class)->constrained()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('mssv')->unique();
+            $table->string('phone')->unique();
             $table->integer('total');
             $table->string('status')->default(StatusCheckout::Pending->value);
             $table->string('transaction_id')->nullable();
@@ -34,6 +36,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('checkout');
+        Schema::dropIfExists('checkouts');
     }
 };
