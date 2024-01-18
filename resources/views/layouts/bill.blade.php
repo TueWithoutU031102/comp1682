@@ -86,7 +86,7 @@
             <!-- Page content here -->
             @yield('content')
         </div>
-        <div class="drawer-side z-20">
+        <div class="drawer-side z-20" id='cart-data'>
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">
                 <div class="flex flex-col space-y-2">
@@ -156,6 +156,16 @@
             </div>
         </div>
     </div>
+    <script>
+        async function updateEvent() {
+            let url = "/customers/cart-data";
+            let response = await fetch(url);
+            let text = await response.text();
+            let element = window.document.querySelector('#cart-data');
+            element.innerHTML = text;
+        }
+        setInterval(updateEvent, 1000);
+    </script>
 
     <!-- <div class="bg-white rounded-t-xl">
         <footer class="container p-5 flex justify-between">
