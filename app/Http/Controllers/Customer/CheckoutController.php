@@ -56,28 +56,27 @@ class CheckoutController extends Controller
         return redirect($url);
     }
 
-    public function verify(VNPay $payment)
+    public function verify($id) //VNPay $payment
     {
-        $payload = $payment->read();
+        // $payload = $payment->read();
 
-        if (!$payload) {
-            return to_route('vnpay.invalid');
-        }
+        // if (!$payload) {
+        //     return to_route('vnpay.invalid');
+        // }
 
-        $process = Checkout::find($payload->ref);
+        $process = Checkout::find($id);
 
-        if (!$process || $process->status !== StatusCheckout::Pending) {
-            return to_route('vnpay.invalid');
-        }
+        // if (!$process || $process->status !== StatusCheckout::Pending) {
+        //     return to_route('vnpay.invalid');
+        // }
 
-        if (!$payload->success) {
-            $process->forceFill(['status' => StatusCheckout::Canceled])->save();
-            return to_route('customer.checkout.show')->with('message', $payload->message);
-        }
+        // if (!$payload->success) {
+        //     $process->forceFill(['status' => StatusCheckout::Canceled])->save();
+        //     return to_route('customer.checkout.show')->with('message', $payload->message);
+        // }
 
         $process->forceFill([
             'status' => StatusCheckout::Transfer,
-            'transaction_id' => $payload->transaction_id,
         ])->save();
 
         $session = Session::find(session()->get('customer.session'));
