@@ -70,4 +70,66 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js" defer></script>
+    <script>
+        async function updateEvent() {
+            let url = "{{ route('manager.checkout.event', [], false) }}";
+            let response = await fetch(url);
+            let data = await response.json();
+            let checkout = data.checkouts;
+            let table = data.tables;
+            let status = data.statuses;
+            let element = window.document.querySelector('#checkout_data');
+            element.innerHTML = '';
+
+            for (const obj of checkout) {
+                let tableName = table.find(table => table.id === obj.table_id).name;
+                let created = document.querySelector(`#status${obj.id}`)
+
+                let dialog = created ? '' : `<dialog id="status${obj.id}" class="modal">
+                    <div class="modal-box max-w-xs">
+                        <article>
+                            <form method="dialog">
+                                <button method="dialog"
+                                    class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
+                                    X
+                                </button>
+                            </form>
+                            <h3 class="font-semibold text-lg mb-3">Status</h3>
+                            <form method="POST" action="managers/checkout/${obj.id}/update">
+                                @csrf
+
+                                <div class="form-control">
+                                    <label class="label">Status</label>
+                                    <select name="status" value="${obj.status}"
+                                        class="select select-bordered w-full max-w-xs">
+                                        @foreach ($statuses as $status)
+                                            <option value="{{ $status->value }}">{{ $status->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-success mt-5">Save Status</button>
+                            </form>
+                        </article>
+                    </div>
+                </dialog>`
+
+                let tr = `<tr>
+                        <td>${obj.id}</td>
+                        <td>${tableName }</td>
+                        <td>${obj.total } đ</td>
+                        <td>${obj.name }</td>
+                        <td>${obj.mssv }</td>
+                        <td>${obj.phone }</td>
+                        <td class="text-info link" onclick="status${obj.id}.showModal()">
+                            ${obj.status}
+                        </td>
+                    </tr>`
+                element.insertAdjacentHTML('beforeend', dialog + tr);
+            }
+        }
+        setInterval(updateEvent, 1000);
+    </script>
 </x-app-layout>
