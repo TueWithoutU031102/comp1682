@@ -73,7 +73,7 @@
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle lg:hidden">
                 <label for="navbar" class="indicator">
-                    <a href="{{ route('customer.order.index') }}"><img src="/images/Bag.png" alt=""></a>
+                    <img src="/images/Bag.png" alt=""></a>
                     <!-- <span class="badge badge-xs badge-primary indicator-item"></span> -->
                 </label>
             </button>
@@ -136,7 +136,9 @@
                         @endforeach
                         @if ($allCompleted)
                             <a href="{{ route('customer.checkout.show') }}">
-                                <button type="submit" class="btn btn-info w-full mt-2">Checkout</button>
+                                <button type="submit"
+                                    class="btn btn-info w-full mt-2 bg-[rgba(202,1,71,1)] text-white">Thanh
+                                    toán</button>
                             </a>
                         @endif
                     @endif
@@ -155,7 +157,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-t-xl">
+    <!-- <div class="bg-white rounded-t-xl">
         <footer class="container p-5 flex justify-between">
             <aside class="">
                 <p class="mt-5">Wibu Coffee<br />Product of Vu Nguyen Duc Tue</p>
@@ -186,7 +188,7 @@
                 </div>
             </nav>
         </footer>
-    </div>
+    </div> -->
 
     @stack('scripts')
 </body>

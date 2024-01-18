@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/css/checkinstyle.css">
     {{-- @include('layouts.link') --}}
-    <title>Document</title>
+    <title>Checkin</title>
 </head>
 
 <body>
