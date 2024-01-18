@@ -99,10 +99,6 @@ h2 {
     cursor: pointer;
     border-radius: 40px;
 }
-.button-action button:hover {
-    background: rgb(39, 194, 25);
-    color: #fff;
-}
 .alert {
     width: 290px;
     height: 30px;

@@ -205,7 +205,7 @@
         </script> --}}
     </div>
 
-    <div class="bg-white rounded-t-xl">
+    <!-- <div class="bg-white rounded-t-xl">
         <footer class="container p-5 flex justify-between">
             <aside class="">
                 <p class="mt-5">Tetnolo-Z Web<br />Product of Vu Nguyen Duc Tue<br />Back-end by Vu Nguyen Duc
@@ -238,7 +238,7 @@
                 </div>
             </nav>
         </footer>
-    </div>
+    </div> -->
     @stack('scripts')
 </body>
 

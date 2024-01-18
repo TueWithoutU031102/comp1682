@@ -154,7 +154,7 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-t-xl">
+    <!-- <div class="bg-white rounded-t-xl">
         <footer class="container p-5 flex justify-between">
             <aside class="">
                 <p class="mt-5">Wibu Coffee<br />Product of Vu Nguyen Duc Tue</p>
@@ -185,7 +185,7 @@
                 </div>
             </nav>
         </footer>
-    </div>
+    </div> -->
 
     @stack('scripts')
 </body>
