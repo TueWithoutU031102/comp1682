@@ -12,15 +12,17 @@ class Checkout extends Model
 
     protected $fillable = ['table_id', 'total', 'status'];
 
-    protected $casts = [
-        'status' => StatusCheckout::class
-    ];
+    protected $casts = ['status' => StatusCheckout::class];
 
     public function Table()
     {
         return $this->belongsTo(Table::class, 'table_id');
     }
 
+    public function Session()
+    {
+        return $this->belongsTo(Session::class, 'session_id');
+    }
     public function carts()
     {
         return $this->hasMany(Cart::class);

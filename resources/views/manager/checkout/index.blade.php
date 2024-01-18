@@ -16,6 +16,9 @@
                             <th scope="col">ID</th>
                             <th>Table</th>
                             <th>Total</th>
+                            <th>Name</th>
+                            <th>MSSV</th>
+                            <th>Mobile phone</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -53,6 +56,9 @@
                             <tr class="hover">
                                 <td>{{ $checkout->id }}</td>
                                 <td>{{ $checkout->table->name }}</td>
+                                <td>{{ $checkout->session->name }}</td>
+                                <td>{{ $checkout->session->mssv }}</td>
+                                <td>{{ $checkout->session->phone }}</td>
                                 <td>{{ $checkout->total }}</td>
                                 <td class="text-info link" onclick="status{{ $checkout->id }}.showModal()">
                                     {{ $checkout->status }}

@@ -28,6 +28,7 @@ class CheckoutController extends Controller
         $session = Session::find(session()->get('customer.session'));
         $before = Checkout::where('table_id', $session->table_id)->where('status', StatusCheckout::Pending)->first();
 
+
         if ($before) {
             $before->forceFill(['status' => StatusCheckout::Canceled])->save();
         }
@@ -40,6 +41,7 @@ class CheckoutController extends Controller
 
         $checkout->forceFill([
             'table_id' => $session->table_id,
+            'session_id' => $session->id,
             'total' => $items->sum(fn($item) => $item->total()),
         ])->save();
 
