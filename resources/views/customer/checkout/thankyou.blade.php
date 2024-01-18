@@ -27,12 +27,12 @@
             <div class="card-body">
                 <h3 class="card-title">Thank you for using our services</h3>
 
-                <p class="text-success text-center">Your payment number #{{ $checkout->id }} is process sucessfully. We
+                <p class="text-success text-center">Your payment number # is process sucessfully. We
                     hope see you in next time.</p>
 
                 <div class="grid grid-cols-2">
                     <p class="mt-3 font-light text-xl">
-                        Total: <span class="text-primary font-bold">{{ number_format($checkout->total) }}</span>đ
+                        Total: <span class="text-primary font-bold"></span>đ
                     </p>
                     <div>
                         <button class="btn float-right" disabled>Already Paid</button>

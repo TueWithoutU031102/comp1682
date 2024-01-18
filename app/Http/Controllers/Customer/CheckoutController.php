@@ -23,7 +23,7 @@ class CheckoutController extends Controller
         return view('customer.checkout.process', ['session' => $session, 'bill' => $bill]);
     }
 
-    public function pay(VNPay $payment, Checkout $checkout, Request $request)
+    public function pay(Checkout $checkout) //VNPay $payment,, Request $request
     {
         $session = Session::find(session()->get('customer.session'));
         $before = Checkout::where('table_id', $session->table_id)->where('status', StatusCheckout::Pending)->first();
@@ -45,18 +45,18 @@ class CheckoutController extends Controller
             'total' => $items->sum(fn($item) => $item->total()),
         ])->save();
 
-        $url = $payment->create(
-            $checkout->id,
-            $checkout->total,
-            $request->ip(),
-            "Thanh toan don hang {$checkout->id}",
-            route('vnpay.verify')
-        );
+        // $url = $payment->create(
+        //     $checkout->id,
+        //     $checkout->total,
+        //     $request->ip(),
+        //     "Thanh toan don hang {$checkout->id}",
+        //     route()
+        // );
 
-        return redirect($url);
+        return to_route('vnpay.verify');
     }
 
-    public function verify($id) //VNPay $payment
+    public function verify() //VNPay $payment
     {
         // $payload = $payment->read();
 
@@ -64,7 +64,7 @@ class CheckoutController extends Controller
         //     return to_route('vnpay.invalid');
         // }
 
-        $process = Checkout::find($id);
+
 
         // if (!$process || $process->status !== StatusCheckout::Pending) {
         //     return to_route('vnpay.invalid');
@@ -75,10 +75,6 @@ class CheckoutController extends Controller
         //     return to_route('customer.checkout.show')->with('message', $payload->message);
         // }
 
-        $process->forceFill([
-            'status' => StatusCheckout::Transfer,
-        ])->save();
-
         $session = Session::find(session()->get('customer.session'));
         if ($session) {
             $session->delete();
@@ -86,6 +82,6 @@ class CheckoutController extends Controller
             session()->forget('cart');
         }
 
-        return view('customer.checkout.thankyou', ['checkout' => $process]);
+        return view('customer.checkout.thankyou');
     }
 }

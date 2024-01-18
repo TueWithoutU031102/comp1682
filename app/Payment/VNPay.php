@@ -64,7 +64,7 @@ class VNPay
         $hmac = hash_hmac('sha512', $query, $this->secret);
         $query = "$query&vnp_SecureHash=$hmac";
 
-        return static::API . "/paymentv2/vpcpay.html?$query";
+        //return static::API . "/paymentv2/vpcpay.html?$query";
     }
 
     /**
