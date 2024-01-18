@@ -56,10 +56,10 @@
                             <tr class="hover">
                                 <td>{{ $checkout->id }}</td>
                                 <td>{{ $checkout->table->name }}</td>
+                                <td>{{ $checkout->total }} đ</td>
                                 <td>{{ $checkout->name }}</td>
                                 <td>{{ $checkout->mssv }}</td>
                                 <td>{{ $checkout->phone }}</td>
-                                <td>{{ $checkout->total }}</td>
                                 <td class="text-info link" onclick="status{{ $checkout->id }}.showModal()">
                                     {{ $checkout->status }}
                                 </td>
