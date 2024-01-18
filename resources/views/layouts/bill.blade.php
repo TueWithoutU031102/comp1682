@@ -164,7 +164,7 @@
             let element = window.document.querySelector('#cart-data');
             element.innerHTML = text;
         }
-        setInterval(updateEvent, 1000);
+        setInterval(updateEvent, 1500);
     </script>
 
     <!-- <div class="bg-white rounded-t-xl">
