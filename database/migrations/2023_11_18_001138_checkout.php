@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('mssv')->unique();
-            $table->string('phone')->unique();
+            $table->string('mssv');
+            $table->string('phone');
             $table->integer('total');
             $table->string('status')->default(StatusCheckout::Pending->value);
             $table->string('transaction_id')->nullable();
