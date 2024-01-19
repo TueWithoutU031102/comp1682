@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <div class="flex flex-col space-y-6">
+    <div class="flex flex-col space-y-6 pb-44">
         @if (session('cart'))
             @foreach (session('cart') as $id => $details)
                 <div class="flex justify-evenly bg-white mx-6 mt-12 cart-detail"
