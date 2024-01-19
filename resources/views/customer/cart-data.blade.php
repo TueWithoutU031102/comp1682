@@ -1,5 +1,5 @@
 <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
-<div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">
+<div class="flex flex-col justify-between p-2 w-80 bg-base-200">
     <div class="flex flex-col space-y-2">
         @if ($bill)
             @php $total = 0 @endphp
@@ -46,7 +46,7 @@
             @endforeach
             @if ($allCompleted)
                 <a href="{{ route('customer.checkout.show') }}">
-                    <button type="submit" class="btn btn-info w-full mt-2 bg-[rgba(202,1,71,1)] text-white">Thanh
+                    <button type="submit" class="btn btn-info w-full mt-2 border-[rgba(202,1,71,1)] bg-[rgba(202,1,71,1)] text-white">Thanh
                         toán</button>
                 </a>
             @endif

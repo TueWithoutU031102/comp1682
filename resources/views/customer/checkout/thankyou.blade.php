@@ -20,7 +20,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-image: url("/images/ThanksBG.png");
+            background-image: url("/images/ThanksBGMB.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
@@ -34,7 +34,7 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                background-image: url("/images/ThanksBG.png");
+                background-image: url("/images/ThanksBGPC.png");
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center center;
