@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thanks you</title>
+    <title>Cảm ơn</title>
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.2/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,9 +43,9 @@
     </style>
 
     <div class ="flex flex-col justify-center">
-        <div class="font-bold text-2xl text-white mx-auto">
-            <p>Cảm ơn bạn đã đặt món</p>
-            <p>Chúc bạn ngon miệng!</p>
+        <div class="font-bold text-xl text-center text-white mx-auto">
+            <p>Cảm ơn bạn đã sử dụng dịch vụ</p>
+            <p>Vui lòng qua quầy để thanh toán !</p>
         </div>
         <div>
             <img src="/images/Toothless.png" alt="">

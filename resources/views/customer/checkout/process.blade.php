@@ -41,7 +41,7 @@
                 <div></div>
                 <span class="text-black font-semibold mb-6 w-20 price"
                     data-price="{{ $b->quantity * $b->menu->price }}">
-                    {{ $b->quantity * $b->menu->price }} đ
+                    {{ number_format($b->quantity * $b->menu->price) }} đ
                 </span>
                 @php
                 $total += $b->quantity * $b->menu->price;

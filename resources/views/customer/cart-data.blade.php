@@ -1,5 +1,5 @@
 <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
-<div class="flex flex-col justify-between p-2 w-80 bg-base-200">
+<div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">
     <div class="flex flex-col space-y-2">
         @if ($bill)
             @php $total = 0 @endphp

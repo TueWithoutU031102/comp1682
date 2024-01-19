@@ -62,7 +62,7 @@
                 </label>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="{{ route('customer.index') }}">Home</a></li>
+                    <li><a href="{{ route('customer.index') }}">Trang chủ</a></li>
                     <li><a href="{{ route('customer.menu.index') }}">Menu</a></li>
                 </ul>
             </div>
@@ -74,7 +74,9 @@
             <button class="btn btn-ghost btn-circle lg:hidden">
                 <label for="navbar" class="indicator">
                     <img src="/images/Bag.png" alt=""></a>
-                    <!-- <span class="badge badge-xs badge-primary indicator-item"></span> -->
+                    @if ($bill)
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                    @endif
                 </label>
             </button>
         </div>

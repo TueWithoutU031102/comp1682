@@ -75,7 +75,9 @@
             <button class="btn btn-ghost btn-circle lg:hidden">`
                 <label for="navbar" class="indicator">
                     <a href="{{ route('customer.order.index') }}"><img src="/images/Bag.png" alt=""></a>
-                    <!-- <span class="badge badge-xs badge-primary indicator-item"></span> -->
+                    @if (session('cart'))
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                    @endif
                 </label>
             </button>
         </div>
