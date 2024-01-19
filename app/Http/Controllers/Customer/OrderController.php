@@ -50,7 +50,7 @@ class OrderController extends Controller
         }
 
         session()->put('cart', $cart);
-        return redirect()->route('customer.menu.index')->with('success', 'Dish added to cart successfully');
+        return redirect()->route('customer.menu.index')->with('success', 'Món ăn đã được thêm vào giỏ hàng');
     }
 
 
@@ -62,7 +62,7 @@ class OrderController extends Controller
             'quantity' => 'required|numeric|min:0',
         ]);
 
-        abort_if(empty($cart[$id]), 404, 'Dish not found in cart');
+        abort_if(empty($cart[$id]), 404, 'Không có món ăn nào ở trong giỏ');
 
         $cart[$id]['quantity'] = $request->quantity;
 
@@ -72,7 +72,7 @@ class OrderController extends Controller
 
         session()->put('cart', $cart);
 
-        $message = $request->quantity < 1 ? 'Dish removed from cart successfully' : 'Dish updated successfully';
+        $message = $request->quantity < 1 ? 'Món ăn đã được xóa khỏi giỏ hàng' : 'Món ăn đã được cập nhật';
 
         return ['success' => $message];
     }
