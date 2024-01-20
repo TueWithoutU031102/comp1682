@@ -36,7 +36,7 @@
         @php
             $allCompleted = true;
         @endphp
-        @if ($bill)
+        @if ($bill && count($bill) > 0)
             @foreach ($bill as $b)
                 @if ($b['status'] !== 'Completed')
                     @php
@@ -46,7 +46,8 @@
             @endforeach
             @if ($allCompleted)
                 <a href="{{ route('customer.checkout.show') }}">
-                    <button type="submit" class="btn btn-info w-full mt-2 border-[rgba(202,1,71,1)] bg-[rgba(202,1,71,1)] text-white">Thanh
+                    <button type="submit"
+                        class="btn btn-info w-full mt-2 border-[rgba(202,1,71,1)] bg-[rgba(202,1,71,1)] text-white">Thanh
                         toán</button>
                 </a>
             @endif

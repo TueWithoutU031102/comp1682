@@ -17,7 +17,7 @@ class CustomerController extends Controller
             $user_name = Session::find(session()->get('customer.session'))->name;
             $session_id = session()->get('customer.session');
             $bill = Cart::where('session_id', $session_id)->get();
-
+            
             view()->share('table_id', $table_id);
             view()->share('user_name', $user_name);
             view()->share('session_id', $session_id);

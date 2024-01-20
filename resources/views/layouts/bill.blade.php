@@ -75,7 +75,7 @@
                 <label for="navbar" class="indicator">
                     <img src="/images/Bag.png" alt=""></a>
                     @if ($bill)
-                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                        <span class="badge badge-xs badge-primary indicator-item"></span>
                     @endif
                 </label>
             </button>
@@ -128,7 +128,8 @@
                     @php
                         $allCompleted = true;
                     @endphp
-                    @if ($bill)
+
+                    @if ($bill && count($bill) > 0)
                         @foreach ($bill as $b)
                             @if ($b['status'] !== 'Completed')
                                 @php

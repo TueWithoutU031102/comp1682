@@ -3,67 +3,72 @@
 
 
 @section('content')
-    <div class="flex flex-col space-y-6 pb-44">
-        @if (session('cart'))
-            @foreach (session('cart') as $id => $details)
-                <div class="flex justify-evenly bg-white mx-6 mt-12 cart-detail"
-                    style="box-shadow: -4px -4px 10px rgba(0, 0, 0, 0.05), 4px 4px 10px rgba(0, 0, 0, 0.05);">
-                    <div class="cart-detail-img">
-                        <img class="aspect-square w-24 h-24 m-4 rounded object-cover" src="{{ asset($details['image']) }}"
-                            alt="">
-                    </div>
-                    <div class="mt-6">
-                        <p class="font-bold w-36">{{ $details['name'] }}</p>
-                        <div class="flex justify-between mt-6 p-0.5 border-[1px] border-[rgba(242,245,248,1)] w-[90px]">
-                            <button class="" onclick="decreaseQuantity(this)"><img
-                                    src="/images/clarity_minus-line.png" alt=""></button>
-                            <div class="cart_update" data-id="{{ $id }}">
-                                <input type="number" class="w-8 text-center font-semibold quantity"
-                                    value="{{ $details['quantity'] }}">
+    @if ($cart != null)
+        <div class="flex flex-col space-y-6 pb-44">
+            @if (session('cart'))
+                @foreach (session('cart') as $id => $details)
+                    <div class="flex justify-evenly bg-white mx-6 mt-12 cart-detail"
+                        style="box-shadow: -4px -4px 10px rgba(0, 0, 0, 0.05), 4px 4px 10px rgba(0, 0, 0, 0.05);">
+                        <div class="cart-detail-img">
+                            <img class="aspect-square w-24 h-24 m-4 rounded object-cover" src="{{ asset($details['image']) }}"
+                                alt="">
+                        </div>
+                        <div class="mt-6">
+                            <p class="font-bold w-36">{{ $details['name'] }}</p>
+                            <div class="flex justify-between mt-6 p-0.5 border-[1px] border-[rgba(242,245,248,1)] w-[90px]">
+                                <button class="" onclick="decreaseQuantity(this)"><img
+                                        src="/images/clarity_minus-line.png" alt=""></button>
+                                <div class="cart_update" data-id="{{ $id }}">
+                                    <input type="number" class="w-8 text-center font-semibold quantity"
+                                        value="{{ $details['quantity'] }}">
+                                </div>
+                                <button class="" onclick="increaseQuantity(this)"><img class="w-5"
+                                        src="/images/bi_plus.png" alt=""></button>
                             </div>
-                            <button class="" onclick="increaseQuantity(this)"><img class="w-5"
-                                    src="/images/bi_plus.png" alt=""></button>
+                        </div>
+                        <div class="flex flex-col justify-between mt-2">
+                            <img class="w-6 ml-6" src="/images/bi_x.png" onclick="cartDelete(this)" alt="">
+                            <span class="text-black font-semibold mb-6 w-20 price" data-price="{{ $details['price'] }}">
+                                {{ number_format($details['price']) }} đ
+                            </span>
                         </div>
                     </div>
-                    <div class="flex flex-col justify-between mt-2">
-                        <img class="w-6 ml-6" src="/images/bi_x.png" onclick="cartDelete(this)" alt="">
-                        <span class="text-black font-semibold mb-6 w-20 price" data-price="{{ $details['price'] }}">
-                            {{ number_format($details['price']) }} đ
-                        </span>
-                    </div>
-                </div>
-            @endforeach
-        @endif
-    </div>
-
-    <div class="fixed bg-white w-full bottom-0 h-40">
-        <div class="flex flex-col ml-4 mt-4">
-            @php $total = 0 @endphp
-            @foreach ((array) session('cart') as $id => $details)
-                @php $total += $details['price'] * $details['quantity'] @endphp
-            @endforeach
-            <span class="font-bold">Tổng:</span>
-            <span class="font-bold text-xl" id="total-amount"> {{ number_format($total) }} đ</span>
+                @endforeach
+            @endif
         </div>
-        <div class="flex justify-center">
-            <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <button type="submit"
-                    class="rounded-2xl font-semibold py-[10px] w-36 mx-32 mt-6 bg-[rgba(202,1,71,1)] text-white">Đặt món
-                </button>
-            </form>
+
+        <div class="fixed bg-white w-full bottom-0 h-40">
+            <div class="flex flex-col ml-4 mt-4">
+                @php $total = 0 @endphp
+                @foreach ((array) session('cart') as $id => $details)
+                    @php $total += $details['price'] * $details['quantity'] @endphp
+                @endforeach
+                <span class="font-bold">Tổng:</span>
+                <span class="font-bold text-xl" id="total-amount"> {{ number_format($total) }} đ</span>
+            </div>
+
+            <div class="flex justify-center">
+                <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <button type="submit"
+                        class="rounded-2xl font-semibold py-[10px] w-36 mx-32 mt-6 bg-[rgba(202,1,71,1)] text-white">Đặt món
+                    </button>
+                </form>
+            </div>
+
+            <!-- <div class="lg:mt-3 w-full text-center">
+                                                    <label class="swap swap-flip opacity-40">
+
+                                                        this hidden checkbox controls the state
+                                                        <input type="checkbox" class="hidden" />
+                                                        <div class="swap-off"><span class="text-4xl">😀</span></div>
+                                                        <div class="swap-on"><span class="text-4xl">🤡</span></div>
+                                                    </label>
+                                                </div> -->
         </div>
-        <!-- <div class="lg:mt-3 w-full text-center">
-                <label class="swap swap-flip opacity-40">
-
-                    this hidden checkbox controls the state
-                    <input type="checkbox" class="hidden" />
-                    <div class="swap-off"><span class="text-4xl">😀</span></div>
-                    <div class="swap-on"><span class="text-4xl">🤡</span></div>
-                </label>
-            </div> -->
-    </div>
-
+    @else
+        <h1>Xin hãy gọi món ạ </h1>
+    @endif
 
 
     {{-- <div class="drawer drawer-end lg:drawer-open">
