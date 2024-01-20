@@ -14,7 +14,8 @@
 <body>
     <div class="max-w-xl mx-auto ml-6 mt-3 text-3xl">
         <a href="{{ route('customer.index') }}" class="btn btn-ghost">
-            <</a>
+            <img class="mt-6" src="/images/arrow-left.png" alt="">
+        </a>
     </div>
     <div class="flex flex-col space-y-6 pb-44">
         @if (Session::has('message'))

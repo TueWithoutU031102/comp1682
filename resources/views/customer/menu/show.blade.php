@@ -29,7 +29,7 @@
     </div>
     <div>
         <div class="px-5 mt-8">
-            <div class="p-12 rounded-full max-w-[400px] mx-auto" style="box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.1);">
+            <div class="p-12 rounded-full max-w-[320px] mx-auto" style="box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.1);">
                 <img class="aspect-square object-cover rounded-full" src="{{ asset($menu->image) }}">
             </div>
         </div>

@@ -74,8 +74,8 @@
             <button class="btn btn-ghost btn-circle lg:hidden">
                 <label for="navbar" class="indicator">
                     <img src="/images/Bag.png" alt=""></a>
-                    @if ($bill)
-                        <span class="badge badge-xs badge-primary indicator-item"></span>
+                    @if ($bill && count($bill) > 0)
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
                     @endif
                 </label>
             </button>
@@ -93,29 +93,28 @@
             <div class="flex flex-col justify-between p-2 w-80 bg-base-200 h-full">
                 <div class="flex flex-col space-y-2">
                     @if ($bill)
-                        @php $total = 0 @endphp
-                        @foreach ($bill as $b)
-                            <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
-                                <div class="cart-detail-img">
-                                    <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b->menu->image) }}"
-                                        alt="">
-                                </div>
-                                <div>
-                                    <p>
-                                        {{ $b['quantity'] }} X
-                                        {{ $b->menu->name }}
-                                        @if ($b['status'] !== 'Completed')
-                                            <span class="text-sm opacity-50">({{ $b['status'] }})</span>
-                                        @endif
-                                    </p>
-                                    @php
-                                        $price = $b->menu->price * $b['quantity'];
-                                    @endphp
-                                    <span class="text-red-500 price">{{ number_format($price) }} đ</span>
-                                    @php $total += $price @endphp
-                                </div>
-                            </div>
-                        @endforeach
+                    @php $total = 0 @endphp
+                    @foreach ($bill as $b)
+                    <div class="rounded flex space-x-2 bg-white p-2 cart-detail">
+                        <div class="cart-detail-img">
+                            <img class="aspect-square w-12 h-12 rounded" src="{{ asset($b->menu->image) }}" alt="">
+                        </div>
+                        <div>
+                            <p>
+                                {{ $b['quantity'] }} X
+                                {{ $b->menu->name }}
+                                @if ($b['status'] !== 'Completed')
+                                <span class="text-sm opacity-50">({{ $b['status'] }})</span>
+                                @endif
+                            </p>
+                            @php
+                            $price = $b->menu->price * $b['quantity'];
+                            @endphp
+                            <span class="text-red-500 price">{{ number_format($price) }} đ</span>
+                            @php $total += $price @endphp
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
                 </div>
 
@@ -126,24 +125,23 @@
                         <span> {{ number_format($total) }}đ</span>
                     </div>
                     @php
-                        $allCompleted = true;
+                    $allCompleted = true;
                     @endphp
 
                     @if ($bill && count($bill) > 0)
-                        @foreach ($bill as $b)
-                            @if ($b['status'] !== 'Completed')
-                                @php
-                                    $allCompleted = false;
-                                @endphp
-                            @endif
-                        @endforeach
-                        @if ($allCompleted)
-                            <a href="{{ route('customer.checkout.show') }}">
-                                <button type="submit"
-                                    class="btn btn-info w-full mt-2 bg-[rgba(202,1,71,1)] text-white">Thanh
-                                    toán</button>
-                            </a>
-                        @endif
+                    @foreach ($bill as $b)
+                    @if ($b['status'] !== 'Completed')
+                    @php
+                    $allCompleted = false;
+                    @endphp
+                    @endif
+                    @endforeach
+                    @if ($allCompleted)
+                    <a href="{{ route('customer.checkout.show') }}">
+                        <button type="submit" class="btn btn-info w-full mt-2 bg-[rgba(202,1,71,1)] text-white">Thanh
+                            toán</button>
+                    </a>
+                    @endif
                     @endif
 
                     {{-- <div class="lg:mt-5 w-full text-center">

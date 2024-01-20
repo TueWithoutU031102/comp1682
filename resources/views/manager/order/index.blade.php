@@ -95,7 +95,6 @@
             let tableName = table.find(table => table.id === tableID).name;
 
             let created = document.querySelector(`#status${obj.id}`)
-
             let dialog = created ? '' : `<dialog id="status${obj.id}" class="modal">
                                 <div class="modal-box max-w-xs">
                                     <article>
@@ -144,7 +143,7 @@
             element.insertAdjacentHTML('beforeend', dialog + tr);
         }
     }
-    setInterval(updateEvent, 1000);
+    setInterval(updateEvent, 5000);
 </script>
 
 </x-app-layout>
