@@ -132,7 +132,7 @@
             let cartDetail = $(button).closest('.cart-detail');
             let id = cartDetail.find('.cart_update').data('id');
             cartDetail.remove();
-            update(id,0);
+            update(id, 0);
         }
 
         function update(id, quantity) {
@@ -155,6 +155,8 @@
                     quantity: +quantity
                 })
             })
+
+            if (total == 0) { window.location.reload(); }
         }
 
         function decreaseQuantity(button) {
@@ -167,8 +169,8 @@
                 inputElement.value = parseInt(inputElement.value) - 1;
                 let cartDetail = $(button).closest('.cart-detail');
                 let id = cartDetail.find('.cart_update').data('id');
-                update(id, 0)
                 cartDetail.remove();
+                update(id, 0)
             }
         }
 
