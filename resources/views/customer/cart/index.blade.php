@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="flex flex-col justify-between mt-2">
-            <img class="w-6 ml-6" src="/images/bi_x.png" onclick="cartDelete(this)" alt="">
+            <button onclick="cartDelete(this)"> <img class="w-6 ml-6" src="/images/bi_x.png" alt=""></button>
             <span class="text-black font-semibold mb-6 w-20 price" data-price="{{ $details['price'] }}">
                 {{ number_format($details['price']) }} đ
             </span>
@@ -122,7 +122,7 @@
             currency: 'VND',
         });
 
-        $(document).on('input', '.cart_update input.quantity', funct ion () {
+        $(document).on('input', '.cart_update input.quantity', function () {
             let id = $(this).closest('.cart_detail').find('.cart_update').data('id');
             let quantity = $(this).val();
             update(id, quantity);
@@ -131,13 +131,13 @@
         function cartDelete(button) {
             let cartDetail = $(button).closest('.cart-detail');
             let id = cartDetail.find('.cart_update').data('id');
-            update(id, 0)
             cartDetail.remove();
+            update(id,0);
         }
 
         function update(id, quantity) {
             var total = 0;
-            $('.cart-detail').each(func tion () {
+            $('.cart-detail').each(function () {
                 var quantity = +$(this).find('.quantity').val();
                 var price = parseFloat($(this).find('.price').data('price'));
                 total += price * quantity;
@@ -177,7 +177,7 @@
             inputElement.value = parseInt(inputElement.value) + 1;
             let id = $(button).closest('.cart-detail').find('.cart_update').data('id');
             update(id, inputElement.value);
-     
+        }
     </script>
 </div>
 @endsection
