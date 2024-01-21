@@ -76,7 +76,7 @@
             let url = "{{ route('manager.checkout.event', [], false) }}";
             let response = await fetch(url);
             let data = await response.json();
-            let checkout = data.checkouts;
+            let checkout = data.checkouts.reverse();
             let table = data.tables;
             let status = data.statuses;
             let element = window.document.querySelector('#checkout_data');

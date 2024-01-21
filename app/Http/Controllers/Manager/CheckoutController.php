@@ -14,7 +14,7 @@ class CheckoutController extends Controller
     //
     public function index()
     {
-        $checkouts = Checkout::all();
+        $checkouts = Checkout::orderBy('created_at', 'desc')->paginate(10);
         $statuses = StatusCheckout::cases();
         return view('manager.checkout.index', ['checkouts' => $checkouts, 'statuses' => $statuses]);
     }
