@@ -25,7 +25,7 @@ class CheckoutController extends Controller
 
         $checkout->update(['status' => $data]);
         if ($checkout->status != "Pending") {
-            $session = Session::find(session()->get('customer.session'));
+            $session = Session::where('mssv', $checkout->mssv)->first();
             if ($session) {
                 $session->delete();
                 session()->forget('customer.session');
