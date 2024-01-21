@@ -13,7 +13,6 @@ class MenuController extends Controller
     public function index()
     {
         $currentTime = Carbon::now();
-        dd($menus = Menu::all());
         if ($currentTime->isBetween(Carbon::createFromTime(18, 0), Carbon::createFromTime(18, 40))) {
             $menus = Menu::all();
             return view(
