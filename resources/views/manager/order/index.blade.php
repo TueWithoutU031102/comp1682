@@ -125,7 +125,6 @@
                                     </article>
                                 </div>
                             </dialog>`
-                console.log(dialog);
                 let tr = `<tr>
                 <td>${obj.id}</td>
                 <td>${menuName}</td>
