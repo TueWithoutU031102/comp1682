@@ -3,62 +3,67 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             @if (Auth::user()->isManager())
-                <div class="flex">
-                    <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
-                        <a href="{{ route('manager.index') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                        </a>
-                    </div>
-
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('manager.review.index')" :active="request()->routeIs('manager.review.index')">
-                            {{ __('Review') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.book.index')" :active="request()->routeIs('manager.book.index')">
-                            {{ __('Booking') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.table.index')" :active="request()->routeIs('manager.table.index')">
-                            {{ __('Table') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.checkin.index')" :active="request()->routeIs('manager.checkin.index')">
-                            {{ __('Session') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.order.index')" :active="request()->routeIs('manager.order.index')">
-                            {{ __('Order') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.type.index')" :active="request()->routeIs('manager.type.index')">
-                            {{ __('Type') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.menu.index')" :active="request()->routeIs('manager.menu.index')">
-                            {{ __('Menu') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.notification.index')" :active="request()->routeIs('manager.notification.index')">
-                            {{ __('Notification') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manager.checkout.index')" :active="request()->routeIs('manager.checkout.index')">
-                            {{ __('Checkout') }}
-                        </x-nav-link>
-                    </div>
+            <div class="flex">
+                <!-- Logo -->
+                <div class="shrink-0 flex items-center">
+                    <a href="{{ route('manager.index') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
                 </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('manager.review.index')"
+                        :active="request()->routeIs('manager.review.index')">
+                        {{ __('Review') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.book.index')" :active="request()->routeIs('manager.book.index')">
+                        {{ __('Booking') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.table.index')"
+                        :active="request()->routeIs('manager.table.index')">
+                        {{ __('Table') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.checkin.index')"
+                        :active="request()->routeIs('manager.checkin.index')">
+                        {{ __('Session') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.order.index')"
+                        :active="request()->routeIs('manager.order.index')">
+                        {{ __('Order') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.type.index')" :active="request()->routeIs('manager.type.index')">
+                        {{ __('Type') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.menu.index')" :active="request()->routeIs('manager.menu.index')">
+                        {{ __('Menu') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.notification.index')"
+                        :active="request()->routeIs('manager.notification.index')">
+                        {{ __('Notification') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('manager.checkout.index')"
+                        :active="request()->routeIs('manager.checkout.index')">
+                        {{ __('Checkout') }}
+                    </x-nav-link>
+                </div>
+            </div>
             @elseif(Auth::user()->isAdmin())
-                <div class="flex">
-                    <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
-                        <a href="{{ route('admin.index') }}">
-                            <x-application-logo
-                                class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                        </a>
-                    </div>
-
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                            {{ __('Admin') }}
-                        </x-nav-link>
-                    </div>
+            <div class="flex">
+                <!-- Logo -->
+                <div class="shrink-0 flex items-center">
+                    <a href="{{ route('admin.index') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
                 </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                        {{ __('Admin') }}
+                    </x-nav-link>
+                </div>
+            </div>
             @endif
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -88,8 +93,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -117,44 +121,50 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         @if (Auth::user()->isManager())
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
-                </x-responsive-nav-link>
-                {{-- <x-responsive-nav-link :href="route('')" :active="request()->routeIs('')">
-                            {{ __('Payment') }}
-                        </x-responsive-nav-link> --}}
-                <x-responsive-nav-link :href="route('manager.review.index')" :active="request()->routeIs('manager.review.index')">
-                    {{ __('Review') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('manager.book.index')" :active="request()->routeIs('manager.book.index')">
-                    {{ __('Booking') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('manager.table.index')" :active="request()->routeIs('manager.table.index')">
-                    {{ __('Table') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('manager.checkin.index')" :active="request()->routeIs('manager.checkin.index')">
-                    {{ __('Session') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('manager.order.index')" :active="request()->routeIs('manager.order.index')">
-                    {{ __('Order') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('manager.type.index')" :active="request()->routeIs('manager.type.index')">
-                    {{ __('Type') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('manager.menu.index')" :active="request()->routeIs('manager.menu.index')">
-                    {{ __('Menu') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('manager.notification.index')" :active="request()->routeIs('manager.notification.index')">
-                    {{ __('Notification') }}
-                </x-responsive-nav-link>
-            </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('manager.review.index')"
+                :active="request()->routeIs('manager.review.index')">
+                {{ __('Review') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.book.index')"
+                :active="request()->routeIs('manager.book.index')">
+                {{ __('Booking') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.table.index')"
+                :active="request()->routeIs('manager.table.index')">
+                {{ __('Table') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.checkin.index')"
+                :active="request()->routeIs('manager.checkin.index')">
+                {{ __('Session') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.order.index')"
+                :active="request()->routeIs('manager.order.index')">
+                {{ __('Order') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.type.index')"
+                :active="request()->routeIs('manager.type.index')">
+                {{ __('Type') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.menu.index')"
+                :active="request()->routeIs('manager.menu.index')">
+                {{ __('Menu') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.notification.index')"
+                :active="request()->routeIs('manager.notification.index')">
+                {{ __('Notification') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manager.checkout.index')"
+                :active="request()->routeIs('manager.checkout.index')">
+                {{ __('Checkout') }}
+            </x-responsive-nav-link>
+        </div>
         @elseif(Auth::user()->isAdmin())
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
-                </x-responsive-nav-link>
-            </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
         @endif
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -171,8 +181,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
