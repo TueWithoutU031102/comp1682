@@ -135,7 +135,7 @@
             update(id, 0);
         }
 
-        function update(id, quantity) {
+        async function update(id, quantity) {
             var total = 0;
             $('.cart-detail').each(function () {
                 var quantity = +$(this).find('.quantity').val();
@@ -145,7 +145,7 @@
 
             $('#total-amount').text(formater.format(total));
 
-            fetch('/customers/orders/update/' + id, {
+            await fetch('/customers/orders/update/' + id, {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
