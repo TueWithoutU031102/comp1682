@@ -77,15 +77,16 @@
                 <li>
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('manager.index') }}">
-                            <x-application-logo
-                                class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                            <!-- <x-application-logo
+                                class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> -->
+                                <img class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" src="/images/Logotet.png" alt="">
                         </a>
                     </div>
                 </li>
             </ul>
-            <ul class="hidden md:block">
+            <!-- <ul class="hidden md:block">
                 <li><a onclick="showModal()">Booking</a></li>
-            </ul>
+            </ul> -->
 
             <ul class="hidden md:block">
                 <li><a href="/login" role="button">Login</a></li>
@@ -115,7 +116,7 @@
             <label for="navbar" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu p-4 w-80 min-h-full bg-base-200">
                 <!-- Sidebar content here -->
-                <li><a class="no-underline" onclick="showModal()">Booking</a></li>
+                <!-- <li><a class="no-underline" onclick="showModal()">Booking</a></li> -->
                 <li><a class="no-underline" href="/login">Login</a></li>
             </ul>
         </div>
