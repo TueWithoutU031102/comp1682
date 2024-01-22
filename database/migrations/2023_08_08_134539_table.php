@@ -30,6 +30,9 @@ return new class extends Migration {
             [
                 'name' => 'Bàn 4'
             ],
+            [
+                'name' => 'Bàn 5'
+            ],
         ]);
     }
 

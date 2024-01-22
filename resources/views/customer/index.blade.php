@@ -3,7 +3,8 @@
 @section('content')
 <div style="background: #fff" class="min-h-screen">
     @if (Session::has('success'))
-    <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+    <div class="alert alert-success bg-[rgba(5,38,142,1)]" role="alert"><strong class="text-white">{{
+            Session::get('success') }}</strong></div>
     @endif
     <div class="flex flex-col text-center mt-[10vh]">
         <h1 style="font-size: 22px; color: #000; font-weight: 500" class="mb-3">Xin chào, {{ $user_name }}</h1>
@@ -17,7 +18,8 @@
         </div>
     </div>
 
-    <div style="background: rgba(5, 38, 142, 1); border-top-left-radius: 40px; border-top-right-radius: 40px; height: 600px; box-shadow: 0px 0px 0px, 0px -10px 10px rgba(0,0,0,0.25);" class="w-full mt-20">
+    <div style="background: rgba(5, 38, 142, 1); border-top-left-radius: 40px; border-top-right-radius: 40px; height: 600px; box-shadow: 0px 0px 0px, 0px -10px 10px rgba(0,0,0,0.25);"
+        class="w-full mt-20">
 
         <div style="padding-top: 100px" class="card-body grid grid-cols-2 md:grid-cols-2 gap-12">
             <form action="{{ route('customer.notification.store') }}" method="POST" enctype="multipart/form-data"

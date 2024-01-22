@@ -40,6 +40,20 @@ return new class extends Migration {
                 'phone' => '0123456789',
                 'password' => Hash::make('123456'),
             ],
+            [
+                'name' => 'Yến Nhi',
+                'email' => 'nhi@gmail.com',
+                'role' => 'Manager',
+                'phone' => '0123456789',
+                'password' => Hash::make('123456'),
+            ],
+            [
+                'name' => 'Mei Linh',
+                'email' => 'meilinh@gmail.com',
+                'role' => 'Manager',
+                'phone' => '0123456789',
+                'password' => Hash::make('123456'),
+            ],
         ]);
     }
 

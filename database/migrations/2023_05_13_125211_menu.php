@@ -64,21 +64,12 @@ return new class extends Migration {
                 'saled' => '0'
             ],
             [
-                'name' => 'Soda xanh lá',
+                'name' => 'Soda tím',
                 'type_id' => '2',
                 'status' => StatusMenu::Available->value,
                 'price' => '15000',
                 'description' => 'Soda syrup',
-                'image' => '/images/sodaxanhla.png',
-                'saled' => '0'
-            ],
-            [
-                'name' => 'Soda xanh biển',
-                'type_id' => '2',
-                'status' => StatusMenu::Available->value,
-                'price' => '15000',
-                'description' => 'Soda syrup',
-                'image' => '/images/sodaxanhbien.png',
+                'image' => '/images/sodatim.png',
                 'saled' => '0'
             ],
             [
