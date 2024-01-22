@@ -61,7 +61,7 @@
                             <td>{{ $checkout->mssv }}</td>
                             <td>{{ $checkout->phone }}</td>
                             <!-- 
-                                Pending: text-info
+                                Pending: text-orange-500
                                 Cash - Transfer: text-green-500
                                 Canceled: text-red-500
                              -->
