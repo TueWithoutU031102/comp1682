@@ -24,55 +24,64 @@
                     </thead>
                     <tbody id="order_data">
                         @foreach ($carts as $cart)
-                            <dialog id="status{{ $cart->id }}" class="modal">
-                                <div class="modal-box max-w-xs">
-                                    <article>
-                                        <form method="dialog">
-                                            <button method="dialog"
-                                                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
-                                                X
-                                            </button>
-                                        </form>
-                                        <h3 class="font-semibold text-lg mb-3">Update status order</h3>
-                                        <form method="POST"
-                                            action="{{ route('manager.order.update', ['cart' => $cart]) }}">
-                                            @csrf
-
-                                            <div class="form-control">
-                                                <label class="label">Status</label>
-                                                <select name="status" value="{{ $cart->status }}"
-                                                    class="select select-bordered w-full max-w-xs">
-                                                    @foreach ($statuses as $status)
-                                                        <option value="{{ $status->value }}">{{ $status->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <button type="submit" class="btn btn-success mt-5">Save Status</button>
-                                        </form>
-                                    </article>
-                                </div>
-                            </dialog>
-                            <tr>
-                                <td>{{ $cart->id }}</td>
-                                <td>{{ $cart->menu->name }}</td>
-                                <td>{{ $cart->session->table->name }}</td>
-                                <td>{{ $cart->quantity }}</td>
-                                <td class="text-info link" onclick="status{{ $cart->id }}.showModal()">
-                                    {{ $cart->status }}
-                                </td>
-                                <td>{{ $cart->created_at }}</td>
-                                <td>
-                                    <form action="{{ route('manager.order.destroy', ['cart' => $cart]) }}"
-                                        method="POST" class="d-inline"
-                                        onsubmit="return confirm('Are you sure to delete {{ $cart->quantity }} {{ $cart->menu->name }} {{ $cart->session->table->name }} !!!???')">
-                                        @csrf
-                                        <button class="btn btn-error btn-outline btn-square btn-sm"><i
-                                                class="fa-solid fa-trash"></i></button>
+                        <dialog id="status{{ $cart->id }}" class="modal">
+                            <div class="modal-box max-w-xs">
+                                <article>
+                                    <form method="dialog">
+                                        <button method="dialog"
+                                            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
+                                            X
+                                        </button>
                                     </form>
-                                </td>
-                            </tr>
+                                    <h3 class="font-semibold text-lg mb-3">Update status order</h3>
+                                    <form method="POST" action="{{ route('manager.order.update', ['cart' => $cart]) }}">
+                                        @csrf
+
+                                        <div class="form-control">
+                                            <label class="label">Status</label>
+                                            <select name="status" value="{{ $cart->status }}"
+                                                class="select select-bordered w-full max-w-xs">
+                                                @foreach ($statuses as $status)
+                                                <option value="{{ $status->value }}">{{ $status->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success mt-5">Save Status</button>
+                                    </form>
+                                </article>
+                            </div>
+                        </dialog>
+                        <tr>
+                            <td>{{ $cart->id }}</td>
+                            <td>{{ $cart->menu->name }}</td>
+                            <td>{{ $cart->session->table->name }}</td>
+                            <td>{{ $cart->quantity }}</td>
+                            @if ($cart->status === 'Waiting')
+                            <td class="link text-red-500" onclick="status{{ $cart->id }}.showModal()">
+                                Waiting
+                            </td>
+                            @elseif ($cart->status === 'Preparing')
+                            <td class="link text-orange-500" onclick="status{{ $cart->id }}.showModal()">
+                                Preparing
+                            </td>
+                            @elseif ($cart->status === 'Completed')
+                            <td class="link text-green-500" onclick="status{{ $cart->id }}.showModal()">
+                                Completed
+                            </td>
+                            @endif
+                            <td>{{ $cart->created_at }}</td>
+                            <td>
+                                <form action="{{ route('manager.order.destroy', ['cart' => $cart]) }}" method="POST"
+                                    class="d-inline"
+                                    onsubmit="return confirm('Are you sure to delete {{ $cart->quantity }} {{ $cart->menu->name }} {{ $cart->session->table->name }} !!!???')">
+                                    @csrf
+                                    <button class="btn btn-error btn-outline btn-square btn-sm"><i
+                                            class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -130,8 +139,20 @@
                 <td>${menuName}</td>
                 <td>${tableName}</td>
                 <td>${obj.quantity}</td>
-                <td class="text-info link" onclick="status${obj.id}.showModal()">${obj.status}</td>
-                <td>${moment(obj.created_at).format('YYYY-MM-DD HH:mm:ss') }</td>
+                @if ($cart->status === 'Waiting')
+                            <td class="link text-red-500" onclick="status{{ $cart->id }}.showModal()">
+                                Waiting
+                            </td>
+                            @elseif ($cart->status === 'Preparing')
+                            <td class="link text-orange-500" onclick="status{{ $cart->id }}.showModal()">
+                                Preparing
+                            </td>
+                            @elseif ($cart->status === 'Completed')
+                            <td class="link text-green-500" onclick="status{{ $cart->id }}.showModal()">
+                                Completed
+                            </td>
+                            @endif
+                <td>${moment(obj.created_at).format('YYYY-MM-DD HH:mm:ss')}</td>
                 <td>
                     <form action="/managers/orders/${obj.id}/destroy" method="POST"
                         class="d-inline"
@@ -145,7 +166,7 @@
                 element.insertAdjacentHTML('beforeend', dialog + tr);
             }
         }
-        setInterval(updateEvent, 5000);
+        setInterval(updateEvent, 2000);
     </script>
 
 </x-app-layout>

@@ -49,7 +49,7 @@
             <p>Vui lòng qua quầy để thanh toán !</p>
         </div>
         <div>
-            <img src="/images/toothless.gif" alt="">
+            <img src="/images/Toothless.gif" alt="">
         </div>
     </div>
     <div class="flex justify-center">

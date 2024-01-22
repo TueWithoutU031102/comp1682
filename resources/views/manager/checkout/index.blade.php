@@ -24,46 +24,51 @@
                     </thead>
                     <tbody id="checkout_data">
                         @foreach ($checkouts as $checkout)
-                            <dialog id="status{{ $checkout->id }}" class="modal">
-                                <div class="modal-box max-w-xs">
-                                    <article>
-                                        <form method="dialog">
-                                            <button method="dialog"
-                                                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
-                                                X
-                                            </button>
-                                        </form>
-                                        <h3 class="font-semibold text-lg mb-3">Status</h3>
-                                        <form method="POST" action="{{ route('manager.checkout.update', $checkout) }}">
-                                            @csrf
+                        <dialog id="status{{ $checkout->id }}" class="modal">
+                            <div class="modal-box max-w-xs">
+                                <article>
+                                    <form method="dialog">
+                                        <button method="dialog"
+                                            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">
+                                            X
+                                        </button>
+                                    </form>
+                                    <h3 class="font-semibold text-lg mb-3">Status</h3>
+                                    <form method="POST" action="{{ route('manager.checkout.update', $checkout) }}">
+                                        @csrf
 
-                                            <div class="form-control">
-                                                <label class="label">Status</label>
-                                                <select name="status" value="{{ $checkout->status }}"
-                                                    class="select select-bordered w-full max-w-xs">
-                                                    @foreach ($statuses as $status)
-                                                        <option value="{{ $status->value }}">{{ $status->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                        <div class="form-control">
+                                            <label class="label">Status</label>
+                                            <select name="status" value="{{ $checkout->status }}"
+                                                class="select select-bordered w-full max-w-xs">
+                                                @foreach ($statuses as $status)
+                                                <option value="{{ $status->value }}">{{ $status->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                            <button type="submit" class="btn btn-success mt-5">Save Status</button>
-                                        </form>
-                                    </article>
-                                </div>
-                            </dialog>
-                            <tr class="hover">
-                                <td>{{ $checkout->id }}</td>
-                                <td>{{ $checkout->table->name }}</td>
-                                <td>{{ $checkout->total }} đ</td>
-                                <td>{{ $checkout->name }}</td>
-                                <td>{{ $checkout->mssv }}</td>
-                                <td>{{ $checkout->phone }}</td>
-                                <td class="text-info link" onclick="status{{ $checkout->id }}.showModal()">
-                                    {{ $checkout->status }}
-                                </td>
-                            </tr>
+                                        <button type="submit" class="btn btn-success mt-5">Save Status</button>
+                                    </form>
+                                </article>
+                            </div>
+                        </dialog>
+                        <tr class="hover">
+                            <td>{{ $checkout->id }}</td>
+                            <td>{{ $checkout->table->name }}</td>
+                            <td>{{ $checkout->total }} đ</td>
+                            <td>{{ $checkout->name }}</td>
+                            <td>{{ $checkout->mssv }}</td>
+                            <td>{{ $checkout->phone }}</td>
+                            <!-- 
+                                Pending: text-info
+                                Cash - Transfer: text-green-500
+                                Canceled: text-red-500
+                             -->
+                            <td class="text-info link" onclick="status{{ $checkout->id }}.showModal()">
+                                {{ $checkout->status }}
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -118,11 +123,11 @@
 
                 let tr = `<tr>
                         <td>${obj.id}</td>
-                        <td>${tableName }</td>
-                        <td>${obj.total } đ</td>
-                        <td>${obj.name }</td>
-                        <td>${obj.mssv }</td>
-                        <td>${obj.phone }</td>
+                        <td>${tableName}</td>
+                        <td>${obj.total} đ</td>
+                        <td>${obj.name}</td>
+                        <td>${obj.mssv}</td>
+                        <td>${obj.phone}</td>
                         <td class="text-info link" onclick="status${obj.id}.showModal()">
                             ${obj.status}
                         </td>
