@@ -43,13 +43,23 @@
         }
     </style>
 
-    <div class ="flex flex-col justify-center">
+    <div class="flex flex-col justify-center">
         <div class="font-bold text-xl text-center text-white mx-auto">
             <p>Cảm ơn bạn đã sử dụng dịch vụ</p>
             <p>Vui lòng qua quầy để thanh toán !</p>
         </div>
         <div>
-            <img src="/images/Toothless.png" alt="">
+            <img src="/images/toothless.gif" alt="">
+        </div>
+    </div>
+    <div class="flex justify-center">
+        <div class="rounded-xl absolute bottom-0">
+            <footer class="container p-5 flex justify-center">
+                <div class="text-white text-center text-xs">
+                    <p class="mt-5">Special thanks to: <br>Vu Nguyen Duc Tue, Vu Hien Vinh, Luu Thao Huong, Alexzvn
+                    </p>
+                </div>
+            </footer>
         </div>
     </div>
 </body>
