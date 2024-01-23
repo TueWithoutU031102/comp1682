@@ -44,14 +44,14 @@ return new class extends Migration {
                 'name' => 'Yến Nhi',
                 'email' => 'nhi@gmail.com',
                 'role' => 'Manager',
-                'phone' => '0123456789',
+                'phone' => '0987654321',
                 'password' => Hash::make('123456'),
             ],
             [
                 'name' => 'Mei Linh',
                 'email' => 'meilinh@gmail.com',
                 'role' => 'Manager',
-                'phone' => '0123456789',
+                'phone' => '0481724625',
                 'password' => Hash::make('123456'),
             ],
         ]);
