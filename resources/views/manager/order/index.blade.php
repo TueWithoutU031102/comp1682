@@ -99,10 +99,19 @@
             let menu = data.menus;
             let session = data.sessions;
             let table = data.tables;
+            let status = data.status;
             let element = window.document.querySelector('#order_data');
             element.innerHTML = '';
 
             for (const obj of cart) {
+                let statusClass = '';
+                if (obj.status === "Waiting") {
+                    statusClass = 'text-red-500';
+                } else if (obj.status === "Preparing") {
+                    statusClass = 'text-orange-500';
+                } else if (obj.status === "Completed") {
+                    statusClass = 'text-green-500';
+                }
                 let menuName = menu.find(menu => menu.id === obj.menu_id).name;
                 let tableID = session.find(session => session.id === obj.session_id).table_id;
                 let tableName = table.find(table => table.id === tableID).name;
@@ -139,19 +148,9 @@
                 <td>${menuName}</td>
                 <td>${tableName}</td>
                 <td>${obj.quantity}</td>
-                @if ($cart->status === 'Waiting')
-                            <td class="link text-red-500" onclick="status{{ $cart->id }}.showModal()">
-                                Waiting
-                            </td>
-                            @elseif ($cart->status === 'Preparing')
-                            <td class="link text-orange-500" onclick="status{{ $cart->id }}.showModal()">
-                                Preparing
-                            </td>
-                            @elseif ($cart->status === 'Completed')
-                            <td class="link text-green-500" onclick="status{{ $cart->id }}.showModal()">
-                                Completed
-                            </td>
-                            @endif
+                <td class="text-info link ${statusClass}" onclick="status${obj.id}.showModal()">
+                            ${obj.status}
+                        </td>
                 <td>${moment(obj.created_at).format('YYYY-MM-DD HH:mm:ss')}</td>
                 <td>
                     <form action="/managers/orders/${obj.id}/destroy" method="POST"
