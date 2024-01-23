@@ -41,7 +41,7 @@
                     </button>
                     <div>
                         <input style="font-size: 26px; font-weight: 500" id="quantity" type="number"
-                            class="input input-xs join-item w-16 text-center quantity mt-2" value="1">
+                            class="input input-xs join-item w-16 h-full text-center quantity" value="1">
                     </div>
                     <button id="increase" class="rounded-full bg-[rgba(5,38,142,1)] size-10" onclick="updateQuantity(1)">
                         <span class="text-xl text-white text-center">+</span>
