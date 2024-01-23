@@ -31,16 +31,25 @@ return new class extends Migration {
                 'name' => 'Chè khúc bạch',
                 'type_id' => '1',
                 'status' => StatusMenu::Available->value,
-                'price' => '15000',
+                'price' => '25000',
                 'description' => 'Chè khúc bạch là một món tráng miệng truyền thống của nền văn hóa ẩm thực Trung Quốc, với thành phần chính là bột nếp trắng được trải qua quá trình nấu chín, sau đó cuộn vào hình tròn nhỏ giống như viên tròn trắng, thêm nước cốt dừa và đường để tạo ra hương vị độc đáo và thơm ngon.',
                 'image' => '/images/khucbach.png',
+                'saled' => '0'
+            ],
+            [
+                'name' => 'Tàu hủ chân trâu',
+                'type_id' => '1',
+                'status' => StatusMenu::Available->value,
+                'price' => '25000',
+                'description' => 'Tàu hủ trân châu',
+                'image' => '/images/tauhu.png',
                 'saled' => '0'
             ],
             [
                 'name' => 'Chè bưởi',
                 'type_id' => '1',
                 'status' => StatusMenu::Available->value,
-                'price' => '15000',
+                'price' => '25000',
                 'description' => 'Với hương thơm dễ chịu của lá bưởi và vị ngọt thanh của đường, chè bưởi không chỉ là một món tráng miệng ngon miệng mà còn mang lại cảm giác sảng khoái và tinh tế, là điểm nhấn tuyệt vời cho bữa ăn truyền thống Việt Nam.',
                 'image' => '/images/chebuoi.png',
                 'saled' => '0'
@@ -49,7 +58,7 @@ return new class extends Migration {
                 'name' => 'Chè khoai dẻo',
                 'type_id' => '1',
                 'status' => StatusMenu::Available->value,
-                'price' => '15000',
+                'price' => '25000',
                 'description' => 'Chè khoai dẻo là một món tráng miệng phổ biến trong ẩm thực Việt Nam, được làm từ khoai lang, một loại khoai có hương vị đặc trưng, được bào nhuyễn và trộn với bột nếp để tạo ra lớp vỏ mềm mịn',
                 'image' => '/images/khoaideo.png',
                 'saled' => '0'

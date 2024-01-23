@@ -33,6 +33,22 @@ return new class extends Migration {
             [
                 'name' => 'Bàn 5'
             ],
+            [
+                'name' => 'Bàn 6'
+            ],
+            [
+                'name' => 'Bàn 7'
+            ],
+            [
+                'name' => 'Bàn 8'
+            ],
+            [
+                'name' => 'Bàn 9'
+            ],
+            [
+                'name' => 'Bàn 10'
+            ],
+
         ]);
     }
 
