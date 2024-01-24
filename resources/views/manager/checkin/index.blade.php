@@ -16,6 +16,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Phone</th>
+                            <th>MSSV</th>
                             <th>Table</th>
                             <th>Action</th>
                         </tr>
@@ -26,6 +27,7 @@
                                 <td>{{ $ses->id }}</td>
                                 <td>{{ $ses->name }}</td>
                                 <td>{{ $ses->phone }}</td>
+                                <td>{{ $ses->mssv }}</td>
                                 <td>{{ $ses->table->name }}</td>
                                 <td>
                                     <form action="{{ route('manager.checkin.destroy', $ses) }}" method="POST"
