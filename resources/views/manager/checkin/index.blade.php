@@ -67,6 +67,7 @@
                 <td>${obj.id}</td>
                 <td>${obj.name}</td>
                 <td>${obj.phone}</td>
+                <td>${obj.mssv}</td>
                 <td>${tableName}</td>
                 <td>
                     <form action="/managers/checkins/${obj.id}/destroy" method="POST" onsubmit="return confirm('Are you sure to delete this !!!???')">
