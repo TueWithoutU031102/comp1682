@@ -45,6 +45,7 @@ return new class extends Migration {
                 'image' => '/images/tauhu.png',
                 'saled' => '0'
             ],
+
             [
                 'name' => 'Chè bưởi',
                 'type_id' => '1',
@@ -117,6 +118,24 @@ return new class extends Migration {
                 'price' => '15000',
                 'description' => 'Khô gà',
                 'image' => '/images/khoga.png',
+                'saled' => '0'
+            ],
+            [
+                'name' => 'Bánh tráng cuộn bò hành',
+                'type_id' => '3',
+                'status' => StatusMenu::Available->value,
+                'price' => '30000',
+                'description' => 'Bánh tráng cuộn bò hành',
+                'image' => '/images/cuonbohanh.png',
+                'saled' => '0'
+            ],
+            [
+                'name' => 'Bánh tráng trộn thập cẩm',
+                'type_id' => '3',
+                'status' => StatusMenu::Available->value,
+                'price' => '30000',
+                'description' => 'Bánh tráng trộn thập cẩm',
+                'image' => '/images/tronthapcam.png',
                 'saled' => '0'
             ],
             [
