@@ -21,7 +21,6 @@ use App\Http\Controllers\Manager\BookController as ManagerBookController;
 use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\ReviewController as CustomerReviewController;
 use App\Http\Controllers\Manager\ReviewController as ManagerReviewController;
-úe
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -117,8 +116,6 @@ Route::group(['middleware' => ['auth', 'users']], function () {
 });
 Route::get('payment/verify', [CustomerCheckoutController::class, 'verify'])->name('vnpay.verify');
 Route::get('payment/invalid', fn() => view('customer.checkout.invalid'))->name('vnpay.invalid');
-
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name("vnpay_payment");
 Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
