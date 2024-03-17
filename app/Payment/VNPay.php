@@ -7,19 +7,19 @@ class VNPay
     public const API = 'https://sandbox.vnpayment.vn';
 
     protected $responseCode = [
-        '00' => 'Successful transaction',
-        '07' => 'Deduct money successfully. Suspected transaction (related to fraud, unusual transactions).',
-        '09' => 'Customer`s card/account has not registered for InternetBanking service at the bank.',
-        '10' => 'Customers verify incorrect card/account information more than 3 times.',
-        '11' => 'Payment deadline has expired. Please retry the transaction.',
-        '12' => 'Customer`s card/account is locked.',
-        '13' => 'You entered the wrong transaction authentication password (OTP). Please retry the transaction.',
-        '24' => 'Customer cancels transaction',
-        '51' => 'Your account does not have enough balance to make a transaction.',
-        '65' => 'Your account has exceeded the daily transaction limit.',
-        '75' => 'The payment bank is under maintenance.',
-        '79' => 'Customers enter the wrong payment password more than the specified number of times. Please retry the transaction.',
-        '99' => 'Other error',
+        '00' => 'Giao dịch thành công',
+        '07' => 'Trừ tiền thành công. Giao dịch bị nghi ngờ (liên quan tới lừa đảo, giao dịch bất thường).',
+        '09' => 'Thẻ/Tài khoản của khách hàng chưa đăng ký dịch vụ InternetBanking tại ngân hàng.',
+        '10' => 'Khách hàng xác thực thông tin thẻ/tài khoản không đúng quá 3 lần.',
+        '11' => 'Đã hết hạn chờ thanh toán. Xin quý khách vui lòng thực hiện lại giao dịch.',
+        '12' => 'Thẻ/Tài khoản của khách hàng bị khóa.',
+        '13' => 'Quý khách nhập sai mật khẩu xác thực giao dịch (OTP). Xin quý khách vui lòng thực hiện lại giao dịch.',
+        '24' => 'Khách hàng hủy giao dịch',
+        '51' => 'Tài khoản của quý khách không đủ số dư để thực hiện giao dịch.',
+        '65' => 'Tài khoản của Quý khách đã vượt quá hạn mức giao dịch trong ngày.',
+        '75' => 'Ngân hàng thanh toán đang bảo trì.',
+        '79' => 'KH nhập sai mật khẩu thanh toán quá số lần quy định. Xin quý khách vui lòng thực hiện lại giao dịch.',
+        '99' => 'lỗi khác',
     ];
 
     public function __construct(
@@ -27,8 +27,7 @@ class VNPay
         protected string $secret = 'VOMWSOAXPMYBXTRZTFJNKSPCHNEQMLLP',
         protected string $locale = 'vn',
         protected string $version = '2.1.0',
-    ) {
-    }
+    ) {}
 
     /**
      * Create payment url
@@ -64,16 +63,15 @@ class VNPay
         $hmac = hash_hmac('sha512', $query, $this->secret);
         $query = "$query&vnp_SecureHash=$hmac";
 
-        //return static::API . "/paymentv2/vpcpay.html?$query";
+        return static::API . "/paymentv2/vpcpay.html?$query";
     }
 
     /**
      * Read payment result
      *
-     * @return null|\App\Payment\Status null if invalid hash otherwise return object with properties: transaction_id, ref, amount, code, success, message
+     * @return null|object null if invalid hash otherwise return object with properties: transaction_id, ref, amount, code, success, message
      */
-    public function read()
-    {
+    public function read() {
         $payload = [];
 
         if (empty($_GET['vnp_SecureHash'])) {
@@ -93,13 +91,13 @@ class VNPay
 
         $payload = (object) $payload;
 
-        return new Status([
+        return (object) [
             'transaction_id' => $payload->vnp_TransactionNo,
             'ref' => $payload->vnp_TxnRef,
             'amount' => $payload->vnp_Amount / 100,
             'code' => $payload->vnp_ResponseCode,
             'success' => $payload->vnp_ResponseCode === '00',
             'message' => $this->responseCode[$payload->vnp_ResponseCode] ?? 'Lỗi không xác định',
-        ]);
+        ];
     }
 }
