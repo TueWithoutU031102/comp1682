@@ -26,8 +26,7 @@ class NotificationController extends Controller
         //
         $data = $request->all();
         $notification->fill($data)->save();
-        session()->flash('managerSuccess', 'Notification created successfully!');
-        return to_route("customer.index");
+        return to_route("customer.index")->with('success', 'You have called the staff, please wait for the staff to come serve you!');
     }
 
     /**
