@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->integer('saled')->default('0');
             $table->timestamps();
         });
-        DB::table('tables')->insert([
+        DB::table('menus')->insert([
             [
                 'name' => 'Chè bưởi',
                 'type_id' => '1',
