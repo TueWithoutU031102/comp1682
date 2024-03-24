@@ -118,6 +118,7 @@ Route::get('payment/invalid', fn() => view('customer.checkout.invalid'))->name('
 Route::group(['prefix' => 'customers', 'middleware' => Customer::class], function () {
     /////// CUSTOMER ///////
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('cart-data', [CustomerController::class, 'cartData'])->name('customer.cart');
     Route::prefix('checkouts')->group(function () {
         Route::get('show', [CustomerCheckoutController::class, 'show'])->name('customer.checkout.show');
         Route::post('pay', [CustomerCheckoutController::class, 'pay'])->name('customer.checkout.pay');

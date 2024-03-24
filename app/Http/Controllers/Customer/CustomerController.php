@@ -32,5 +32,9 @@ class CustomerController extends Controller
     {
         return view("customer.index");
     }
+    public function cartData()
+    {
+        return view("customer.cart-data");
+    }
 
 }
