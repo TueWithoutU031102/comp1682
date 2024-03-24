@@ -59,7 +59,7 @@ return new class extends Migration {
                 'status' => StatusMenu::Available->value,
                 'price' => '15000',
                 'description' => 'Hạt hướng dương',
-                'image' => '/images/hathuongduong.png',
+                'image' => '/images/huongduong.png',
                 'saled' => '0'
             ],
             [
