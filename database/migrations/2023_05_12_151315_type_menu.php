@@ -20,10 +20,10 @@ return new class extends Migration
         });
 
         DB::table('types')->insert([
-            ['name' => 'Coffee'],
-            ['name' => 'Cake'],
-            ['name' => 'Smoothie'],
-            ['name' => 'Tea'],
+            ['name' => 'Chè'],
+            ['name' => 'Nước ngọt và trà'],
+            ['name' => 'Đồ ăn vặt'],
+            ['name' => 'Combo'],
         ]);
     }
 
