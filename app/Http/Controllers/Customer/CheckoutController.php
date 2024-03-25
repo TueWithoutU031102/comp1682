@@ -40,6 +40,8 @@ class CheckoutController extends Controller
 
         $checkout->forceFill([
             'table_id' => $session->table_id,
+            'name' => $session->name,
+            'phone' => $session->phone,
             'total' => $items->sum(fn($item) => $item->total()),
         ])->save();
 

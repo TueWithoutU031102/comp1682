@@ -6,6 +6,7 @@ use App\Enums\StatusCheckout;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Checkout;
+use App\Models\Table;
 
 class CheckoutController extends Controller
 {
@@ -29,5 +30,17 @@ class CheckoutController extends Controller
 
         $checkout->update(['status' => $data]);
         return to_route('manager.checkout.index')->with('success', 'The invoice has been paid successfully!');
+    }
+
+    public function event()
+    {
+        $checkouts = Checkout::all();
+        $tables = Table::all();
+        $statuses = StatusCheckout::cases();
+        return response()->json([
+            'checkouts' => $checkouts,
+            'tables' => $tables,
+            'statuses' => $statuses,
+        ]);
     }
 }

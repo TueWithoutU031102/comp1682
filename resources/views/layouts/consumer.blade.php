@@ -145,11 +145,14 @@
                         <span>Total price:</span>
                         <span id="total-amount"> {{ number_format($total) }} đ</span>
                     </div>
-                    <form action="{{ route('customer.order.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <button type="submit" class="btn btn-info w-full mt-2">Order</button>
-                    </form>
-                    <div class="lg:mt-3 w-full text-center">
+                    @if ($total > 0)
+                        <form action="{{ route('customer.order.store') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <button type="submit" class="btn btn-info w-full mt-2">Order</button>
+                        </form>
+                    @endif
+                    {{-- <div class="lg:mt-3 w-full text-center">
                         <label class="swap swap-flip opacity-40">
 
                             <!-- this hidden checkbox controls the state -->
@@ -157,7 +160,7 @@
                             <div class="swap-off"><span class="text-4xl">😀</span></div>
                             <div class="swap-on"><span class="text-4xl">🤡</span></div>
                         </label>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

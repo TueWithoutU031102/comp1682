@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth', 'users']], function () {
             Route::post('/{cart}/destroy', [ManagerOrderController::class, 'destroy'])->name('manager.order.destroy');
         });
         Route::prefix('checkouts')->group(function () {
+            Route::get('/event', [ManagerCheckoutController::class, 'event'])->name('manager.checkout.event');
             Route::get('/index', [ManagerCheckoutController::class, 'index'])->name('manager.checkout.index');
             Route::post('/{checkout}/update', [ManagerCheckoutController::class, 'update'])->name('manager.checkout.update');
         });

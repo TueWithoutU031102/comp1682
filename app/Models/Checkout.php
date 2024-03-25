@@ -10,7 +10,7 @@ class Checkout extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['table_id', 'total', 'status'];
+    protected $fillable = ['table_id', 'name', 'phone', 'total', 'status'];
 
     protected $casts = [
         'status' => StatusCheckout::class
