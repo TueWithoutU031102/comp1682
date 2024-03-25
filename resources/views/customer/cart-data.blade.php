@@ -36,7 +36,7 @@
         @php
             $allCompleted = true;
         @endphp
-        @if ($bill)
+        @if ($bill && count($bill) > 0)
             @foreach ($bill as $b)
                 @if ($b['status'] !== 'Completed')
                     @php
