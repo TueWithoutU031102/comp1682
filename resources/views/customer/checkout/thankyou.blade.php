@@ -17,7 +17,7 @@
 
         <div class="flex justify-center">
             <div class="avatar mx-auto my-3">
-                <div class="w-20 mask mask-squircle">
+                <div class="w-40 mask mask-squircle">
                     <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                 </div>
             </div>

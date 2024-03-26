@@ -64,7 +64,7 @@
                             <button type="submit" class="btn btn-success">Pay with VNPay</button>
                         </div>
                     </form>
-                    <form action="{{ route('customer.checkout.pay') }}" method="POST">
+                    <form action="{{ route('customer.checkout.payCash') }}" method="POST">
                         @csrf
                         <div>
                             <button type="submit" class="btn btn-success float-right">Pay with cash</button>

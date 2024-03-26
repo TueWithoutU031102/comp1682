@@ -56,6 +56,36 @@ class CheckoutController extends Controller
         return redirect($url);
     }
 
+    public function payCash(Checkout $checkout)
+    {
+        $session = Session::find(session()->get('customer.session'));
+        $before = Checkout::where('table_id', $session->table_id)->where('status', StatusCheckout::Pending)->first();
+
+        if ($before) {
+            $before->forceFill(['status' => StatusCheckout::Canceled])->save();
+        }
+
+        $items = Cart::where('session_id', $session->id)->with('menu')->get();
+
+        if ($items->count() == 0) {
+            return to_route('customer.index'); // card is empty then abort checkout
+        }
+
+        $checkout->forceFill([
+            'table_id' => $session->table_id,
+            'name' => $session->name,
+            'phone' => $session->phone,
+            'total' => $items->sum(fn($item) => $item->total()),
+        ])->save();
+
+        if ($session) {
+            $session->delete();
+            session()->forget('customer.session');
+            session()->forget('cart');
+        }
+        return view('customer.checkout.thankyou', ['checkout' => $checkout]);
+    }
+
     public function verify(VNPay $payment)
     {
         $payload = $payment->read();

@@ -123,6 +123,7 @@ Route::group(['prefix' => 'customers', 'middleware' => Customer::class], functio
     Route::prefix('checkouts')->group(function () {
         Route::get('show', [CustomerCheckoutController::class, 'show'])->name('customer.checkout.show');
         Route::post('pay', [CustomerCheckoutController::class, 'pay'])->name('customer.checkout.pay');
+        Route::post('payCash', [CustomerCheckoutController::class, 'payCash'])->name('customer.checkout.payCash');
     });
     Route::prefix('menus')->group(function () {
         Route::get('index', [CustomerMenuController::class, 'index'])->name('customer.menu.index');
