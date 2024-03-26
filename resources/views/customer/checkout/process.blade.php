@@ -54,16 +54,23 @@
                         </div>
                     @endforeach
                 </div>
-
-                <form action="{{ route('customer.checkout.pay') }}" class="grid grid-cols-2" method="POST">
-                    @csrf
-                    <p class="mt-3">
-                        Your total cost is: <span class="text-primary font-bold">{{ number_format($total) }}</span>đ
-                    </p>
-                    <div>
-                        <button type="submit" class="btn btn-success float-right">Pay with VNPay</button>
-                    </div>
-                </form>
+                <p class="mt-3">
+                    Your total cost is: <span class="text-primary font-bold">{{ number_format($total) }}</span>đ
+                </p>
+                <div class="grid grid-cols-2">
+                    <form action="{{ route('customer.checkout.pay') }}" method="POST">
+                        @csrf
+                        <div>
+                            <button type="submit" class="btn btn-success">Pay with VNPay</button>
+                        </div>
+                    </form>
+                    <form action="{{ route('customer.checkout.pay') }}" method="POST">
+                        @csrf
+                        <div>
+                            <button type="submit" class="btn btn-success float-right">Pay with cash</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
