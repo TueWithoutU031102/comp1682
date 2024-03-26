@@ -23,7 +23,7 @@
                     <label class="block font-medium text-sm text-gray-700 dark:text-gray-300">Your
                         name:</label>
                     <input placeholder="Name"
-                        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 py-2 px-3 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full "
+                        class="border border-gray-300 dark:border-gray-700 dark:bg-gray-900 py-2 px-3 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full "
                         type="text" id="name" name="name">
                     @if ($errors->any())
                         <div class="text-sm text-red-600 dark:text-red-400 space-y-1 mt-2">
@@ -39,7 +39,7 @@
                     <label class="block font-medium text-sm text-gray-700 dark:text-gray-300">Phone
                         number:</label>
                     <input placeholder="Phone number"
-                        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 py-2 px-3 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
+                        class="border border-gray-300 dark:border-gray-700 dark:bg-gray-900 py-2 px-3 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full"
                         type="text" id="phone" name="phone" required="required" autofocus="autofocus">
                     @if ($errors->any())
                         <div class="text-sm text-red-600 dark:text-red-400 space-y-1 mt-2">
@@ -58,7 +58,7 @@
                     </div>
                     <div>
                         <button type="submit"
-                            class="flex w-full justify-center rounded-md bg-gray-800 dark:bg-gray-200 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 button-action">Submit</button>
+                            class="flex w-full justify-center rounded-md bg-gray-800 dark:bg-gray-200 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 button-action">Receive table</button>
                     </div>
                 </div>
             </form>
