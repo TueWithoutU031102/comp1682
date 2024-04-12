@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Enums\StatusDish;
+use App\Enums\StatusMenu;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Menu;
@@ -29,13 +30,17 @@ class OrderController extends Controller
             $menu = Menu::find($cart->menu_id);
             if (is_int($menu->saled) && $menu->saled >= $cart->quantity) {
                 $menu->update(['saled' => $menu->saled - $cart->quantity]);
+                $menu->update(['quantity' => $menu->quantity + $cart->quantity]);
             }
         } else if ($cart['status'] !== 'Completed' && $data['status'] === 'Completed') {
             $menu = Menu::find($cart->menu_id);
             if (is_int($menu->saled)) {
                 $menu->increment('saled', $cart->quantity);
+                $menu->decrement('quantity', $cart->quantity);
             }
         }
+        if($menu->quantity === 0)
+            $menu->update(['status' => StatusMenu::Unavailable->value]);
         $cart->update($data);
 
         return to_route('manager.order.index')->with('success', 'Dish in cart updated successfully!');

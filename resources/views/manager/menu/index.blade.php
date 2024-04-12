@@ -23,6 +23,7 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Status</th>
+                                <th>Quantity</th>
                                 <th>Sold</th>
                                 <th>Description</th>
                                 <th>Action</th>
@@ -46,6 +47,7 @@
                                     <td>
                                         <span class="badge">{{ $menu->status }}</span>
                                     </td>
+                                    <td>{{ $menu->quantity }}</td>
                                     <td>{{ $menu->saled }}</td>
                                     <td>{{ $menu->description }}</td>
                                     <td>
