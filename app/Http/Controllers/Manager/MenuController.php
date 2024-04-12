@@ -63,8 +63,10 @@ class MenuController extends Controller
             $data['image'] = $this->saveImage($request->file('image'));
         } else
             $data['image'] = $menu->image;
-        $menu->fill($data)->save();
 
+        $data['status'] = $request->status ? $request->status : $menu->status;
+        
+        $menu->fill($data)->save();
         return redirect()->route('manager.menu.index')->with('success', 'Menu updated successfully.');
     }
 
