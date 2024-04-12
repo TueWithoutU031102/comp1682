@@ -32,6 +32,10 @@
                     </div>
                 </div>
 
+                <div class="form-control">
+                    <label class="label">Quantity</label>
+                    <input type="number" class="input input-bordered" value="{{ $menu->quantity }}" name="quantity">
+                </div>
 
                 <div class="form-control">
                     <label class="label">Price</label>

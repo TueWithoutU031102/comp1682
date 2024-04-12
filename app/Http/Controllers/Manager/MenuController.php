@@ -30,6 +30,7 @@ class MenuController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'type_id' => 'required',
+            'quantity'=>'required',
             'price' => 'required',
             'description' => 'required',
             'image' => 'required',
@@ -54,6 +55,7 @@ class MenuController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'type_id' => 'required',
+            'quantity'=>'required',
             'price' => 'required',
             'description' => 'required',
         ]);
@@ -65,7 +67,7 @@ class MenuController extends Controller
             $data['image'] = $menu->image;
 
         $data['status'] = $request->status ? $request->status : $menu->status;
-        
+
         $menu->fill($data)->save();
         return redirect()->route('manager.menu.index')->with('success', 'Menu updated successfully.');
     }
