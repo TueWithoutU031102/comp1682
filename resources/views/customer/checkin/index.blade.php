@@ -58,7 +58,7 @@
                     </div>
                     <div>
                         <button type="submit"
-                            class="flex w-full justify-center rounded-md bg-gray-800 dark:bg-gray-200 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 button-action">Receive table</button>
+                            class="flex w-full justify-center rounded-md bg-gray-800 dark:bg-gray-200 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white dark:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 button-action">Receive table</button>
                     </div>
                 </div>
             </form>
