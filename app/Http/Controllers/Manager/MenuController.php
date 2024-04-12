@@ -30,8 +30,8 @@ class MenuController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'type_id' => 'required',
-            'quantity'=>'required',
-            'price' => 'required',
+            'quantity'=>'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
             'description' => 'required',
             'image' => 'required',
             'status' => ['required', new Enum(StatusMenu::class)],
@@ -55,8 +55,8 @@ class MenuController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'type_id' => 'required',
-            'quantity'=>'required',
-            'price' => 'required',
+            'quantity'=>'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
             'description' => 'required',
         ]);
 
