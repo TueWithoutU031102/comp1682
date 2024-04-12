@@ -8,6 +8,34 @@
             @if (Session::has('success'))
                 <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
             @endif
+            <h2 class="text-center my-5 text-3xl font-bold">Best Seller</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
+                @foreach ($bestSeller as $bS)
+                    <div>
+                        <div
+                            class="relative overflow-hidden transition hover:shadow-md duration-300 shadow rounded :[&>img]:rounded">
+                            <img class="aspect-square object-cover cursor-pointer w-full transition duration-500 hover:scale-125"
+                                src="{{ asset($bS->image) }}" alt="">
+
+                            @if ($bS->status->value === 'Available')
+                                <td>
+                                    <a href="{{ route('customer.order.add', ['menu' => $bS]) }}">
+                                        <button
+                                            class="absolute bottom-3 right-3 btn btn-circle btn-warning btn-sm opacity-90">+
+                                        </button>
+                                    </a>
+                                </td>
+                            @endif
+                        </div>
+                        <p class="flex flex-col p-2">
+                            <strong class="cursor-pointer">{{ $bS->name }}</strong>
+                            <span class="opacity-50 text-sm">{{ number_format($bS->price) }} đ</span>
+                            <span class="opacity-50 text-sm">{{ $bS->status }}</span>
+                            <span class="opacity-50 text-sm">{{ $bS->description }}</span>
+                        </p>
+                    </div>
+                @endforeach
+            </div>
             @php
                 $currentType = null;
             @endphp
